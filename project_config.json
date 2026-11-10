@@ -1,0 +1,31 @@
+{
+    "project_name": "magic_academy_rpg",
+    "game_title": "Magic Academy: The Lost Ancient Magic",
+    "version": "0.1.0",
+    "resolution": {
+        "width": 1280,
+        "height": 720
+    },
+    "game": {
+        "fps": 60,
+        "tile_size": 32,
+        "fullscreen": false
+    },
+    "graphics": {
+        "style": "detailed_pixel_art",
+        "image_format": "png",
+        "transparent_background": true,
+        "animation_format": "sprite_sheet"
+    },
+    "audio": {
+        "music_format": "ogg",
+        "sound_format": "ogg"
+    },
+    "development": {
+        "language": "Python",
+        "framework": "Pygame",
+        "environment": "Google Colab",
+        "web_converter": "Pygbag",
+        "deployment": "GitHub Pages"
+    }
+}
