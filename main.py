@@ -32,65 +32,12 @@ clock = pygame.time.Clock()
 
 
 # =========================================
-# 字型管理
-# 優先使用原有 FontManager
-# 不覆寫 systems/font_manager.py
+# 中文字型
 # =========================================
 
-font_manager = None
-
-try:
-    from systems.font_manager import FontManager
-
-    try:
-        font_manager = FontManager()
-    except TypeError:
-        font_manager = FontManager(FONT_PATH)
-
-    print("已載入原有 FontManager")
-
-except Exception as error:
-    print("FontManager 無法初始化，使用字型備援：", error)
-
-
 def load_font(size):
-
-    if font_manager is not None:
-
-        for method_name in (
-            "get_font",
-            "load_font",
-            "font"
-        ):
-
-            method = getattr(
-                font_manager,
-                method_name,
-                None
-            )
-
-            if callable(method):
-
-                for args in (
-                    (size,),
-                    (size, FONT_PATH),
-                    (FONT_PATH, size)
-                ):
-
-                    try:
-                        result = method(*args)
-
-                        if result is not None and hasattr(result, "render"):
-                            return result
-
-                    except (TypeError, AttributeError, OSError):
-                        continue
-
-    # 備援：直接載入指定中文字型
-    if FONT_PATH.exists():
-        return pygame.font.Font(str(FONT_PATH), size)
-
-    return pygame.font.Font(None, size)
+    font_path = FONT_PATH if FONT_PATH.is_file() else None
+    return pygame.font.Font(str(font_path) if font_path else None, size)
 
 
 font_small = load_font(20)
@@ -375,13 +322,21 @@ async def main():
             if event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_ESCAPE:
+                    current = scene_manager.current_scene
+                    menu_open = bool(
+                        scene_manager.current_scene_name == "game"
+                        and getattr(getattr(current, "player_menu", None), "opened", False)
+                    )
 
-                    if scene_manager.current_scene_name == "title":
+                    if menu_open:
+                        # 遊戲內選單由 GameScene 統一處理 ESC 關閉
+                        pass
+                    elif scene_manager.current_scene_name == "title":
                         running = False
+                        continue
                     else:
                         scene_manager.switch("title")
-
-                    continue
+                        continue
 
             result = scene_manager.handle_event(event)
 
@@ -390,6 +345,23 @@ async def main():
                 break
 
             elif result is not None:
+
+                if result == "game":
+
+                    # 職業確認後重新建立遊戲場景
+                    # 讓 PlayerWorldBridge 讀取最新職業
+                    new_game_scene = GameScene(ctx)
+
+                    scene_manager.register(
+                        "game",
+                        new_game_scene
+                    )
+
+                    print(
+                        "遊戲場景重新建立完成：",
+                        ctx.selected_class_id
+                    )
+
                 scene_manager.switch(result)
 
         if not running:

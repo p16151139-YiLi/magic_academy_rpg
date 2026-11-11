@@ -1,46 +1,34 @@
 # Magic Academy: The Lost Ancient Magic
 
-A 2D top-down fantasy action RPG developed with Python and Pygame.
+2D 像素風魔法學院 RPG 專案。此 ZIP 是整理後的 Python 原始專案，不是可直接雙擊執行的 Windows 遊戲，也不是已重新 Build 的 GitHub Pages 網頁包。
 
-## Project Settings
+## 開發環境
 
-- Resolution: 1280 x 720
-- FPS: 60
-- Art Style: Detailed Pixel Art
-- Tile Size: 32 x 32
-- Framework: Pygame
-- Development Environment: Google Colab
-- Web Deployment: Pygbag + GitHub Pages
+```bash
+pip install pygame-ce pygbag
+```
 
-## Character Classes
+## 本機／Colab 網頁建置
 
-- Ranged Mage
-- Melee Mage
-- Balanced Mage
+在專案根目錄執行：
 
-## Asset Sources
+```bash
+pygbag --build .
+```
 
-- AI-generated original assets
-- Properly licensed free game assets
+網頁輸出位於 `build/web/`。將該資料夾內的內容部署至 GitHub Pages 的發布來源。
 
-## Project Structure
+## 主要資料夾
 
-- assets/: Images, animations, audio and fonts
-- scenes/: Game scenes
-- characters/: Character logic
-- combat/: Combat systems
-- systems/: Game systems
-- ai/: Enemy AI
-- maps/: Map management
-- ui/: User interface
-- utils/: Shared utilities
-- data/: Game data
-- docs/: Project documentation
+- `scenes/`：遊戲場景
+- `systems/`：玩家、職業、地圖、背包及成長系統
+- `ui/`：玩家選單、角色資訊及背包介面
+- `data/`：職業、玩家存檔、地圖及設定 JSON
+- `assets/`：圖片、字型、角色及地圖素材
 
-## Development Policy
+## 注意
 
-The project is developed in stages.
-Each completed stage should be tested and approved
-before moving to the next stage.
-
-See project_config.json for configuration.
+- 三種職業的資料與選擇流程已保留。
+- 近戰型與遠程型角色目前暫時共用均衡型法師的動畫精靈圖，使用色調區分；待取得專屬精靈圖後可替換。
+- 教室、圖書館及森林的背景圖片尚未包含在目前素材中。
+- 具體修正與未完成素材清單請見 `docs/INTEGRATION_REPORT.md`。
