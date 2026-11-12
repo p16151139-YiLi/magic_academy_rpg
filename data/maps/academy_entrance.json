@@ -26,7 +26,13 @@
       ],
       "target": "academy_hall",
       "target_spawn": "from_entrance",
-      "interaction_padding": 116
+      "interaction_padding": 116,
+      "approach_rect": [
+        742,
+        275,
+        186,
+        170
+      ]
     }
   ],
   "collision_rects": [

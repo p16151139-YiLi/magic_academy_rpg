@@ -145,17 +145,23 @@ class PlayerWorldBridge:
         return pygame.Rect(*raw)
 
     def is_player_near_exit(self, exit_data):
-        """Single source of truth for keyboard and mouse door interactions.
+        """Use the player's FOOT position against the real door approach zone.
 
-        The player has a small foot collision box. The door's artwork is much
-        taller than the threshold, so its interaction padding must not depend
-        on being able to walk through the solid door/base collision.
+        The character sprite is 96px high, while its collision box is only
+        24x18. A visual 'standing in front of the door' position is therefore
+        much farther south than the door's solid wood/stone pixels. For the
+        entrance hall use a dedicated narrow carpet zone instead of inflating
+        the door's collision rectangle by an arbitrary amount.
         """
+        approach = exit_data.get("approach_rect")
+        if (isinstance(approach, (list, tuple)) and len(approach) == 4
+                and exit_data.get("id") == "to_hall"):
+            return pygame.Rect(*approach).colliderect(self.player.rect)
+
         exit_rect = self.get_exit_rect(exit_data)
         if exit_rect is None:
             return False
-        padding = int(exit_data.get("interaction_padding", 76))
-        padding = max(0, min(padding, 140))
+        padding = max(0, min(int(exit_data.get("interaction_padding", 76)), 140))
         return self.player.rect.inflate(padding, padding).colliderect(exit_rect)
 
     def find_nearby_exit(self):
@@ -377,6 +383,32 @@ class PlayerWorldBridge:
             except Exception as error:
                 self.show_message(f"切換失敗：{error}")
             return True
+        return False
+
+    def click_exit_artwork(self, pos):
+        """Click the actual front-facing door, not only a tiny floating marker.
+
+        This also provides a mouse fallback if a browser hasn't focused its
+        canvas for keyboard input. It cannot teleport from across the map.
+        """
+        for exit_data in self.scene.map_manager.get_exits():
+            if exit_data.get("id") != "to_hall":
+                continue
+            exit_rect = self.get_exit_rect(exit_data)
+            if exit_rect is None:
+                continue
+            # A tight rectangle around the visible upper wall door art.
+            door_click = pygame.Rect(exit_rect.left - 36,
+                                     exit_rect.top - 168,
+                                     exit_rect.width + 72, 232)
+            cam = self.scene.camera
+            screen_rect = door_click.move(-int(cam.x), -int(cam.y))
+            if screen_rect.collidepoint(pos):
+                if not self.is_player_near_exit(exit_data):
+                    self.show_message("請先走到木門前的紫色地毯，再按 E", 2.8)
+                    return True
+                self.interact()
+                return True
         return False
 
     def click_interaction_prompt(self, pos):

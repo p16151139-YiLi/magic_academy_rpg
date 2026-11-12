@@ -67,6 +67,8 @@ class GameScene(BaseScene):
         self.player_menu.inventory_panel.quickbar = self.quickbar
         self._previous_game_keys = set()
         self._handled_key_events = set()
+        # Browser fallback: a KEYUP can still be delivered when KEYDOWN was lost.
+        self._e_keydown_seen = False
         self.shortcut_hint_open = False
 
         # STAGE4_PLAYER_WORLD_INTEGRATION
@@ -184,8 +186,8 @@ class GameScene(BaseScene):
         self.player_menu.draw()
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
-        build_tag = ctx.font_small.render("V9.1 Hall Fix", True, (197, 186, 164))
-        screen.blit(build_tag, (screen.get_width() - build_tag.get_width() - 10, 4))
+        build_tag = ctx.font_small.render("V9.2 E FIX", True, (243, 210, 123))
+        screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):
         return pygame.Rect(self.ctx.screen.get_width() - 160, 12, 146, 34)
@@ -234,12 +236,19 @@ class GameScene(BaseScene):
             self.player_menu.open(5)
             return True
         if key == pygame.K_e:
-            # Door interaction must not be swallowed by an idle NPC nearby.
-            # Active shop/dialogue windows are already handled above.
+            # World interaction first when next to a door. Give feedback even
+            # when the key was received OUTSIDE the actual approach zone.
             if self.player_world.find_nearby_exit() is not None:
-                self.player_world.interact()
+                result = self.player_world.interact()
+                if result is False:
+                    self.player_world.show_message("入口互動失敗，請再按 E", 2.5)
             elif not self.npc_shop.interact():
-                self.player_world.interact()
+                if self.map_id == "academy_entrance":
+                    self.player_world.show_message(
+                        "E 鍵已收到：請走到大廳木門前的紫色地毯", 2.8)
+                else:
+                    self.player_world.show_message(
+                        "E 鍵已收到：請靠近人物或入口", 2.2)
             return True
         return False
 
@@ -268,11 +277,23 @@ class GameScene(BaseScene):
 
     def handle_event(self, event):
         if event.type == pygame.KEYDOWN:
-            # Do not let Pygbag/desktop short taps disappear between frames.
+            # Some browser/IME layouts expose printable E via unicode while
+            # the key identifier varies; normalize it before dispatching.
+            key = event.key
+            if (key == pygame.K_e or
+                    str(getattr(event, "unicode", "")).lower() == "e"):
+                key = pygame.K_e
+                self._e_keydown_seen = True
             if getattr(event, "repeat", 0) == 0:
-                if event.key not in self._handled_key_events:
-                    self._handled_key_events.add(event.key)
-                    self._game_key(event.key)
+                if key not in self._handled_key_events:
+                    self._handled_key_events.add(key)
+                    self._game_key(key)
+            return None
+        if event.type == pygame.KEYUP and event.key == pygame.K_e:
+            # If browser focus lost KEYDOWN, use KEYUP as a single fallback.
+            if not self._e_keydown_seen:
+                self._game_key(pygame.K_e)
+            self._e_keydown_seen = False
             return None
         # 選單開啟時，滑鼠事件交由選單處理。
         if self.npc_shop.shop or self.npc_shop.dialogue:
@@ -293,6 +314,8 @@ class GameScene(BaseScene):
             if self.player_world.click_interaction_prompt(event.pos):
                 return None
             if self.player_world.click_location_marker(event.pos):
+                return None
+            if self.player_world.click_exit_artwork(event.pos):
                 return None
 
         return None

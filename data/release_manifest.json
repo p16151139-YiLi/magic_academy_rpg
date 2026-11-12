@@ -1,11 +1,11 @@
 {
-  "version": "V9.1",
-  "description": "學院入口 → 中央大廳 E 鍵與點擊互動修復",
-  "base": "V9",
+  "version": "V9.2",
+  "description": "入口真實接近區、E 鍵狀態回饋、KEYUP 備援、門本體可點擊",
+  "base": "V9.1",
   "fixes": [
-    "to_hall unified keyboard/mouse range",
-    "clickable entrance prompt",
-    "visible to_hall marker",
-    "door priority over nearby idle NPC"
+    "hall entry approach_rect matches player feet and door carpet",
+    "E now gives feedback even when too far",
+    "web KEYUP fallback and unicode E",
+    "door sprite click support and explicit version label"
   ]
 }
