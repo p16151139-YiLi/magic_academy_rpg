@@ -1,0 +1,24 @@
+{
+  "frame_width": 64,
+  "frame_height": 64,
+  "display_scale": 1,
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "states": {
+    "idle": 4,
+    "walk": 6,
+    "attack": 6,
+    "cast": 6,
+    "hurt": 3
+  },
+  "classes": [
+    "balanced_mage",
+    "melee_mage",
+    "ranged_mage"
+  ],
+  "layout": "columns_frames_rows_directions"
+}

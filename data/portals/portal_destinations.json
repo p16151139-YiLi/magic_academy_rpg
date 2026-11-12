@@ -1,0 +1,53 @@
+{
+  "map_id": "academy_hall",
+  "portals": [
+    {
+      "id": "forest_portal",
+      "image": "assets/maps/portals/portal_forest.png",
+      "position": [
+        376,
+        1064
+      ],
+      "size": [
+        368,
+        552
+      ],
+      "target": "forest_outskirts",
+      "target_spawn": "default",
+      "unlock_condition": null,
+      "label": "外圍森林"
+    },
+    {
+      "id": "quest_portal",
+      "image": "assets/maps/portals/portal_quest.png",
+      "position": [
+        1872,
+        1008
+      ],
+      "size": [
+        368,
+        552
+      ],
+      "target": "ancient_ruins",
+      "target_spawn": "default",
+      "unlock_condition": "quest_ancient_magic",
+      "label": "古代遺跡"
+    },
+    {
+      "id": "dungeon_portal",
+      "image": "assets/maps/portals/portal_dungeon.png",
+      "position": [
+        2464,
+        1060
+      ],
+      "size": [
+        368,
+        552
+      ],
+      "target": "trial_tower",
+      "target_spawn": "default",
+      "unlock_condition": "trial_access",
+      "label": "魔法試煉塔"
+    }
+  ]
+}

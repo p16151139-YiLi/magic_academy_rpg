@@ -1,0 +1,1040 @@
+{
+  "id": "academy_hall",
+  "name": "魔法學院中央大廳",
+  "width": 1672,
+  "height": 941,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/academy_hall.png",
+  "spawn_points": {
+    "default": [
+      835,
+      755
+    ],
+    "from_entrance": [
+      835,
+      755
+    ],
+    "from_library": [
+      266,
+      706
+    ],
+    "from_classroom": [
+      1407,
+      706
+    ],
+    "from_forest": [
+      835,
+      755
+    ],
+    "from_item_shop": [
+      625,
+      706
+    ],
+    "from_weapon_shop": [
+      1045,
+      706
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_entrance",
+      "rect": [
+        784,
+        833,
+        102,
+        49
+      ],
+      "target": "academy_entrance",
+      "target_spawn": "from_hall"
+    },
+    {
+      "id": "library_portal",
+      "rect": [
+        236,
+        762,
+        60,
+        46
+      ],
+      "target": "academy_library",
+      "target_spawn": "default",
+      "interaction_padding": 70,
+      "floor": "1F"
+    },
+    {
+      "id": "classroom_portal",
+      "rect": [
+        1377,
+        762,
+        60,
+        46
+      ],
+      "target": "academy_classroom",
+      "target_spawn": "default",
+      "interaction_padding": 70,
+      "floor": "1F"
+    },
+    {
+      "id": "item_shop_portal",
+      "rect": [
+        594,
+        762,
+        60,
+        46
+      ],
+      "target": "item_shop",
+      "target_spawn": "default",
+      "interaction_padding": 70,
+      "floor": "1F"
+    },
+    {
+      "id": "weapon_shop_portal",
+      "rect": [
+        1014,
+        762,
+        60,
+        46
+      ],
+      "target": "weapon_shop",
+      "target_spawn": "default",
+      "interaction_padding": 70,
+      "floor": "1F"
+    }
+  ],
+  "collision_rects": [
+    [
+      0,
+      0,
+      1672,
+      120
+    ],
+    [
+      0,
+      120,
+      75,
+      705
+    ],
+    [
+      1588,
+      120,
+      84,
+      705
+    ],
+    [
+      0,
+      851,
+      721,
+      90
+    ],
+    [
+      950,
+      851,
+      722,
+      90
+    ],
+    [
+      181,
+      158,
+      28,
+      234
+    ],
+    [
+      324,
+      158,
+      23,
+      234
+    ],
+    [
+      1320,
+      158,
+      27,
+      234
+    ],
+    [
+      1464,
+      158,
+      27,
+      234
+    ],
+    [
+      209,
+      143,
+      116,
+      20
+    ],
+    [
+      1347,
+      143,
+      117,
+      20
+    ],
+    [
+      539,
+      236,
+      113,
+      22
+    ],
+    [
+      1016,
+      236,
+      105,
+      22
+    ],
+    [
+      665,
+      320,
+      337,
+      56
+    ],
+    [
+      944,
+      299,
+      42,
+      34
+    ],
+    [
+      565,
+      313,
+      55,
+      39
+    ],
+    [
+      1052,
+      313,
+      54,
+      39
+    ],
+    [
+      478,
+      271,
+      60,
+      34
+    ],
+    [
+      1137,
+      271,
+      60,
+      34
+    ],
+    [
+      433,
+      578,
+      125,
+      35
+    ],
+    [
+      1106,
+      578,
+      125,
+      35
+    ],
+    [
+      433,
+      713,
+      125,
+      35
+    ],
+    [
+      1105,
+      713,
+      125,
+      35
+    ],
+    [
+      365,
+      584,
+      48,
+      32
+    ],
+    [
+      1247,
+      584,
+      49,
+      32
+    ],
+    [
+      365,
+      718,
+      48,
+      32
+    ],
+    [
+      1247,
+      718,
+      49,
+      32
+    ],
+    [
+      243,
+      624,
+      64,
+      50
+    ],
+    [
+      1352,
+      624,
+      62,
+      50
+    ],
+    [
+      83,
+      523,
+      45,
+      19
+    ],
+    [
+      1532,
+      523,
+      42,
+      19
+    ],
+    [
+      747,
+      870,
+      175,
+      18
+    ],
+    [
+      214,
+      154,
+      107,
+      18
+    ],
+    [
+      1351,
+      154,
+      107,
+      18
+    ],
+    [
+      576,
+      812,
+      99,
+      17
+    ],
+    [
+      996,
+      812,
+      99,
+      17
+    ],
+    [
+      240,
+      807,
+      52,
+      32
+    ],
+    [
+      598,
+      807,
+      52,
+      32
+    ],
+    [
+      1018,
+      807,
+      52,
+      32
+    ],
+    [
+      1381,
+      807,
+      52,
+      32
+    ]
+  ],
+  "objects": [],
+  "npcs": [
+    {
+      "id": "edwin",
+      "name": "艾德溫・洛恩",
+      "role": "quest",
+      "position": [
+        845,
+        412
+      ],
+      "color": [
+        91,
+        109,
+        172
+      ],
+      "dialogue": [
+        "我是艾德溫，負責學院的教學與古代魔法調查。",
+        "我正在整理這週的學院報告，也在追查一批來歷不明的魔法記錄。"
+      ],
+      "sprite": "npc_edwin",
+      "behavior": "stationary",
+      "pose": "stand",
+      "facing": "down",
+      "face_player": true,
+      "interaction_radius": 115,
+      "activity": "administration",
+      "dialogue_profile": "edwin"
+    },
+    {
+      "id": "lia",
+      "name": "莉亞・溫特",
+      "role": "normal",
+      "position": [
+        686,
+        404
+      ],
+      "color": [
+        194,
+        114,
+        140
+      ],
+      "dialogue": [
+        "歡迎來到魔法學院，我是接待員莉亞。",
+        "我正在接待來訪的學生與旅人，並確認各房間是否開放。"
+      ],
+      "sprite": "npc_lia",
+      "behavior": "stationary",
+      "pose": "stand",
+      "facing": "down",
+      "face_player": true,
+      "interaction_radius": 110,
+      "activity": "reception",
+      "dialogue_profile": "lia"
+    },
+    {
+      "id": "rain",
+      "name": "雷恩・艾許",
+      "role": "student",
+      "position": [
+        838,
+        676
+      ],
+      "area": [
+        766,
+        570,
+        982,
+        748
+      ],
+      "color": [
+        98,
+        163,
+        153
+      ],
+      "dialogue": [
+        "嗨，我是雷恩，今天還有幾個課題沒弄懂。",
+        "我暫時沒事，正在想下一堂課要準備什麼。"
+      ],
+      "sprite": "npc_rain",
+      "behavior": "utility",
+      "speed": 37.0,
+      "pose": "roam",
+      "facing": "down",
+      "dialogue_profile": "rain"
+    },
+    {
+      "id": "noah",
+      "name": "諾亞・格林",
+      "role": "student",
+      "position": [
+        1042,
+        595
+      ],
+      "area": [
+        1005,
+        490,
+        1240,
+        745
+      ],
+      "color": [
+        167,
+        143,
+        94
+      ],
+      "dialogue": [
+        "我是諾亞，最近對古代咒文很感興趣。",
+        "我還在想那本咒文書可能收在哪個書架。"
+      ],
+      "sprite": "npc_noah",
+      "behavior": "utility",
+      "speed": 38.0,
+      "pose": "roam",
+      "facing": "down",
+      "dialogue_profile": "noah"
+    },
+    {
+      "id": "mira",
+      "name": "米菈・諾爾",
+      "role": "student",
+      "position": [
+        580,
+        602
+      ],
+      "pose": "stand",
+      "behavior": "stationary",
+      "sprite": "npc_mira",
+      "facing": "down",
+      "face_player": false,
+      "interaction_radius": 112,
+      "dialogue": [
+        "你好，我是米菈。",
+        "我站在大廳這裡複習今天的魔法課，順便讓眼睛休息一下。"
+      ],
+      "draw_depth": 623,
+      "render_note": "站在長椅旁，而不是站在椅面上",
+      "activity": "review",
+      "dialogue_profile": "mira"
+    },
+    {
+      "id": "sophie",
+      "name": "蘇菲・葛雷",
+      "role": "student",
+      "position": [
+        1260,
+        685
+      ],
+      "pose": "stand",
+      "behavior": "stationary",
+      "sprite": "npc_sophie_v8",
+      "facing": "down",
+      "face_player": false,
+      "interaction_radius": 110,
+      "dialogue": [
+        "我是蘇菲，正在等朋友一起去上課。",
+        "我站在大廳這裡等同學，等人到齊就往教室走。"
+      ],
+      "draw_depth": 757,
+      "render_note": "V8 獨立見習法師（短髮、深藍披風）精靈，不再使用與玩家相似的紫髮法師造型",
+      "activity": "waiting",
+      "dialogue_profile": "sophie"
+    }
+  ],
+  "enemies": [],
+  "music": null,
+  "layers": {
+    "ground": "assets/maps/backgrounds/academy_hall.png"
+  },
+  "save_crystals": [
+    {
+      "id": "crystal_1",
+      "position": [
+        592,
+        272
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    },
+    {
+      "id": "crystal_2",
+      "position": [
+        1078,
+        272
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    },
+    {
+      "id": "crystal_3",
+      "position": [
+        271,
+        562
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    },
+    {
+      "id": "crystal_4",
+      "position": [
+        1380,
+        562
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    }
+  ],
+  "exploration_points": [],
+  "collision_metadata": [
+    {
+      "name": "top boundary",
+      "rect": [
+        0,
+        0,
+        1672,
+        120
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left wall",
+      "rect": [
+        0,
+        120,
+        75,
+        705
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right wall",
+      "rect": [
+        1588,
+        120,
+        84,
+        705
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom left wall",
+      "rect": [
+        0,
+        851,
+        721,
+        90
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom right wall",
+      "rect": [
+        950,
+        851,
+        722,
+        90
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left stairs outer railing",
+      "rect": [
+        181,
+        158,
+        28,
+        234
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left stairs inner railing",
+      "rect": [
+        324,
+        158,
+        23,
+        234
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right stairs inner railing",
+      "rect": [
+        1320,
+        158,
+        27,
+        234
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right stairs outer railing",
+      "rect": [
+        1464,
+        158,
+        27,
+        234
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left stair landing wall",
+      "rect": [
+        209,
+        143,
+        116,
+        20
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right stair landing wall",
+      "rect": [
+        1347,
+        143,
+        117,
+        20
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "大廳後方左書櫃・底座",
+      "rect": [
+        539,
+        236,
+        113,
+        22
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "back left shelf base"
+    },
+    {
+      "name": "大廳後方右書櫃・底座",
+      "rect": [
+        1016,
+        236,
+        105,
+        22
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "back right shelf base"
+    },
+    {
+      "name": "reception counter base",
+      "rect": [
+        665,
+        320,
+        337,
+        56
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "desk planter",
+      "rect": [
+        944,
+        299,
+        42,
+        34
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left reception crystal plinth",
+      "rect": [
+        565,
+        313,
+        55,
+        39
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right reception crystal plinth",
+      "rect": [
+        1052,
+        313,
+        54,
+        39
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "rear left plant pot",
+      "rect": [
+        478,
+        271,
+        60,
+        34
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "rear right plant pot",
+      "rect": [
+        1137,
+        271,
+        60,
+        34
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper left bench",
+      "rect": [
+        433,
+        578,
+        125,
+        35
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper right bench",
+      "rect": [
+        1106,
+        578,
+        125,
+        35
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower left bench",
+      "rect": [
+        433,
+        713,
+        125,
+        35
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower right bench",
+      "rect": [
+        1105,
+        713,
+        125,
+        35
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper left pot",
+      "rect": [
+        365,
+        584,
+        48,
+        32
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper right pot",
+      "rect": [
+        1247,
+        584,
+        49,
+        32
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower left pot",
+      "rect": [
+        365,
+        718,
+        48,
+        32
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower right pot",
+      "rect": [
+        1247,
+        718,
+        49,
+        32
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left crystal pedestal",
+      "rect": [
+        243,
+        624,
+        64,
+        50
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right crystal pedestal",
+      "rect": [
+        1352,
+        624,
+        62,
+        50
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "大廳左側書櫃・底座",
+      "rect": [
+        83,
+        523,
+        45,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "side left shelf"
+    },
+    {
+      "name": "大廳右側書櫃・底座",
+      "rect": [
+        1532,
+        523,
+        42,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "side right shelf"
+    },
+    {
+      "name": "exit bottom door sill",
+      "rect": [
+        747,
+        870,
+        175,
+        18
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "library stair threshold",
+      "rect": [
+        214,
+        154,
+        107,
+        18
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "classroom stair threshold",
+      "rect": [
+        1351,
+        154,
+        107,
+        18
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "item shop door threshold",
+      "rect": [
+        576,
+        812,
+        99,
+        17
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "weapon shop door threshold",
+      "rect": [
+        996,
+        812,
+        99,
+        17
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "ground floor flat entrance threshold 1",
+      "rect": [
+        240,
+        807,
+        52,
+        32
+      ],
+      "type": "door_feet_footprint"
+    },
+    {
+      "name": "ground floor flat entrance threshold 2",
+      "rect": [
+        598,
+        807,
+        52,
+        32
+      ],
+      "type": "door_feet_footprint"
+    },
+    {
+      "name": "ground floor flat entrance threshold 3",
+      "rect": [
+        1018,
+        807,
+        52,
+        32
+      ],
+      "type": "door_feet_footprint"
+    },
+    {
+      "name": "ground floor flat entrance threshold 4",
+      "rect": [
+        1381,
+        807,
+        52,
+        32
+      ],
+      "type": "door_feet_footprint"
+    }
+  ],
+  "collision_calibration_version": "v7_ground_floor_flat_doors",
+  "occluders": [
+    {
+      "image": "assets/maps/foreground/academy_hall_front_00.png",
+      "x": 523,
+      "y": 85,
+      "depth_y": 263
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_01.png",
+      "x": 1004,
+      "y": 85,
+      "depth_y": 263
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_02.png",
+      "x": 656,
+      "y": 220,
+      "depth_y": 379
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_03.png",
+      "x": 429,
+      "y": 518,
+      "depth_y": 618
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_04.png",
+      "x": 1098,
+      "y": 518,
+      "depth_y": 618
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_05.png",
+      "x": 427,
+      "y": 651,
+      "depth_y": 751
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_06.png",
+      "x": 1098,
+      "y": 650,
+      "depth_y": 752
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_07.png",
+      "x": 76,
+      "y": 373,
+      "depth_y": 547
+    },
+    {
+      "image": "assets/maps/foreground/academy_hall_front_08.png",
+      "x": 1515,
+      "y": 373,
+      "depth_y": 547
+    }
+  ],
+  "decals": [
+    {
+      "image": "assets/maps/foreground/doors/flat_2d_academy_door.png",
+      "x": 227,
+      "y": 760,
+      "comment": "library_portal 一樓 2D 平面門"
+    },
+    {
+      "image": "assets/maps/foreground/doors/flat_2d_academy_door.png",
+      "x": 585,
+      "y": 760,
+      "comment": "item_shop_portal 一樓 2D 平面門"
+    },
+    {
+      "image": "assets/maps/foreground/doors/flat_2d_academy_door.png",
+      "x": 1005,
+      "y": 760,
+      "comment": "weapon_shop_portal 一樓 2D 平面門"
+    },
+    {
+      "image": "assets/maps/foreground/doors/flat_2d_academy_door.png",
+      "x": 1368,
+      "y": 760,
+      "comment": "classroom_portal 一樓 2D 平面門"
+    }
+  ],
+  "floorplan_note": "圖書館、教室、兩間商店都由中央大廳一樓入口進入；樓梯僅為原場景裝飾。"
+}

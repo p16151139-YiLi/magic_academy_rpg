@@ -1,0 +1,29 @@
+{
+  "balanced_mage": {
+    "name": "均衡型法師",
+    "description": "雙型態切換與技能連擊，透過連續攻擊累積傷害。",
+    "hp": 110,
+    "mp": 110,
+    "attack": 20,
+    "defense": 12,
+    "portrait": "balanced_mage_portrait.png"
+  },
+  "melee_mage": {
+    "name": "近戰型法師",
+    "description": "使用魔法強化自身與普通攻擊，擁有較高生存能力。",
+    "hp": 150,
+    "mp": 80,
+    "attack": 18,
+    "defense": 18,
+    "portrait": "melee_mage_portrait.png"
+  },
+  "ranged_mage": {
+    "name": "遠程型法師",
+    "description": "擅長遠距離魔法、蓄力攻擊與高爆發傷害。",
+    "hp": 85,
+    "mp": 140,
+    "attack": 32,
+    "defense": 7,
+    "portrait": "ranged_mage_portrait.png"
+  }
+}

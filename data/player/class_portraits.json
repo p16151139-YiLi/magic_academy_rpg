@@ -1,0 +1,14 @@
+{
+  "balanced_mage": {
+    "name": "均衡型法師",
+    "portrait": "assets/characters/portraits/balanced_mage_portrait.png"
+  },
+  "ranged_mage": {
+    "name": "遠程型法師",
+    "portrait": "assets/characters/portraits/ranged_mage_portrait.png"
+  },
+  "melee_mage": {
+    "name": "近戰型法師",
+    "portrait": "assets/characters/portraits/melee_mage_portrait.png"
+  }
+}

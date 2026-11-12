@@ -323,13 +323,9 @@ async def main():
 
                 if event.key == pygame.K_ESCAPE:
                     current = scene_manager.current_scene
-                    menu_open = bool(
-                        scene_manager.current_scene_name == "game"
-                        and getattr(getattr(current, "player_menu", None), "opened", False)
-                    )
-
-                    if menu_open:
-                        # 遊戲內選單由 GameScene 統一處理 ESC 關閉
+                    # 遊戲中的 ESC 必須先交給對話、商店或背包；不能直接退出。
+                    # 當前 GameScene 依覆蓋層優先順序關閉相應介面。
+                    if scene_manager.current_scene_name == "game":
                         pass
                     elif scene_manager.current_scene_name == "title":
                         running = False

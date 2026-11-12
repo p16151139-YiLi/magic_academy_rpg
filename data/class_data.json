@@ -1,0 +1,74 @@
+{
+    "ranged_mage": {
+        "name": "遠程型法師",
+        "subtitle": "Arcane Artillery",
+        "description": "以遠距離魔法與高威力技能進行爆發輸出。",
+        "combat_style": "爆發輸出",
+        "attack_range": "遠距離",
+        "survivability": "低",
+        "stats": {
+            "hp": 85,
+            "mp": 140,
+            "attack": 32,
+            "defense": 7
+        },
+        "mechanics": [
+            "高傷害魔法技能",
+            "蓄力攻擊",
+            "短時間爆發輸出",
+            "依賴距離與施法時機"
+        ]
+    },
+    "melee_mage": {
+        "name": "近戰型法師",
+        "subtitle": "Arcane Vanguard",
+        "description": "透過自身增益強化普攻，兼具高坦度與持續近戰輸出。",
+        "combat_style": "增益強化普攻",
+        "attack_range": "近距離",
+        "survivability": "高",
+        "stats": {
+            "hp": 150,
+            "mp": 80,
+            "attack": 18,
+            "defense": 18
+        },
+        "mechanics": [
+            "自身攻擊增益",
+            "強化普通攻擊",
+            "提升防禦能力",
+            "持續近距離作戰"
+        ]
+    },
+    "balanced_mage": {
+        "name": "均衡型法師",
+        "subtitle": "Arcane Duality",
+        "description": "在兩種型態間切換，透過技能銜接與連擊累積傷害。",
+        "combat_style": "雙型態連擊",
+        "attack_range": "中距離／依型態變化",
+        "survivability": "中",
+        "stats": {
+            "hp": 110,
+            "mp": 110,
+            "attack": 20,
+            "defense": 12
+        },
+        "mechanics": [
+            "兩種戰鬥型態",
+            "型態切換",
+            "技能連擊",
+            "連續攻擊累積傷害"
+        ],
+        "forms": [
+            {
+                "id": "form_a",
+                "name": "第一型態",
+                "description": "第一套攻擊與技能組合"
+            },
+            {
+                "id": "form_b",
+                "name": "第二型態",
+                "description": "第二套攻擊與技能組合"
+            }
+        ]
+    }
+}

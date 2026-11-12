@@ -1,0 +1,135 @@
+{
+  "hp_potion_small": {
+    "name": "初級生命藥水",
+    "type": "consumable",
+    "description": "恢復 30 點生命值。",
+    "effect": {
+      "hp": 30
+    },
+    "stackable": true,
+    "max_stack": 99,
+    "price": 20,
+    "icon": "assets/items/consumables/hp_potion_small.png",
+    "effects": {
+      "hp": 30
+    },
+    "advanced_bonuses": {},
+    "hidden_bonuses": {}
+  },
+  "mp_potion_small": {
+    "name": "初級魔力藥水",
+    "type": "consumable",
+    "description": "恢復 30 點魔力值。",
+    "effect": {
+      "mp": 30
+    },
+    "stackable": true,
+    "max_stack": 99,
+    "price": 20,
+    "icon": "assets/items/consumables/mp_potion_small.png",
+    "effects": {
+      "mp": 30
+    },
+    "advanced_bonuses": {},
+    "hidden_bonuses": {}
+  },
+  "apprentice_staff": {
+    "name": "見習法杖",
+    "type": "weapon",
+    "slot": "weapon",
+    "description": "魔法學院見習生使用的基礎法杖。",
+    "bonuses": {
+      "attack": 3,
+      "magic": 5
+    },
+    "stackable": false,
+    "price": 100,
+    "icon": "assets/items/weapons/apprentice_staff.png",
+    "max_stack": 1,
+    "advanced_bonuses": {},
+    "hidden_bonuses": {}
+  },
+  "magic_blade": {
+    "name": "初級魔法劍",
+    "type": "weapon",
+    "slot": "weapon",
+    "description": "能將魔力附著於劍刃的武器。",
+    "bonuses": {
+      "attack": 6
+    },
+    "stackable": false,
+    "price": 150,
+    "icon": "assets/items/weapons/magic_blade.png",
+    "max_stack": 1,
+    "advanced_bonuses": {},
+    "hidden_bonuses": {}
+  },
+  "apprentice_robe": {
+    "name": "見習法袍",
+    "type": "armor",
+    "slot": "armor",
+    "description": "魔法學院的基本制服。",
+    "bonuses": {
+      "defense": 3
+    },
+    "stackable": false,
+    "price": 80,
+    "icon": "assets/items/armor/apprentice_robe.png",
+    "max_stack": 1,
+    "advanced_bonuses": {},
+    "hidden_bonuses": {}
+  },
+  "mana_crystal": {
+    "name": "魔力結晶",
+    "type": "material",
+    "description": "蘊含微弱魔力的結晶，可用於製作道具。",
+    "stackable": true,
+    "max_stack": 99,
+    "price": 15,
+    "icon": "assets/items/materials/mana_crystal.png",
+    "advanced_bonuses": {},
+    "hidden_bonuses": {}
+  },
+  "academy_boots": {
+    "name": "學院旅行靴",
+    "type": "equipment",
+    "slot": "shoes",
+    "description": "輕便的魔法旅行靴。",
+    "bonuses": {
+      "defense": 2,
+      "agility": 1
+    },
+    "price": 85,
+    "icon": "assets/items/equipment/academy_boots.png",
+    "stackable": false,
+    "max_stack": 1
+  },
+  "mana_ring": {
+    "name": "魔力戒指",
+    "type": "equipment",
+    "slot": "ring",
+    "description": "提高施法能力的戒指。",
+    "bonuses": {
+      "magic": 4,
+      "max_mp": 12
+    },
+    "price": 125,
+    "icon": "assets/items/equipment/mana_ring.png",
+    "stackable": false,
+    "max_stack": 1
+  },
+  "academy_medal": {
+    "name": "學院勳章",
+    "type": "equipment",
+    "slot": "medal",
+    "description": "魔法學院頒發的勳章。",
+    "bonuses": {
+      "defense": 2,
+      "max_hp": 15
+    },
+    "price": 145,
+    "icon": "assets/items/equipment/academy_medal.png",
+    "stackable": false,
+    "max_stack": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "forest_outskirts",
+  "name": "學院外圍森林",
+  "width": 2560,
+  "height": 1440,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/forest_outskirts.png",
+  "spawn_points": {
+    "default": [
+      1280,
+      1000
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_hall",
+      "rect": [
+        1180,
+        1180,
+        200,
+        100
+      ],
+      "target": "academy_hall",
+      "target_spawn": "from_forest"
+    }
+  ],
+  "collision_rects": [],
+  "objects": [],
+  "npcs": [],
+  "enemies": [],
+  "music": null,
+  "collision_calibration_version": "v4_npc_door_footprint"
+}

@@ -1,0 +1,527 @@
+{
+  "id": "item_shop",
+  "name": "星露雜貨店",
+  "width": 1536,
+  "height": 1024,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/item_shop.png",
+  "spawn_points": {
+    "default": [
+      768,
+      817
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_hall",
+      "rect": [
+        703,
+        901,
+        130,
+        44
+      ],
+      "target": "academy_hall",
+      "target_spawn": "from_item_shop",
+      "interaction_padding": 66,
+      "floor": "1F"
+    }
+  ],
+  "collision_rects": [
+    [
+      0,
+      0,
+      1536,
+      55
+    ],
+    [
+      0,
+      50,
+      60,
+      895
+    ],
+    [
+      1470,
+      50,
+      66,
+      895
+    ],
+    [
+      0,
+      908,
+      685,
+      116
+    ],
+    [
+      852,
+      908,
+      684,
+      116
+    ],
+    [
+      180,
+      264,
+      210,
+      26
+    ],
+    [
+      420,
+      262,
+      173,
+      28
+    ],
+    [
+      880,
+      261,
+      150,
+      27
+    ],
+    [
+      1050,
+      262,
+      116,
+      29
+    ],
+    [
+      1190,
+      261,
+      213,
+      29
+    ],
+    [
+      89,
+      260,
+      115,
+      58
+    ],
+    [
+      102,
+      484,
+      252,
+      50
+    ],
+    [
+      1117,
+      488,
+      258,
+      51
+    ],
+    [
+      450,
+      418,
+      632,
+      45
+    ],
+    [
+      630,
+      450,
+      85,
+      15
+    ],
+    [
+      835,
+      451,
+      76,
+      15
+    ],
+    [
+      102,
+      735,
+      115,
+      46
+    ],
+    [
+      1315,
+      730,
+      112,
+      47
+    ],
+    [
+      650,
+      855,
+      36,
+      78
+    ],
+    [
+      854,
+      854,
+      36,
+      78
+    ],
+    [
+      126,
+      785,
+      56,
+      42
+    ],
+    [
+      1316,
+      785,
+      55,
+      43
+    ],
+    [
+      90,
+      710,
+      40,
+      34
+    ],
+    [
+      1391,
+      715,
+      42,
+      34
+    ]
+  ],
+  "collision_metadata": [
+    {
+      "name": "上牆",
+      "rect": [
+        0,
+        0,
+        1536,
+        55
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左牆",
+      "rect": [
+        0,
+        50,
+        60,
+        895
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右牆",
+      "rect": [
+        1470,
+        50,
+        66,
+        895
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "底牆左",
+      "rect": [
+        0,
+        908,
+        685,
+        116
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "底牆右",
+      "rect": [
+        852,
+        908,
+        684,
+        116
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左藥架底",
+      "rect": [
+        180,
+        264,
+        210,
+        26
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左雜物架底",
+      "rect": [
+        420,
+        262,
+        173,
+        28
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右瓶架底",
+      "rect": [
+        880,
+        261,
+        150,
+        27
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右捲軸架底",
+      "rect": [
+        1050,
+        262,
+        116,
+        29
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右貨架底",
+      "rect": [
+        1190,
+        261,
+        213,
+        29
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左側水晶台底",
+      "rect": [
+        89,
+        260,
+        115,
+        58
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左展示貨架底",
+      "rect": [
+        102,
+        484,
+        252,
+        50
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右展示貨架底",
+      "rect": [
+        1117,
+        488,
+        258,
+        51
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "櫃檯主底座",
+      "rect": [
+        450,
+        418,
+        632,
+        45
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "櫃檯左台腳",
+      "rect": [
+        630,
+        450,
+        85,
+        15
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "櫃檯右台腳",
+      "rect": [
+        835,
+        451,
+        76,
+        15
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左底部箱子",
+      "rect": [
+        102,
+        735,
+        115,
+        46
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右底部桶",
+      "rect": [
+        1315,
+        730,
+        112,
+        47
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "門檻左柱",
+      "rect": [
+        650,
+        855,
+        36,
+        78
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "門檻右柱",
+      "rect": [
+        854,
+        854,
+        36,
+        78
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左花盆底",
+      "rect": [
+        126,
+        785,
+        56,
+        42
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右花盆底",
+      "rect": [
+        1316,
+        785,
+        55,
+        43
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左木箱底",
+      "rect": [
+        90,
+        710,
+        40,
+        34
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右木箱底",
+      "rect": [
+        1391,
+        715,
+        42,
+        34
+      ],
+      "type": "solid_footprint"
+    }
+  ],
+  "objects": [],
+  "npcs": [
+    {
+      "id": "erin",
+      "name": "艾琳・梅洛",
+      "role": "merchant",
+      "shop": "item_shop",
+      "position": [
+        780,
+        425
+      ],
+      "color": [
+        195,
+        112,
+        145
+      ],
+      "dialogue": [
+        "歡迎來到星露雜貨店！我是艾琳，需要補充冒險用品嗎？",
+        "我正在櫃檯接待客人，藥水、卷軸和小型魔法材料都可以詢問。"
+      ],
+      "interaction_radius": 265,
+      "sprite": "npc_erin_v8",
+      "behavior": "stationary",
+      "pose": "stand",
+      "facing": "down",
+      "face_player": false,
+      "idle_animation": true,
+      "draw_depth": 425,
+      "render_note": "V8 AI背景無椅子；NPC 獨立站櫃檯後，前景不重複繪製家具",
+      "sprite_scale": 1.3,
+      "activity": "shopkeeping",
+      "talk_animation": true,
+      "dialogue_profile": "erin"
+    },
+    {
+      "id": "berk",
+      "name": "柏克・米勒",
+      "role": "visitor",
+      "behavior": "utility",
+      "sprite": "npc_berk",
+      "position": [
+        1040,
+        684
+      ],
+      "interaction_radius": 95,
+      "dialogue": [
+        "我是柏克，正在這家店看看冒險用品。",
+        "我還在考慮要不要多買一些藥水備用。"
+      ],
+      "pose": "roam",
+      "area": [
+        1010,
+        575,
+        1260,
+        796
+      ],
+      "speed": 35,
+      "facing": "down",
+      "dialogue_profile": "berk"
+    }
+  ],
+  "enemies": [],
+  "music": null,
+  "layers": {
+    "ground": "assets/maps/backgrounds/item_shop.png"
+  },
+  "collision_calibration_version": "v8_exact_new_background",
+  "occluders": [
+    {
+      "image": "assets/maps/foreground/item_shop_v8_cash_counter.png",
+      "x": 437,
+      "y": 397,
+      "depth_y": 473,
+      "fade_when_overlapping": false,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/item_shop_v8_left_display.png",
+      "x": 205,
+      "y": 485,
+      "depth_y": 614,
+      "fade_when_overlapping": true,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/item_shop_v8_right_display.png",
+      "x": 1094,
+      "y": 479,
+      "depth_y": 620,
+      "fade_when_overlapping": true,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/item_shop_v8_rear_left_shelf.png",
+      "x": 180,
+      "y": 112,
+      "depth_y": 301,
+      "fade_when_overlapping": false,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/item_shop_v8_rear_right_shelf.png",
+      "x": 872,
+      "y": 105,
+      "depth_y": 311,
+      "fade_when_overlapping": false,
+      "role": "furniture_front_only"
+    }
+  ],
+  "floor": "1F"
+}

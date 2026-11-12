@@ -1,0 +1,60 @@
+{
+  "map_id": "academy_hall",
+  "interactions": [
+    {
+      "id": "headmaster",
+      "type": "quest_npc",
+      "position": [
+        1600,
+        252
+      ],
+      "radius": 90,
+      "label": "院長室",
+      "action": "open_headmaster_dialog"
+    },
+    {
+      "id": "library",
+      "type": "library",
+      "position": [
+        808,
+        928
+      ],
+      "radius": 150,
+      "label": "圖書館",
+      "action": "open_library"
+    },
+    {
+      "id": "skill_tree",
+      "type": "skills",
+      "position": [
+        2400,
+        924
+      ],
+      "radius": 160,
+      "label": "技能殿堂",
+      "action": "open_skill_tree"
+    },
+    {
+      "id": "item_shop",
+      "type": "shop",
+      "position": [
+        704,
+        2076
+      ],
+      "radius": 150,
+      "label": "道具商店",
+      "action": "open_item_shop"
+    },
+    {
+      "id": "weapon_shop",
+      "type": "shop",
+      "position": [
+        2384,
+        2076
+      ],
+      "radius": 150,
+      "label": "武器裝備店",
+      "action": "open_weapon_shop"
+    }
+  ]
+}

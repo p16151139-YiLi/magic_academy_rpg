@@ -1,0 +1,11 @@
+{
+  "version": "V9.1",
+  "description": "學院入口 → 中央大廳 E 鍵與點擊互動修復",
+  "base": "V9",
+  "fixes": [
+    "to_hall unified keyboard/mouse range",
+    "clickable entrance prompt",
+    "visible to_hall marker",
+    "door priority over nearby idle NPC"
+  ]
+}

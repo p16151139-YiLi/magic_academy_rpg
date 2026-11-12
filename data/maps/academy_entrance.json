@@ -1,0 +1,570 @@
+{
+  "id": "academy_entrance",
+  "name": "魔法學院入口",
+  "width": 1672,
+  "height": 941,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/academy_entrance.png",
+  "spawn_points": {
+    "default": [
+      835,
+      700
+    ],
+    "from_hall": [
+      835,
+      348
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_hall",
+      "rect": [
+        772,
+        227,
+        127,
+        48
+      ],
+      "target": "academy_hall",
+      "target_spawn": "from_entrance",
+      "interaction_padding": 116
+    }
+  ],
+  "collision_rects": [
+    [
+      0,
+      0,
+      719,
+      136
+    ],
+    [
+      955,
+      0,
+      717,
+      136
+    ],
+    [
+      0,
+      136,
+      105,
+      625
+    ],
+    [
+      1565,
+      136,
+      107,
+      625
+    ],
+    [
+      0,
+      785,
+      715,
+      156
+    ],
+    [
+      960,
+      785,
+      712,
+      156
+    ],
+    [
+      151,
+      249,
+      95,
+      22
+    ],
+    [
+      261,
+      248,
+      67,
+      22
+    ],
+    [
+      1362,
+      240,
+      17,
+      30
+    ],
+    [
+      1494,
+      240,
+      19,
+      30
+    ],
+    [
+      335,
+      237,
+      54,
+      42
+    ],
+    [
+      564,
+      234,
+      53,
+      41
+    ],
+    [
+      1015,
+      234,
+      58,
+      41
+    ],
+    [
+      1253,
+      237,
+      53,
+      41
+    ],
+    [
+      494,
+      587,
+      68,
+      52
+    ],
+    [
+      1086,
+      588,
+      73,
+      52
+    ],
+    [
+      148,
+      582,
+      244,
+      53
+    ],
+    [
+      1313,
+      585,
+      277,
+      51
+    ],
+    [
+      571,
+      588,
+      63,
+      43
+    ],
+    [
+      1000,
+      588,
+      64,
+      43
+    ],
+    [
+      54,
+      591,
+      63,
+      46
+    ],
+    [
+      1543,
+      591,
+      61,
+      46
+    ],
+    [
+      637,
+      777,
+      72,
+      102
+    ],
+    [
+      953,
+      777,
+      72,
+      102
+    ],
+    [
+      735,
+      187,
+      198,
+      26
+    ]
+  ],
+  "objects": [],
+  "npcs": [
+    {
+      "id": "guard",
+      "name": "凱爾・羅斯",
+      "role": "guard",
+      "position": [
+        1188,
+        465
+      ],
+      "color": [
+        99,
+        129,
+        158
+      ],
+      "dialogue": [
+        "我是凱爾，負責學院入口的安全。",
+        "我在守望入口，隨時準備開始下一段巡查。"
+      ],
+      "sprite": "npc_guard",
+      "behavior": "utility",
+      "speed": 49,
+      "pose": "roam",
+      "facing": "left",
+      "face_player": true,
+      "interaction_radius": 110,
+      "area": [
+        1070,
+        394,
+        1288,
+        555
+      ],
+      "dialogue_profile": "guard"
+    }
+  ],
+  "enemies": [],
+  "music": null,
+  "layers": {
+    "ground": "assets/maps/backgrounds/academy_entrance.png"
+  },
+  "save_crystals": [
+    {
+      "id": "crystal_1",
+      "position": [
+        477,
+        245
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    },
+    {
+      "id": "crystal_2",
+      "position": [
+        1170,
+        245
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    }
+  ],
+  "exploration_points": [],
+  "collision_metadata": [
+    {
+      "name": "upper left stone wall",
+      "rect": [
+        0,
+        0,
+        719,
+        136
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper right stone wall",
+      "rect": [
+        955,
+        0,
+        717,
+        136
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left wall",
+      "rect": [
+        0,
+        136,
+        105,
+        625
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right wall",
+      "rect": [
+        1565,
+        136,
+        107,
+        625
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom left wall",
+      "rect": [
+        0,
+        785,
+        715,
+        156
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom right wall",
+      "rect": [
+        960,
+        785,
+        712,
+        156
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "入口書架・左底座",
+      "rect": [
+        151,
+        249,
+        95,
+        22
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "upper left bookshelf"
+    },
+    {
+      "name": "入口書架・右底座",
+      "rect": [
+        261,
+        248,
+        67,
+        22
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "upper left bookshelf"
+    },
+    {
+      "name": "入口公告板・兩腳左",
+      "rect": [
+        1362,
+        240,
+        17,
+        30
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "upper right notice board"
+    },
+    {
+      "name": "入口公告板・兩腳右",
+      "rect": [
+        1494,
+        240,
+        19,
+        30
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "upper right notice board"
+    },
+    {
+      "name": "top pillar 1",
+      "rect": [
+        335,
+        237,
+        54,
+        42
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "top pillar 2",
+      "rect": [
+        564,
+        234,
+        53,
+        41
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "top pillar 3",
+      "rect": [
+        1015,
+        234,
+        58,
+        41
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "top pillar 4",
+      "rect": [
+        1253,
+        237,
+        53,
+        41
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "middle pillar left",
+      "rect": [
+        494,
+        587,
+        68,
+        52
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "middle pillar right",
+      "rect": [
+        1086,
+        588,
+        73,
+        52
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left display counter",
+      "rect": [
+        148,
+        582,
+        244,
+        53
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right display counter",
+      "rect": [
+        1313,
+        585,
+        277,
+        51
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left center plant pot",
+      "rect": [
+        571,
+        588,
+        63,
+        43
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right center plant pot",
+      "rect": [
+        1000,
+        588,
+        64,
+        43
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom left wall plant",
+      "rect": [
+        54,
+        591,
+        63,
+        46
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom right wall plant",
+      "rect": [
+        1543,
+        591,
+        61,
+        46
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom left stair post",
+      "rect": [
+        637,
+        777,
+        72,
+        102
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom right stair post",
+      "rect": [
+        953,
+        777,
+        72,
+        102
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "front door closed wood threshold",
+      "rect": [
+        735,
+        187,
+        198,
+        26
+      ],
+      "type": "accurate_footprint"
+    }
+  ],
+  "collision_calibration_version": "v4_npc_door_footprint",
+  "occluders": [
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_00.png",
+      "x": 713,
+      "y": 19,
+      "depth_y": 214
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_01.png",
+      "x": 330,
+      "y": 78,
+      "depth_y": 281
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_02.png",
+      "x": 558,
+      "y": 57,
+      "depth_y": 280
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_03.png",
+      "x": 1006,
+      "y": 57,
+      "depth_y": 280
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_04.png",
+      "x": 1249,
+      "y": 80,
+      "depth_y": 283
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_05.png",
+      "x": 490,
+      "y": 404,
+      "depth_y": 640
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_06.png",
+      "x": 1081,
+      "y": 402,
+      "depth_y": 640
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_07.png",
+      "x": 144,
+      "y": 511,
+      "depth_y": 639
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_front_08.png",
+      "x": 1306,
+      "y": 510,
+      "depth_y": 639
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_bottomwall_left.png",
+      "x": 0,
+      "y": 738,
+      "depth_y": 875
+    },
+    {
+      "image": "assets/maps/foreground/academy_entrance_bottomwall_right.png",
+      "x": 960,
+      "y": 738,
+      "depth_y": 875
+    }
+  ]
+}

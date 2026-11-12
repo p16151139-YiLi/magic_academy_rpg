@@ -1,0 +1,460 @@
+{
+  "id": "weapon_shop",
+  "name": "赤鐵武器鋪",
+  "width": 1536,
+  "height": 1024,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/weapon_shop.png",
+  "spawn_points": {
+    "default": [
+      768,
+      817
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_hall",
+      "rect": [
+        703,
+        901,
+        130,
+        44
+      ],
+      "target": "academy_hall",
+      "target_spawn": "from_weapon_shop",
+      "interaction_padding": 66,
+      "floor": "1F"
+    }
+  ],
+  "collision_rects": [
+    [
+      0,
+      0,
+      1536,
+      58
+    ],
+    [
+      0,
+      55,
+      62,
+      880
+    ],
+    [
+      1472,
+      55,
+      64,
+      880
+    ],
+    [
+      0,
+      906,
+      655,
+      118
+    ],
+    [
+      877,
+      906,
+      659,
+      118
+    ],
+    [
+      160,
+      275,
+      170,
+      26
+    ],
+    [
+      340,
+      275,
+      201,
+      27
+    ],
+    [
+      592,
+      278,
+      140,
+      26
+    ],
+    [
+      910,
+      277,
+      129,
+      29
+    ],
+    [
+      1273,
+      270,
+      161,
+      29
+    ],
+    [
+      75,
+      370,
+      106,
+      60
+    ],
+    [
+      77,
+      700,
+      315,
+      44
+    ],
+    [
+      1160,
+      702,
+      264,
+      46
+    ],
+    [
+      617,
+      420,
+      648,
+      53
+    ],
+    [
+      619,
+      374,
+      56,
+      46
+    ],
+    [
+      1203,
+      373,
+      51,
+      46
+    ],
+    [
+      1036,
+      332,
+      126,
+      45
+    ],
+    [
+      1320,
+      296,
+      110,
+      51
+    ],
+    [
+      87,
+      770,
+      108,
+      38
+    ],
+    [
+      1370,
+      769,
+      91,
+      40
+    ],
+    [
+      649,
+      854,
+      49,
+      82
+    ],
+    [
+      876,
+      853,
+      50,
+      83
+    ]
+  ],
+  "collision_metadata": [
+    {
+      "name": "上牆",
+      "rect": [
+        0,
+        0,
+        1536,
+        58
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左牆",
+      "rect": [
+        0,
+        55,
+        62,
+        880
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右牆",
+      "rect": [
+        1472,
+        55,
+        64,
+        880
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "底牆左",
+      "rect": [
+        0,
+        906,
+        655,
+        118
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "底牆右",
+      "rect": [
+        877,
+        906,
+        659,
+        118
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左兵器陳列底",
+      "rect": [
+        160,
+        275,
+        170,
+        26
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "劍架底",
+      "rect": [
+        340,
+        275,
+        201,
+        27
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "裝甲架底",
+      "rect": [
+        592,
+        278,
+        140,
+        26
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "武具架底",
+      "rect": [
+        910,
+        277,
+        129,
+        29
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "鍛造工具架底",
+      "rect": [
+        1273,
+        270,
+        161,
+        29
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "礦物箱底",
+      "rect": [
+        75,
+        370,
+        106,
+        60
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左展示台底",
+      "rect": [
+        77,
+        700,
+        315,
+        44
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右展示台底",
+      "rect": [
+        1160,
+        702,
+        264,
+        46
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "武器店櫃檯底",
+      "rect": [
+        617,
+        420,
+        648,
+        53
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "櫃檯左腳",
+      "rect": [
+        619,
+        374,
+        56,
+        46
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "櫃檯右腳",
+      "rect": [
+        1203,
+        373,
+        51,
+        46
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "鍛造砧腳",
+      "rect": [
+        1036,
+        332,
+        126,
+        45
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "熔爐供應桶",
+      "rect": [
+        1320,
+        296,
+        110,
+        51
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "左盆栽腳",
+      "rect": [
+        87,
+        770,
+        108,
+        38
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "右盆栽腳",
+      "rect": [
+        1370,
+        769,
+        91,
+        40
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "門檻左柱",
+      "rect": [
+        649,
+        854,
+        49,
+        82
+      ],
+      "type": "solid_footprint"
+    },
+    {
+      "name": "門檻右柱",
+      "rect": [
+        876,
+        853,
+        50,
+        83
+      ],
+      "type": "solid_footprint"
+    }
+  ],
+  "objects": [],
+  "npcs": [
+    {
+      "id": "grant",
+      "name": "格蘭特・霍克",
+      "role": "merchant",
+      "shop": "weapon_shop",
+      "position": [
+        948,
+        425
+      ],
+      "color": [
+        174,
+        107,
+        65
+      ],
+      "dialogue": [
+        "這裡是赤鐵武器鋪，我是格蘭特。",
+        "我守在櫃檯整理裝備清單，你可以比較武器與防具的用途。"
+      ],
+      "interaction_radius": 260,
+      "sprite": "npc_grant",
+      "behavior": "stationary",
+      "pose": "stand",
+      "facing": "down",
+      "face_player": false,
+      "draw_depth": 425,
+      "idle_animation": true,
+      "sprite_scale": 1.22,
+      "render_note": "V8 無椅子、店主在空櫃檯後，前景只依櫃檯本身處理",
+      "activity": "shopkeeping",
+      "dialogue_profile": "grant"
+    }
+  ],
+  "enemies": [],
+  "music": null,
+  "layers": {
+    "ground": "assets/maps/backgrounds/weapon_shop.png"
+  },
+  "collision_calibration_version": "v8_exact_new_background",
+  "occluders": [
+    {
+      "image": "assets/maps/foreground/weapon_shop_v8_cash_counter.png",
+      "x": 611,
+      "y": 401,
+      "depth_y": 500,
+      "fade_when_overlapping": false,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/weapon_shop_v8_left_display.png",
+      "x": 132,
+      "y": 638,
+      "depth_y": 811,
+      "fade_when_overlapping": true,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/weapon_shop_v8_right_workbench.png",
+      "x": 1145,
+      "y": 632,
+      "depth_y": 812,
+      "fade_when_overlapping": true,
+      "role": "furniture_front_only"
+    },
+    {
+      "image": "assets/maps/foreground/weapon_shop_v8_back_armor_display.png",
+      "x": 135,
+      "y": 100,
+      "depth_y": 322,
+      "fade_when_overlapping": false,
+      "role": "furniture_front_only"
+    }
+  ],
+  "floor": "1F"
+}

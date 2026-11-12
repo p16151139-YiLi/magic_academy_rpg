@@ -1,0 +1,628 @@
+{
+  "id": "academy_classroom",
+  "name": "魔法教室",
+  "width": 1672,
+  "height": 941,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/academy_classroom.png",
+  "spawn_points": {
+    "default": [
+      836,
+      792
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_hall",
+      "rect": [
+        801,
+        825,
+        70,
+        24
+      ],
+      "target": "academy_hall",
+      "target_spawn": "from_classroom",
+      "interaction_padding": 52,
+      "portal_art": "original_background",
+      "floor": "1F"
+    }
+  ],
+  "collision_rects": [
+    [
+      0,
+      0,
+      1672,
+      90
+    ],
+    [
+      0,
+      85,
+      78,
+      765
+    ],
+    [
+      1594,
+      85,
+      78,
+      765
+    ],
+    [
+      0,
+      845,
+      748,
+      96
+    ],
+    [
+      924,
+      845,
+      748,
+      96
+    ],
+    [
+      158,
+      294,
+      143,
+      18
+    ],
+    [
+      341,
+      294,
+      138,
+      18
+    ],
+    [
+      652,
+      330,
+      355,
+      50
+    ],
+    [
+      1187,
+      292,
+      167,
+      20
+    ],
+    [
+      1438,
+      492,
+      104,
+      20
+    ],
+    [
+      159,
+      463,
+      76,
+      50
+    ],
+    [
+      108,
+      685,
+      230,
+      60
+    ],
+    [
+      1323,
+      692,
+      251,
+      62
+    ],
+    [
+      437,
+      479,
+      194,
+      53
+    ],
+    [
+      733,
+      479,
+      195,
+      53
+    ],
+    [
+      1027,
+      479,
+      195,
+      53
+    ],
+    [
+      437,
+      594,
+      194,
+      54
+    ],
+    [
+      733,
+      594,
+      195,
+      54
+    ],
+    [
+      1027,
+      594,
+      195,
+      54
+    ],
+    [
+      437,
+      710,
+      194,
+      52
+    ],
+    [
+      733,
+      710,
+      195,
+      52
+    ],
+    [
+      1027,
+      710,
+      195,
+      52
+    ],
+    [
+      1375,
+      728,
+      176,
+      20
+    ],
+    [
+      752,
+      861,
+      169,
+      20
+    ]
+  ],
+  "objects": [],
+  "npcs": [
+    {
+      "id": "oscar",
+      "name": "奧斯卡・貝爾",
+      "role": "normal",
+      "position": [
+        825,
+        409
+      ],
+      "color": [
+        112,
+        106,
+        178
+      ],
+      "dialogue": [
+        "我是奧斯卡老師，現在正在教室指導基礎魔法。",
+        "我站在講台附近確認學生的學習進度，隨時可以回答課程問題。"
+      ],
+      "interaction_radius": 160,
+      "sprite": "npc_oscar",
+      "behavior": "stationary",
+      "pose": "stand",
+      "facing": "down",
+      "face_player": true,
+      "activity": "teaching",
+      "dialogue_profile": "oscar"
+    },
+    {
+      "id": "cora",
+      "name": "可菈・費恩",
+      "role": "student",
+      "position": [
+        651,
+        579
+      ],
+      "pose": "stand",
+      "facing": "right",
+      "face_player": false,
+      "behavior": "stationary",
+      "sprite": "npc_cora",
+      "interaction_radius": 105,
+      "dialogue": [
+        "我是可菈，剛才的符文課資訊量真大。",
+        "我站在課桌旁回想剛剛的板書，準備把難懂的地方記下來。"
+      ],
+      "draw_depth": 558,
+      "render_note": "學生站在書桌側的可通行地面，不偽裝坐姿",
+      "activity": "review",
+      "dialogue_profile": "cora"
+    },
+    {
+      "id": "leo",
+      "name": "里歐・凡斯",
+      "role": "student",
+      "position": [
+        988,
+        660
+      ],
+      "pose": "stand",
+      "facing": "left",
+      "face_player": false,
+      "behavior": "stationary",
+      "sprite": "npc_leo",
+      "interaction_radius": 105,
+      "dialogue": [
+        "我是里歐，剛剛被一道魔法矩陣題目難住了。",
+        "我現在站著思考那道矩陣題，還沒找到最簡單的解法。"
+      ],
+      "draw_depth": 671,
+      "render_note": "學生站在兩組桌椅間的走道，腳部完整",
+      "activity": "thinking",
+      "dialogue_profile": "leo"
+    }
+  ],
+  "enemies": [],
+  "music": null,
+  "layers": {
+    "ground": "assets/maps/backgrounds/academy_classroom.png"
+  },
+  "save_crystals": [
+    {
+      "id": "crystal_1",
+      "position": [
+        346,
+        310
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    }
+  ],
+  "exploration_points": [
+    {
+      "id": "teacher_notes",
+      "position": [
+        770,
+        300
+      ],
+      "kind": "hidden_story",
+      "enabled": false
+    },
+    {
+      "id": "lost_crystal",
+      "position": [
+        1340,
+        525
+      ],
+      "kind": "hidden_item",
+      "enabled": false
+    }
+  ],
+  "collision_metadata": [
+    {
+      "name": "top wall",
+      "rect": [
+        0,
+        0,
+        1672,
+        90
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left wall",
+      "rect": [
+        0,
+        85,
+        78,
+        765
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right wall",
+      "rect": [
+        1594,
+        85,
+        78,
+        765
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom left wall",
+      "rect": [
+        0,
+        845,
+        748,
+        96
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom right wall",
+      "rect": [
+        924,
+        845,
+        748,
+        96
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "左後雙櫃・左櫃腳",
+      "rect": [
+        158,
+        294,
+        143,
+        18
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "rear left cabinet base"
+    },
+    {
+      "name": "左後雙櫃・右櫃腳",
+      "rect": [
+        341,
+        294,
+        138,
+        18
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "rear left cabinet base"
+    },
+    {
+      "name": "teacher podium base",
+      "rect": [
+        652,
+        330,
+        355,
+        50
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "右後書櫃・底座",
+      "rect": [
+        1187,
+        292,
+        167,
+        20
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "rear right cabinet base"
+    },
+    {
+      "name": "右側立櫃・底座",
+      "rect": [
+        1438,
+        492,
+        104,
+        20
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "far right tall cupboard"
+    },
+    {
+      "name": "left crystal base",
+      "rect": [
+        159,
+        463,
+        76,
+        50
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "left side desk base",
+      "rect": [
+        108,
+        685,
+        230,
+        60
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "right side desk base",
+      "rect": [
+        1323,
+        692,
+        251,
+        62
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper desk 1",
+      "rect": [
+        437,
+        479,
+        194,
+        53
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper desk 2",
+      "rect": [
+        733,
+        479,
+        195,
+        53
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "upper desk 3",
+      "rect": [
+        1027,
+        479,
+        195,
+        53
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "middle desk 1",
+      "rect": [
+        437,
+        594,
+        194,
+        54
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "middle desk 2",
+      "rect": [
+        733,
+        594,
+        195,
+        54
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "middle desk 3",
+      "rect": [
+        1027,
+        594,
+        195,
+        54
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower desk 1",
+      "rect": [
+        437,
+        710,
+        194,
+        52
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower desk 2",
+      "rect": [
+        733,
+        710,
+        195,
+        52
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "lower desk 3",
+      "rect": [
+        1027,
+        710,
+        195,
+        52
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "右藥品櫃・底腳",
+      "rect": [
+        1375,
+        728,
+        176,
+        20
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "right reagent cabinet"
+    },
+    {
+      "name": "bottom exit door sill",
+      "rect": [
+        752,
+        861,
+        169,
+        20
+      ],
+      "type": "accurate_footprint"
+    }
+  ],
+  "collision_calibration_version": "v4_npc_door_footprint",
+  "occluders": [
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_00.png",
+      "x": 156,
+      "y": 139,
+      "depth_y": 320
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_01.png",
+      "x": 651,
+      "y": 225,
+      "depth_y": 379
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_02.png",
+      "x": 1185,
+      "y": 132,
+      "depth_y": 309
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_03.png",
+      "x": 1408,
+      "y": 274,
+      "depth_y": 513
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_04.png",
+      "x": 426,
+      "y": 417,
+      "depth_y": 536
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_05.png",
+      "x": 722,
+      "y": 417,
+      "depth_y": 536
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_06.png",
+      "x": 1021,
+      "y": 417,
+      "depth_y": 536
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_07.png",
+      "x": 426,
+      "y": 534,
+      "depth_y": 651
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_08.png",
+      "x": 722,
+      "y": 534,
+      "depth_y": 651
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_09.png",
+      "x": 1021,
+      "y": 534,
+      "depth_y": 651
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_10.png",
+      "x": 426,
+      "y": 645,
+      "depth_y": 768
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_11.png",
+      "x": 722,
+      "y": 645,
+      "depth_y": 768
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_front_12.png",
+      "x": 1021,
+      "y": 645,
+      "depth_y": 768
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_bottomwall_left.png",
+      "x": 0,
+      "y": 793,
+      "depth_y": 906
+    },
+    {
+      "image": "assets/maps/foreground/academy_classroom_bottomwall_right.png",
+      "x": 924,
+      "y": 793,
+      "depth_y": 906
+    }
+  ],
+  "floor": "1F"
+}

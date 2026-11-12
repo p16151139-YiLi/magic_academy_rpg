@@ -1,0 +1,47 @@
+{
+  "name": "見習冒險者",
+  "level": 1,
+  "exp": 0,
+  "exp_to_next_level": 100,
+  "hp": 100,
+  "max_hp": 100,
+  "mp": 72,
+  "max_mp": 72,
+  "attributes": {
+    "attack": 10,
+    "defense": 8,
+    "magic": 12,
+    "intelligence": 14,
+    "agility": 10,
+    "vitality": 10,
+    "luck": 8
+  },
+  "gold": 0,
+  "class_id": "balanced_mage",
+  "class_name": "均衡型法師",
+  "base_stats": {
+    "str": 10,
+    "vit": 10,
+    "int": 13,
+    "spi": 13,
+    "agi": 10,
+    "luk": 10
+  },
+  "unspent_points": 0,
+  "allocated_points": 0,
+  "hidden_talents": {
+    "element_affinity": {
+      "fire": 0,
+      "water": 0,
+      "wind": 0,
+      "lightning": 0,
+      "light": 0,
+      "dark": 0
+    },
+    "magic_control": 0,
+    "magic_affinity": 0,
+    "perception": 0,
+    "willpower": 0,
+    "special_talents": []
+  }
+}

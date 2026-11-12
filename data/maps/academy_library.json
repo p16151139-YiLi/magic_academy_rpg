@@ -1,0 +1,647 @@
+{
+  "id": "academy_library",
+  "name": "古代魔法圖書館",
+  "width": 1672,
+  "height": 941,
+  "tile_size": 32,
+  "background": "assets/maps/backgrounds/academy_library.png",
+  "spawn_points": {
+    "default": [
+      838,
+      752
+    ]
+  },
+  "exits": [
+    {
+      "id": "to_hall",
+      "rect": [
+        801,
+        826,
+        70,
+        24
+      ],
+      "target": "academy_hall",
+      "target_spawn": "from_library",
+      "interaction_padding": 52,
+      "portal_art": "original_background",
+      "floor": "1F"
+    }
+  ],
+  "collision_rects": [
+    [
+      0,
+      0,
+      1672,
+      85
+    ],
+    [
+      0,
+      85,
+      78,
+      765
+    ],
+    [
+      1594,
+      85,
+      78,
+      765
+    ],
+    [
+      0,
+      850,
+      748,
+      91
+    ],
+    [
+      924,
+      850,
+      748,
+      91
+    ],
+    [
+      297,
+      249,
+      158,
+      19
+    ],
+    [
+      493,
+      249,
+      153,
+      19
+    ],
+    [
+      1012,
+      249,
+      147,
+      19
+    ],
+    [
+      1190,
+      249,
+      117,
+      19
+    ],
+    [
+      1326,
+      249,
+      113,
+      19
+    ],
+    [
+      312,
+      429,
+      209,
+      25
+    ],
+    [
+      713,
+      487,
+      248,
+      28
+    ],
+    [
+      1134,
+      428,
+      204,
+      26
+    ],
+    [
+      706,
+      707,
+      269,
+      33
+    ],
+    [
+      632,
+      817,
+      45,
+      30
+    ],
+    [
+      995,
+      817,
+      45,
+      30
+    ],
+    [
+      752,
+      876,
+      169,
+      13
+    ],
+    [
+      164,
+      681,
+      196,
+      21
+    ],
+    [
+      229,
+      709,
+      55,
+      41
+    ],
+    [
+      397,
+      743,
+      135,
+      23
+    ],
+    [
+      1124,
+      682,
+      211,
+      22
+    ],
+    [
+      1220,
+      712,
+      54,
+      39
+    ],
+    [
+      1378,
+      690,
+      107,
+      23
+    ],
+    [
+      80,
+      474,
+      63,
+      18
+    ],
+    [
+      1528,
+      475,
+      58,
+      18
+    ]
+  ],
+  "objects": [],
+  "npcs": [
+    {
+      "id": "selena",
+      "name": "賽琳娜・莫爾",
+      "role": "librarian",
+      "position": [
+        1200,
+        503
+      ],
+      "color": [
+        151,
+        111,
+        157
+      ],
+      "dialogue": [
+        "歡迎光臨學院圖書館，我是賽琳娜。",
+        "我正在櫃檯旁核對借閱記錄與館藏目錄，請保持安靜。"
+      ],
+      "interaction_radius": 170,
+      "sprite": "npc_selena",
+      "behavior": "stationary",
+      "pose": "sit",
+      "facing": "down",
+      "face_player": false,
+      "idle_animation": true,
+      "draw_depth": 492,
+      "render_note": "坐在右側閱覽桌的原圖椅子，完整角色不帶第二把椅子",
+      "activity": "cataloging",
+      "talk_animation": true,
+      "dialogue_profile": "selena"
+    },
+    {
+      "id": "isaac",
+      "name": "陌生的研究者",
+      "real_name": "伊薩克・維爾",
+      "role": "hidden",
+      "position": [
+        1425,
+        459
+      ],
+      "color": [
+        101,
+        92,
+        132
+      ],
+      "dialogue": [
+        "……你也在尋找那些失落的記錄？",
+        "我避開人群留在舊書區，正在核對一份古老的符文資料。"
+      ],
+      "requires_quest": "ancient_record",
+      "interaction_radius": 120,
+      "sprite": "npc_isaac",
+      "behavior": "stationary",
+      "pose": "stand",
+      "facing": "left",
+      "face_player": true,
+      "activity": "secret",
+      "dialogue_profile": "isaac"
+    },
+    {
+      "id": "nina",
+      "name": "妮娜・亞爾",
+      "role": "student",
+      "position": [
+        1073,
+        499
+      ],
+      "pose": "stand",
+      "facing": "down",
+      "face_player": false,
+      "behavior": "stationary",
+      "sprite": "npc_nina",
+      "interaction_radius": 175,
+      "dialogue": [
+        "我是妮娜，正在找有關古代魔法的資料。",
+        "我站在閱覽區附近比對幾個書名，希望找到提到古代符文的那一本。"
+      ],
+      "draw_depth": 532,
+      "render_note": "在閱覽桌側邊站立，不踩在椅子上",
+      "activity": "research",
+      "dialogue_profile": "nina"
+    }
+  ],
+  "enemies": [],
+  "music": null,
+  "layers": {
+    "ground": "assets/maps/backgrounds/academy_library.png"
+  },
+  "save_crystals": [
+    {
+      "id": "crystal_1",
+      "position": [
+        479,
+        260
+      ],
+      "interaction_radius": 90,
+      "enabled": false
+    }
+  ],
+  "exploration_points": [
+    {
+      "id": "rare_book_shelf",
+      "position": [
+        1300,
+        180
+      ],
+      "kind": "hidden_item",
+      "enabled": false
+    },
+    {
+      "id": "secret_archive",
+      "position": [
+        1340,
+        810
+      ],
+      "kind": "hidden_story",
+      "enabled": false
+    }
+  ],
+  "collision_metadata": [
+    {
+      "name": "上牆",
+      "rect": [
+        0,
+        0,
+        1672,
+        85
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "左牆",
+      "rect": [
+        0,
+        85,
+        78,
+        765
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "右牆",
+      "rect": [
+        1594,
+        85,
+        78,
+        765
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "下牆左",
+      "rect": [
+        0,
+        850,
+        748,
+        91
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "下牆右",
+      "rect": [
+        924,
+        850,
+        748,
+        91
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "左後書架・左格底座",
+      "rect": [
+        297,
+        249,
+        158,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "左後書架"
+    },
+    {
+      "name": "左後書架・右格底座",
+      "rect": [
+        493,
+        249,
+        153,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "左後書架"
+    },
+    {
+      "name": "右後書架・左格底座",
+      "rect": [
+        1012,
+        249,
+        147,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "右後書架"
+    },
+    {
+      "name": "右後書架・中格底座",
+      "rect": [
+        1190,
+        249,
+        117,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "右後書架"
+    },
+    {
+      "name": "右後書架・右格底座",
+      "rect": [
+        1326,
+        249,
+        113,
+        19
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "右後書架"
+    },
+    {
+      "name": "左閱覽桌",
+      "rect": [
+        312,
+        429,
+        209,
+        25
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "中閱覽桌",
+      "rect": [
+        713,
+        487,
+        248,
+        28
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "右閱覽桌",
+      "rect": [
+        1134,
+        428,
+        204,
+        26
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "下方中央書桌",
+      "rect": [
+        706,
+        707,
+        269,
+        33
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "入口左花盆",
+      "rect": [
+        632,
+        817,
+        45,
+        30
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "入口右花盆",
+      "rect": [
+        995,
+        817,
+        45,
+        30
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "bottom exit door sill",
+      "rect": [
+        752,
+        876,
+        169,
+        13
+      ],
+      "type": "accurate_footprint"
+    },
+    {
+      "name": "左側 T 字書架橫架底座",
+      "rect": [
+        164,
+        681,
+        196,
+        21
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "左側 T 字書架立架底座",
+      "rect": [
+        229,
+        709,
+        55,
+        41
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "左下直書架底座",
+      "rect": [
+        397,
+        743,
+        135,
+        23
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "右側 T 字書架橫架底座",
+      "rect": [
+        1124,
+        682,
+        211,
+        22
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "右側 T 字書架立架底座",
+      "rect": [
+        1220,
+        712,
+        54,
+        39
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "右下直書架底座",
+      "rect": [
+        1378,
+        690,
+        107,
+        23
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "圖書館左壁書櫃底座",
+      "rect": [
+        80,
+        474,
+        63,
+        18
+      ],
+      "type": "solid_shelf_base"
+    },
+    {
+      "name": "圖書館右壁書櫃底座",
+      "rect": [
+        1528,
+        475,
+        58,
+        18
+      ],
+      "type": "solid_shelf_base"
+    }
+  ],
+  "collision_calibration_version": "v8_shelf_solid_feet",
+  "occluders": [
+    {
+      "image": "assets/maps/foreground/academy_library_front_00.png",
+      "x": 278,
+      "y": 124,
+      "depth_y": 280,
+      "fade_when_overlapping": false
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_01.png",
+      "x": 1001,
+      "y": 123,
+      "depth_y": 281,
+      "fade_when_overlapping": false
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_02.png",
+      "x": 160,
+      "y": 522,
+      "depth_y": 780,
+      "fade_when_overlapping": false
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_03.png",
+      "x": 394,
+      "y": 522,
+      "depth_y": 779,
+      "fade_when_overlapping": false
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_04.png",
+      "x": 1117,
+      "y": 522,
+      "depth_y": 779,
+      "fade_when_overlapping": false
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_05.png",
+      "x": 1378,
+      "y": 496,
+      "depth_y": 758,
+      "fade_when_overlapping": false
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_06.png",
+      "x": 690,
+      "y": 355,
+      "depth_y": 528,
+      "fade_when_overlapping": true
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_07.png",
+      "x": 306,
+      "y": 329,
+      "depth_y": 463,
+      "fade_when_overlapping": true
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_08.png",
+      "x": 1115,
+      "y": 325,
+      "depth_y": 531,
+      "fade_when_overlapping": true
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_front_09.png",
+      "x": 656,
+      "y": 587,
+      "depth_y": 733,
+      "fade_when_overlapping": true
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_bottomwall_left.png",
+      "x": 0,
+      "y": 793,
+      "depth_y": 906,
+      "fade_when_overlapping": true
+    },
+    {
+      "image": "assets/maps/foreground/academy_library_bottomwall_right.png",
+      "x": 924,
+      "y": 793,
+      "depth_y": 906,
+      "fade_when_overlapping": true
+    }
+  ],
+  "floor": "1F"
+}
