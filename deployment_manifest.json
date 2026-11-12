@@ -2,7 +2,7 @@
   "phase": "V9.1",
   "build_id": "98b16c81ac4c",
   "input_zip": "Magic_Academy_RPG_Phase8_V9_1_Hall_Entry_Fixed.zip",
-  "built_utc": "2026-11-12T12:04:51.141786+00:00",
+  "built_utc": "2026-11-12T12:09:30.084523+00:00",
   "source_sha256": {
     "main.py": "805967bdf5249eed7251096c02461bcd710bba8e3268e680ffb786347dcf2237",
     "data/npcs/dialogue_profiles.json": "e7f7a5d0bc5fd6c7ad35943baa09b71a7c3e5c78a90e5e5c4db62097063b5f7a",
@@ -19,7 +19,7 @@
       "bytes": 33275996
     },
     "magic_academy_rpg.tar.gz": {
-      "sha256": "9dfa42accfc76e851e678a2a6a49c204364b8b3b72ab3a0ebeb1254402a8b7a0",
+      "sha256": "7ecb53f0ae4eafb70900f851bb5117a182698bbbf0b442e31a252d42a8f5229c",
       "bytes": 33224531
     }
   }
