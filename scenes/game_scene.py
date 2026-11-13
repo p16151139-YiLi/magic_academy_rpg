@@ -146,7 +146,8 @@ class GameScene(BaseScene):
             import traceback
             if self._draw_error != repr(exc):
                 traceback.print_exc()
-            self._draw_error = repr(exc)
+            self._draw_error = f"{type(exc).__name__}: {exc}"
+            self._last_draw_traceback = traceback.format_exc()
             self.draw_recovery_screen()
 
     def draw_recovery_screen(self):
@@ -262,7 +263,7 @@ class GameScene(BaseScene):
         self.player_menu.draw()
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
-        build_tag = ctx.font_small.render("V9.5.1 AUDIT FIX", True, (243, 210, 123))
+        build_tag = ctx.font_small.render("V9.6.1 CHAIR LOAD FIX", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):

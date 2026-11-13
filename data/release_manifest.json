@@ -1,7 +1,7 @@
 {
-  "version": "V9.5.1",
-  "description": "全專案靜態稽核、NPC 影格比例與朝向修正、場景錯誤重試、七地圖出口連通回歸（保留全部原始功能）",
-  "base": "V9.5",
+  "version": "V9.6.1",
+  "description": "兩張有椅子地圖背景重建、24個透明椅子與碰撞、玩家/NPC實際方向共用、角色前景遮擋可見性、原有介面功能與七圖通道測試",
+  "base": "V9.5.1",
   "fixes": [
     "Restore inventory Back-to-menu and Close-to-world as separate actions",
     "Restore keyboard fallback without duplicate actions",
@@ -19,8 +19,13 @@
   "collision_revision": "V9.5_solid_geometry_clear_aisles",
   "audit_revision": "V9.5.1_all_maps_npc_atlas_ui_error_recovery",
   "added_checks": [
-    "tests/test_v9_5_1_project_audit.py",
-    "tests/test_v9_5_1_error_recovery.py",
-    "tests/test_v9_5_1_full_pygame_smoke.py"
-  ]
+    "tests/test_v9_6_map_and_character_regression.py",
+    "tests/test_v9_6_no_airwalls.py",
+    "tests/test_v9_6_pygame_runtime.py",
+    "tests/test_v9_6_1_chair_display.py"
+  ],
+  "chair_system": "alpha_png_24_individual_colliders_and_seat_anchors",
+  "shared_motion": "player_and_npc_actual_displacement_facing",
+  "occlusion": "character_reveal_through_baked_furniture_with_existing_colliders",
+  "chair_display_fix": "V9.6.1_convert_alpha_display_guard_and_colab_lifecycle"
 }

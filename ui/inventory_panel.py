@@ -50,8 +50,13 @@ class InventoryPanel:
         rel=info.get('icon','')
         p=ROOT/rel
         if not rel or not p.exists():return None
-        image=pygame.image.load(str(p)).convert_alpha()
-        image=pygame.transform.scale(image,(size,size))
+        try:
+            image=pygame.image.load(str(p)).convert_alpha()
+            image=pygame.transform.scale(image,(size,size))
+        except (pygame.error, OSError, ValueError) as exc:
+            # An optional icon must not kill the entire player-menu draw.
+            print(f"背包圖示無法載入 {p}: {type(exc).__name__}: {exc}")
+            return None
         self.images[key]=image
         return image
 

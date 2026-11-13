@@ -168,6 +168,8 @@ class PlayerMenu:
                 self.return_from_inventory()
                 return True
         elif key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+            # Other tabs have no separate main-selection page; keep the
+            # established layout, close to world instead of losing input.
             self.close()
             return True
         shortcuts = {pygame.K_c: 0, pygame.K_i: 1,
@@ -297,7 +299,7 @@ class PlayerMenu:
         close_rect = self.rect(875, 28, 85, 62)
         pygame.draw.rect(self.screen, (92, 44, 62), close_rect, border_radius=7)
         pygame.draw.rect(self.screen, (242, 212, 151), close_rect, 2, border_radius=7)
-        close_label = self.font(20 * s).render("返回", True, (255, 233, 196))
+        close_label = self.font(20 * s).render("關閉", True, (255, 233, 196))
         self.screen.blit(close_label, close_label.get_rect(center=close_rect.center))
 
         # 分頁按鈕
@@ -446,7 +448,7 @@ class PlayerMenu:
             )
 
         txt(
-            "Tab / Esc 關閉",
+            "Tab 關閉 / Esc 返回",
             765,
             507,
             15,

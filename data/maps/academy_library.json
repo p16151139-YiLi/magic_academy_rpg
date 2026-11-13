@@ -288,8 +288,8 @@
       "name": "賽琳娜・莫爾",
       "role": "librarian",
       "position": [
-        1200,
-        503
+        1178,
+        481
       ],
       "color": [
         151,
@@ -311,7 +311,8 @@
       "render_note": "坐在右側閱覽桌的原圖椅子，完整角色不帶第二把椅子",
       "activity": "cataloging",
       "talk_animation": true,
-      "dialogue_profile": "selena"
+      "dialogue_profile": "selena",
+      "chair_id": "academy_library_seat_05"
     },
     {
       "id": "isaac",
@@ -932,5 +933,128 @@
       "fade_when_overlapping": true
     }
   ],
-  "floor": "1F"
+  "floor": "1F",
+  "chairs": [
+    {
+      "id": "academy_library_seat_01",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 340,
+      "y": 428,
+      "width": 58,
+      "height": 62,
+      "collision_rect": [
+        355,
+        466,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        369,
+        482
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_library_seat_02",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 466,
+      "y": 429,
+      "width": 58,
+      "height": 62,
+      "collision_rect": [
+        481,
+        467,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        495,
+        483
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_library_seat_03",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 733,
+      "y": 465,
+      "width": 58,
+      "height": 61,
+      "collision_rect": [
+        748,
+        502,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        762,
+        518
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_library_seat_04",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 879,
+      "y": 465,
+      "width": 58,
+      "height": 61,
+      "collision_rect": [
+        894,
+        502,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        908,
+        518
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_library_seat_05",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1149,
+      "y": 426,
+      "width": 58,
+      "height": 63,
+      "collision_rect": [
+        1164,
+        465,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1178,
+        481
+      ],
+      "facing": "up",
+      "occupied_by": "selena"
+    },
+    {
+      "id": "academy_library_seat_06",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1250,
+      "y": 426,
+      "width": 58,
+      "height": 63,
+      "collision_rect": [
+        1265,
+        465,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1279,
+        481
+      ],
+      "facing": "up",
+      "occupied_by": null
+    }
+  ],
+  "chair_art_version": "v9.6_alpha_separate"
 }

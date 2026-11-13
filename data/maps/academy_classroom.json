@@ -108,57 +108,57 @@
     ],
     [
       437,
-      479,
+      439,
       194,
-      53
+      40
     ],
     [
       733,
-      479,
+      439,
       195,
-      53
+      40
     ],
     [
       1027,
-      479,
+      439,
       195,
-      53
+      40
     ],
     [
       437,
-      594,
+      554,
       194,
-      54
+      40
     ],
     [
       733,
-      594,
+      554,
       195,
-      54
+      40
     ],
     [
       1027,
-      594,
+      554,
       195,
-      54
+      40
     ],
     [
       437,
-      710,
+      670,
       194,
-      52
+      40
     ],
     [
       733,
-      710,
+      670,
       195,
-      52
+      40
     ],
     [
       1027,
-      710,
+      670,
       195,
-      52
+      40
     ],
     [
       1375,
@@ -423,91 +423,91 @@
       "name": "upper desk 1",
       "rect": [
         437,
-        479,
+        439,
         194,
-        53
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "upper desk 2",
       "rect": [
         733,
-        479,
+        439,
         195,
-        53
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "upper desk 3",
       "rect": [
         1027,
-        479,
+        439,
         195,
-        53
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "middle desk 1",
       "rect": [
         437,
-        594,
+        554,
         194,
-        54
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "middle desk 2",
       "rect": [
         733,
-        594,
+        554,
         195,
-        54
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "middle desk 3",
       "rect": [
         1027,
-        594,
+        554,
         195,
-        54
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "lower desk 1",
       "rect": [
         437,
-        710,
+        670,
         194,
-        52
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "lower desk 2",
       "rect": [
         733,
-        710,
+        670,
         195,
-        52
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "lower desk 3",
       "rect": [
         1027,
-        710,
+        670,
         195,
-        52
+        40
       ],
-      "type": "accurate_footprint"
+      "type": "desk_footprint_chairs_separate"
     },
     {
       "name": "右藥品櫃・底腳",
@@ -624,5 +624,368 @@
       "depth_y": 906
     }
   ],
-  "floor": "1F"
+  "floor": "1F",
+  "chairs": [
+    {
+      "id": "academy_classroom_seat_01",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 462,
+      "y": 482,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        474,
+        515,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        488,
+        531
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_02",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 538,
+      "y": 482,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        550,
+        515,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        564,
+        531
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_03",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 758,
+      "y": 482,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        770,
+        515,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        784,
+        531
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_04",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 835,
+      "y": 482,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        847,
+        515,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        861,
+        531
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_05",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1054,
+      "y": 482,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        1066,
+        515,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1080,
+        531
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_06",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1135,
+      "y": 482,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        1147,
+        515,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1161,
+        531
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_07",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 462,
+      "y": 602,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        474,
+        635,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        488,
+        651
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_08",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 538,
+      "y": 602,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        550,
+        635,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        564,
+        651
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_09",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 758,
+      "y": 602,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        770,
+        635,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        784,
+        651
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_10",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 835,
+      "y": 602,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        847,
+        635,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        861,
+        651
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_11",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1054,
+      "y": 602,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        1066,
+        635,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1080,
+        651
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_12",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1135,
+      "y": 602,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        1147,
+        635,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1161,
+        651
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_13",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 462,
+      "y": 724,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        474,
+        757,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        488,
+        773
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_14",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 538,
+      "y": 724,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        550,
+        757,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        564,
+        773
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_15",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 758,
+      "y": 724,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        770,
+        757,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        784,
+        773
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_16",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 835,
+      "y": 724,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        847,
+        757,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        861,
+        773
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_17",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1054,
+      "y": 724,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        1066,
+        757,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1080,
+        773
+      ],
+      "facing": "up",
+      "occupied_by": null
+    },
+    {
+      "id": "academy_classroom_seat_18",
+      "image": "assets/maps/chairs/academy_wooden_chair.png",
+      "x": 1135,
+      "y": 724,
+      "width": 53,
+      "height": 57,
+      "collision_rect": [
+        1147,
+        757,
+        28,
+        20
+      ],
+      "seat_anchor": [
+        1161,
+        773
+      ],
+      "facing": "up",
+      "occupied_by": null
+    }
+  ],
+  "chair_art_version": "v9.6_alpha_separate"
 }

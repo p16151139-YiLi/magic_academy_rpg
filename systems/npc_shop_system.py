@@ -6,6 +6,7 @@ from pathlib import Path
 import pygame
 from systems.npc_ai.ai_controller import Agent
 from systems.npc_sprite_library import NPCSpriteLibrary
+from systems.chair_system import ChairSystem
 from systems.save_store import read_json, write_json
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -29,6 +30,7 @@ class NPCShopSystem:
         self.notice_timer=0
         self.font=scene.ctx.font_small
         self.sprites=NPCSpriteLibrary()
+        self.chairs=ChairSystem(ROOT)
         self.quests=read_json(WORLD_PATH,{'ancient_record':False})
         # Bundle source stays fixed even if tests redirect save ROOT to a temp folder.
         profile_file=Path(__file__).resolve().parents[1]/'data/npcs/dialogue_profiles.json'
@@ -105,6 +107,14 @@ class NPCShopSystem:
 
     def _profile(self, npc):
         return self.dialogue_profiles.get(npc.get('dialogue_profile',npc['id']), {})
+
+    def actor_state(self,npc):
+        """Shared three-state game model; controller determines which state."""
+        if npc.get('pose')=='sit':
+            return 'sitting'
+        if npc.get('behavior')=='utility' and self.agent(npc).moving:
+            return 'moving'
+        return 'standing'
 
     def _activity(self, npc):
         """Return what the NPC is ACTUALLY doing now, never a scripted guess.
@@ -298,10 +308,61 @@ class NPCShopSystem:
         db=self.item_service.inventory.database.get(item_id,{})
         path=ROOT/db.get('icon','')
         if not db.get('icon') or not path.is_file():return None
-        image=pygame.image.load(str(path)).convert_alpha()
-        image=pygame.transform.scale(image,(size,size))
+        try:
+            image=pygame.image.load(str(path)).convert_alpha()
+            image=pygame.transform.scale(image,(size,size))
+        except (pygame.error, OSError, ValueError) as exc:
+            print(f"商店圖示載入失敗 {path}: {type(exc).__name__}: {exc}")
+            return None
         self.icons[key]=image
         return image
+
+    def _reveal_actor_behind_furniture(self, screen, furniture_rect, depth, player=False):
+        """Blend actor through an occluding high object, without disabling collision.
+
+        Existing furniture is baked into its background, so a pure alpha change
+        to its foreground crop would not reveal the actor. Composite only the
+        actor's intersection with the fixture at reduced opacity. This gives
+        the intended local see-through effect without ghosting floor pixels.
+        """
+        ox,oy=self.scene.camera.x,self.scene.camera.y
+        if player:
+            p=self.scene.player.rect
+            feet=p.bottom+7
+            actors=[('player',None,float(feet),p.centerx-ox,p.bottom-oy,112,114)]
+        else:
+            actors=[]
+            for npc in self.npcs():
+                p=self.pos(npc)
+                actors.append(('npc',npc,float(npc.get('draw_depth',p.y+5)),p.x-ox,p.y-oy,112,110))
+        for kind,npc,actor_depth,cx,cy,ww,hh in actors:
+            # This fixture is drawn in front of the actor only if its depth is
+            # larger, and the actual actor image overlaps the fixture image.
+            if actor_depth>=depth:
+                continue
+            actor_box=pygame.Rect(round(cx-ww/2),round(cy-hh),ww,hh+6)
+            overlap=actor_box.clip(furniture_rect)
+            if overlap.width<=0 or overlap.height<=0:
+                continue
+            layer=pygame.Surface(actor_box.size,pygame.SRCALPHA)
+            if kind=='player':
+                self.scene.player.draw(layer,camera_offset=(ox+actor_box.x,oy+actor_box.y))
+            else:
+                if npc.get('behavior')=='utility':
+                    agent=self.agent(npc)
+                    facing,walk=agent.direction,agent.moving
+                    frame=int(agent.distance/11)%4 if walk else 0
+                else:
+                    facing,walk,frame=npc.get('facing','down'),False,0
+                self.sprites.render(layer,npc['sprite'],facing,walk,frame,
+                                    round(cx-actor_box.x),round(cy-actor_box.y),
+                                    npc.get('sprite_scale',1.0),npc.get('pose','stand'))
+            # The source art remains opaque except in the overlap region;
+            # transparency does not affect any solid collision rectangle.
+            layer.set_alpha(173)
+            src=pygame.Rect(overlap.x-actor_box.x,overlap.y-actor_box.y,
+                            overlap.width,overlap.height)
+            screen.blit(layer,overlap.topleft,src)
 
     def draw_npcs(self, screen, include_player=False):
         ox,oy=self.scene.camera.x,self.scene.camera.y
@@ -313,12 +374,21 @@ class NPCShopSystem:
         # same sorted display list: standing BEHIND a shelf hides the body;
         # walking IN FRONT displays the actor over the shelf image.
         entities=[(float(n.get('draw_depth',self.pos(n).y+5)),0,'npc',n) for n in self.npcs()]
+        for chair in self.chairs.placements(self.scene.map_data):
+            # The seat is depth-sorted like another world entity, not pasted as
+            # an opaque rectangle over the player's head.
+            entities.append((float(chair['y']+chair['height']-7),-1,'chair',chair))
         if include_player:
             entities.append((self.scene.player.rect.bottom+7,0,'player',None))
         for depth,asset,x,y,fade_allowed in self.scene.map_renderer.occluders:
             entities.append((depth,1,'occluder',(asset,x,y,fade_allowed)))
         entities.sort(key=lambda pair:(pair[0],pair[1]))
         for draw_depth,layer_order,kind,payload in entities:
+            if kind == 'chair':
+                chair=payload
+                image=self.chairs.image(chair)
+                screen.blit(image,(round(chair['x']-ox),round(chair['y']-oy)))
+                continue
             if kind == 'player':
                 self.scene.player.draw(screen,camera_offset=(ox,oy))
                 continue
@@ -326,7 +396,12 @@ class NPCShopSystem:
                 image,x,y,fade_allowed=payload
                 # Solid furniture never becomes transparent when a player or
                 # NPC approaches it. The visible object is depth-sorted.
-                screen.blit(image,(round(x-ox),round(y-oy)))
+                px,py=round(x-ox),round(y-oy)
+                screen.blit(image,(px,py))
+                if fade_allowed:
+                    obox=pygame.Rect(px,py,image.get_width(),image.get_height())
+                    self._reveal_actor_behind_furniture(screen,obox,draw_depth,player=True)
+                    self._reveal_actor_behind_furniture(screen,obox,draw_depth,player=False)
                 continue
             npc=payload
             p=self.pos(npc);x,y=round(p.x-ox),round(p.y-oy)

@@ -8,14 +8,14 @@ import heapq
 import math
 import random
 import pygame
+from systems.character_motion import facing_from_actual_displacement,footprint_clear
 
 CELL = 28
 FOOT_W, FOOT_H = 22, 15
 
 
 def available(x, y, obstacles, bounds):
-    feet = pygame.Rect(round(x - FOOT_W / 2), round(y - FOOT_H / 2), FOOT_W, FOOT_H)
-    return bounds.contains(feet) and not any(feet.colliderect(obstacle) for obstacle in obstacles)
+    return footprint_clear(pygame, x, y, (FOOT_W, FOOT_H), obstacles, bounds)
 
 
 def grid_cell(position):
@@ -86,6 +86,7 @@ class Agent:
         self.intent = 'idle'
         self.direction = 'down'
         self.moving = False
+        self.state = 'standing'
         self.idle_left = self.rng.uniform(.25, 1.2) if self.role in ('patrol','guard') else self.rng.uniform(2.2, 5.0)
         self.energy = self.rng.uniform(.55, .95)
         self.curiosity = self.rng.uniform(.3, .85)
@@ -160,6 +161,7 @@ class Agent:
     def update(self, dt, obstacles, bounds, player_pos=None, others=()):
         dt = max(0.0, min(float(dt), .08))
         self.moving = False
+        self.state = 'standing'
         self.observation_cooldown = max(0.0, self.observation_cooldown - dt)
         if player_pos is not None and self.pos.distance_squared_to(player_pos) < 38**2:
             self._face(player_pos - self.pos)
@@ -207,8 +209,13 @@ class Agent:
             self.intent='observe'
             self.idle_left = .4
             return
+        old_pos = pygame.Vector2(self.pos)
         self.pos.update(candidate)
-        self._face(step)
-        self.moving = True
-        self.distance += step_distance
+        real_delta = self.pos - old_pos
+        direction, moved = facing_from_actual_displacement(real_delta.x,real_delta.y,self.direction)
+        if moved:
+            self.direction = direction
+            self.moving = True
+            self.state = 'moving'
+        self.distance += real_delta.length()
         self.energy = max(.04, self.energy - dt * .013)

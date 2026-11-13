@@ -73,9 +73,12 @@ class CharacterInfoPanel:
         if not path.exists():
             return None
 
-        image = pygame.image.load(str(path)).convert_alpha()
-
-        image = pygame.transform.scale(image, size)
+        try:
+            image = pygame.image.load(str(path)).convert_alpha()
+            image = pygame.transform.scale(image, size)
+        except (pygame.error, OSError, ValueError) as exc:
+            print(f"角色肖像載入失敗 {path}: {type(exc).__name__}: {exc}")
+            return None
 
         self.portrait_cache[cache_key] = image
 

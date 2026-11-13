@@ -1,4 +1,5 @@
 import pygame
+from systems.character_motion import facing_from_actual_displacement
 
 
 class PlayerController:
@@ -36,16 +37,7 @@ class PlayerController:
             return
 
         movement.normalize_ip()
-        self.state = "walk"
-
-        if abs(movement.x) > abs(movement.y):
-            self.direction = (
-                "right" if movement.x > 0 else "left"
-            )
-        else:
-            self.direction = (
-                "down" if movement.y > 0 else "up"
-            )
+        before = self.position.copy()
 
         obstacles = obstacles or []
         delta = movement * self.speed * max(0, min(dt, 0.1))
@@ -79,6 +71,10 @@ class PlayerController:
             else:
                 self.position.y = target
             self._sync_rect()
+        actual = self.position - before
+        self.direction, moved = facing_from_actual_displacement(
+            actual.x, actual.y, self.direction, epsilon=0.15)
+        self.state = "walk" if moved else "idle"
 
     def _sync_rect(self):
         self.rect.center = (
