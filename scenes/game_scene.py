@@ -87,6 +87,10 @@ class GameScene(BaseScene):
         """Load a map and its NPC sprites over multiple browser frames."""
         if self.map_loaded:
             return True
+        # Do not repeatedly decode a broken asset every frame. The error
+        # screen remains responsive; R performs an explicit retry.
+        if self._load_error:
+            return False
         try:
             if self._loading_map_ref is not self.map_data:
                 self.map_renderer.begin_load(self.map_data)
@@ -117,7 +121,7 @@ class GameScene(BaseScene):
         small = self.ctx.font_small
         label = self.map_data.get('name', '新場景')
         if self._load_error:
-            lines = ['場景載入異常', self._load_error[:65], '按 Esc 返回主選單']
+            lines = ['場景載入異常', self._load_error[:65], '按 R 重試，Esc 返回主選單']
         else:
             map_progress = self.map_renderer.load_progress
             total_npcs = len(set(n['sprite'] for n in self.map_data.get('npcs', [])))
@@ -131,9 +135,11 @@ class GameScene(BaseScene):
                                                             screen.get_height()//2 - 55 + idx*48)))
 
     def draw(self):
+        if self._draw_error:
+            self.draw_recovery_screen()
+            return
         try:
             self._draw_game_world()
-            self._draw_error = ""
         except Exception as exc:
             # In a browser a draw exception otherwise kills the async loop and
             # leaves the last frame on screen, which looks like a hard freeze.
@@ -141,12 +147,18 @@ class GameScene(BaseScene):
             if self._draw_error != repr(exc):
                 traceback.print_exc()
             self._draw_error = repr(exc)
-            self.ctx.screen.fill((30, 27, 50))
-            messages = ('畫面繪製發生錯誤', str(exc)[:75], '按 Esc 返回主選單')
-            for idx, message in enumerate(messages):
-                surf = self.ctx.font_small.render(message, True, (248, 218, 187))
-                self.ctx.screen.blit(surf, surf.get_rect(
-                    center=(self.ctx.screen.get_width()//2, 260+idx*55)))
+            self.draw_recovery_screen()
+
+    def draw_recovery_screen(self):
+        """A render error must not trap the user on an unusable frozen frame."""
+        screen=self.ctx.screen
+        screen.fill((30, 27, 50))
+        lines=('畫面繪製發生錯誤', self._draw_error[:75],
+               '按 R 重新繪製；Esc 返回主選單')
+        for idx,line in enumerate(lines):
+            rendered=self.ctx.font_small.render(line,True,(248,218,187))
+            screen.blit(rendered,rendered.get_rect(
+                center=(screen.get_width()//2, 260+idx*55)))
 
     def _draw_game_world(self):
         ctx = self.ctx
@@ -250,7 +262,7 @@ class GameScene(BaseScene):
         self.player_menu.draw()
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
-        build_tag = ctx.font_small.render("V9.4.3 HALL DRAW FIX", True, (243, 210, 123))
+        build_tag = ctx.font_small.render("V9.5.1 AUDIT FIX", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):
@@ -352,13 +364,28 @@ class GameScene(BaseScene):
 
     def handle_event(self, event):
         if not getattr(self, 'map_loaded', True):
-            # Emergency exit if a browser asset fails; normal Esc behavior is
-            # unchanged once the world is fully loaded.
-            if event.type == pygame.KEYDOWN and event.key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
-                return "title"
+            # Keep the loading error screen usable even when an asset is bad.
+            if event.type == pygame.KEYDOWN:
+                if event.key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+                    return "title"
+                if event.key == pygame.K_r and self._load_error:
+                    self._load_error = ""
+                    self._loading_map_ref = None
+                    self._loading_npc_queue = []
             return None
-        if getattr(self, '_draw_error', '') and event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-            return "title"
+        if getattr(self, '_draw_error', ''):
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    self._draw_error = ""
+                elif event.key in (pygame.K_ESCAPE,pygame.K_BACKSPACE):
+                    # If the error originated in a panel, allow the panel to
+                    # close and the normal world to recover first.
+                    if self.player_menu.opened:
+                        self.player_menu.close()
+                        self._draw_error = ""
+                    else:
+                        return "title"
+            return None
         if event.type == pygame.KEYDOWN:
             # Some browser/IME layouts expose printable E via unicode while
             # the key identifier varies; normalize it before dispatching.

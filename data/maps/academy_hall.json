@@ -419,12 +419,13 @@
         "嗨，我是雷恩，今天還有幾個課題沒弄懂。",
         "我暫時沒事，正在想下一堂課要準備什麼。"
       ],
-      "sprite": "npc_rain",
+      "sprite": "npc_rain_tousled",
       "behavior": "utility",
       "speed": 37.0,
       "pose": "roam",
       "facing": "down",
-      "dialogue_profile": "rain"
+      "dialogue_profile": "rain",
+      "hair_style": "凌亂短髮"
     },
     {
       "id": "noah",
@@ -466,7 +467,7 @@
       ],
       "pose": "stand",
       "behavior": "stationary",
-      "sprite": "npc_mira",
+      "sprite": "npc_mira_teal_waves",
       "facing": "down",
       "face_player": false,
       "interaction_radius": 112,
@@ -477,7 +478,8 @@
       "draw_depth": 623,
       "render_note": "站在長椅旁，而不是站在椅面上",
       "activity": "review",
-      "dialogue_profile": "mira"
+      "dialogue_profile": "mira",
+      "hair_style": "湖藍長捲髮"
     },
     {
       "id": "sophie",

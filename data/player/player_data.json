@@ -16,7 +16,7 @@
     "vitality": 10,
     "luck": 8
   },
-  "gold": 500,
+  "gold": 0,
   "class_id": "balanced_mage",
   "class_name": "均衡型法師",
   "base_stats": {
@@ -43,6 +43,5 @@
     "perception": 0,
     "willpower": 0,
     "special_talents": []
-  },
-  "phase8_wallet_initialized": true
+  }
 }

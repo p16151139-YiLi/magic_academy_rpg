@@ -206,7 +206,7 @@
         "我是凱爾，負責學院入口的安全。",
         "我在守望入口，隨時準備開始下一段巡查。"
       ],
-      "sprite": "npc_guard",
+      "sprite": "npc_guard_cap",
       "behavior": "utility",
       "speed": 49,
       "pose": "roam",
@@ -219,7 +219,8 @@
         1288,
         555
       ],
-      "dialogue_profile": "guard"
+      "dialogue_profile": "guard",
+      "hair_style": "灰色短髮"
     }
   ],
   "enemies": [],

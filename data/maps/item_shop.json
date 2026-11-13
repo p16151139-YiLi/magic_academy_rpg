@@ -435,7 +435,7 @@
         "我正在櫃檯接待客人，藥水、卷軸和小型魔法材料都可以詢問。"
       ],
       "interaction_radius": 265,
-      "sprite": "npc_erin_v8",
+      "sprite": "npc_erin_wavy",
       "behavior": "stationary",
       "pose": "stand",
       "facing": "down",
@@ -443,10 +443,11 @@
       "idle_animation": true,
       "draw_depth": 425,
       "render_note": "V8 AI背景無椅子；NPC 獨立站櫃檯後，前景不重複繪製家具",
-      "sprite_scale": 1.3,
+      "sprite_scale": 1.0,
       "activity": "shopkeeping",
       "talk_animation": true,
-      "dialogue_profile": "erin"
+      "dialogue_profile": "erin",
+      "hair_style": "波浪盤髮"
     },
     {
       "id": "berk",

@@ -306,27 +306,9 @@ class NPCShopSystem:
     def draw_npcs(self, screen, include_player=False):
         ox,oy=self.scene.camera.x,self.scene.camera.y
         who=self.nearby() if not self.shop and not self.dialogue else None
-        # Actor bodies are used for soft camera occlusion. When a real shelf or
-        # column obscures an actor, its foreground sprite fades instead of
-        # cutting off the character's head or shoes abruptly.
-        actor_boxes = [pygame.Rect(round(self.scene.player.rect.centerx-29),
-                                   round(self.scene.player.rect.bottom-91),58,93)]
-        # Seated workers are intentionally BEHIND the counter/table in the
-        # underlying art. Do not make that furniture ghostly simply because
-        # their torso is behind it; this avoids the missing-legs visual bug.
-        for n in self.npcs():
-            if n.get('pose') == 'sit':
-                continue
-            # Actual nontransparent character pixels, not an arbitrary 58x92
-            # rectangle that can fade nearby shelves prematurely.
-            atlas = self.sprites.frames(n['sprite'])
-            visual = atlas[0][0].get_bounding_rect(min_alpha=25)
-            if visual.w <= 0 or visual.h <= 0:
-                continue
-            position = self.pos(n)
-            actor_boxes.append(pygame.Rect(
-                round(position.x - visual.w / 2),
-                round(position.y - visual.h), visual.w, visual.h))
+        # V9.5: Furniture is solid; do not calculate temporary alpha fade around
+        # a character. Visibility is decided by real foot-depth sorting and
+        # physical collision, not making shelves transparent.
         # depth is feet position, never sprite top. Foreground objects join the
         # same sorted display list: standing BEHIND a shelf hides the body;
         # walking IN FRONT displays the actor over the shelf image.
@@ -342,49 +324,9 @@ class NPCShopSystem:
                 continue
             if kind == 'occluder':
                 image,x,y,fade_allowed=payload
-                area=pygame.Rect(x,y,*image.get_size())
-                # Real alpha silhouette check: transparent corners of cropped
-                # furniture must NOT trigger fading in empty floor tiles.
-                key=id(image)
-                object_mask=self._occluder_masks.get(key)
-                # Objects are not erased or drawn as opaque rectangles over
-                # people. Only pixels that actually overlap a sprite fade,
-                # preserving the rest of a shelf / column at full opacity.
-                # Bottom boundary walls remain solid and never become ghostly.
-                fade_regions=[]
-                is_boundary_wall = y >= 690 and image.get_width() >= 450
-                if not is_boundary_wall and fade_allowed:
-                    for b in actor_boxes:
-                        # Only fade foreground props for actors whose feet are
-                        # BEHIND the prop's lower depth, not actors in front.
-                        if b.bottom > draw_depth + 24 or not area.colliderect(b):
-                            continue
-                        if self._actor_mask is not None and object_mask is None:
-                            object_mask=pygame.mask.from_surface(image,60)
-                            self._occluder_masks[key]=object_mask
-                        if object_mask is not None:
-                            actor_mask=pygame.mask.Mask(b.size,fill=True)
-                            is_covered = object_mask.overlap_area(
-                                actor_mask,(b.left-x,b.top-y)) > 55
-                        else:
-                            hit=area.clip(b)
-                            sx=max(1,hit.width//9);sy=max(1,hit.height//9)
-                            is_covered=any(image.get_at((ix-x,iy-y)).a>60
-                                for ix in range(hit.left,hit.right,sx)
-                                for iy in range(hit.top,hit.bottom,sy))
-                        if is_covered:
-                            fade_regions.append(area.clip(b.inflate(12,10)))
-                if fade_regions:
-                    # A localized RGBA alpha mask, not set_alpha() on a whole
-                    # furniture sprite, avoids flickering of the entire shelf.
-                    softened=image.copy()
-                    for part in fade_regions:
-                        local=pygame.Rect(part.x-x,part.y-y,part.w,part.h)
-                        softened.fill((255,255,255,94),local,
-                                      special_flags=pygame.BLEND_RGBA_MULT)
-                    screen.blit(softened,(round(x-ox),round(y-oy)))
-                else:
-                    screen.blit(image,(round(x-ox),round(y-oy)))
+                # Solid furniture never becomes transparent when a player or
+                # NPC approaches it. The visible object is depth-sorted.
+                screen.blit(image,(round(x-ox),round(y-oy)))
                 continue
             npc=payload
             p=self.pos(npc);x,y=round(p.x-ox),round(p.y-oy)
@@ -411,18 +353,14 @@ class NPCShopSystem:
                         else:
                             direction='down' if diff.y>0 else 'up'
                 moving=False
-                if npc.get('idle_animation'):
-                    # Idle and speaking have different, intentional schedules:
-                    # don't wave continuously when there is nobody to greet.
-                    speaking=self.dialogue is not None and self.dialogue['npc'] is npc
-                    if speaking and npc.get('talk_animation',False):
-                        frame=2 if int(self.time*2.4)%2 else 0
-                    else:
-                        frame=1 if int(self.time*1.5)%13 == 0 else 0
-                else:
-                    frame=0  # No fake walking frames for standing workers.
+                # Existing NPC sheets contain directional WALK poses only.
+                # Cycling them while a fixed worker is speaking or seated
+                # looks like sliding/walking in place. Dialogue remains fully
+                # interactive; use the standing portrait until a dedicated
+                # talk/idle atlas is supplied for that NPC.
+                frame=0
             self.sprites.render(screen,npc['sprite'],direction,moving,frame,x,y,
-                                npc.get('sprite_scale',1.0))
+                                npc.get('sprite_scale',1.0), npc.get('pose','stand'))
             if who is npc:
                 label=self.font.render(npc['name']+'  E 交談',True,(250,232,185))
                 bg=label.get_rect(midbottom=(x,y-(92 if npc.get('pose')=='sit' else 100))).inflate(16,10)

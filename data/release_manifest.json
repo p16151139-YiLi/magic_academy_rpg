@@ -1,7 +1,7 @@
 {
-  "version": "V9.4.3",
-  "description": "修正大廳貼圖繪製時四欄位資料被當成三欄位解包，保留全部原有功能與分批載入。",
-  "base": "V9.4.2",
+  "version": "V9.5.1",
+  "description": "全專案靜態稽核、NPC 影格比例與朝向修正、場景錯誤重試、七地圖出口連通回歸（保留全部原始功能）",
+  "base": "V9.5",
   "fixes": [
     "Restore inventory Back-to-menu and Close-to-world as separate actions",
     "Restore keyboard fallback without duplicate actions",
@@ -14,5 +14,13 @@
   ],
   "input_repair_version": "V9.4.1",
   "hall_loading_fix": "V9.4.2",
-  "hall_draw_fix": "V9.4.3"
+  "hall_draw_fix": "V9.4.3",
+  "npc_styles": "four AI-generated role-specific hair styles",
+  "collision_revision": "V9.5_solid_geometry_clear_aisles",
+  "audit_revision": "V9.5.1_all_maps_npc_atlas_ui_error_recovery",
+  "added_checks": [
+    "tests/test_v9_5_1_project_audit.py",
+    "tests/test_v9_5_1_error_recovery.py",
+    "tests/test_v9_5_1_full_pygame_smoke.py"
+  ]
 }

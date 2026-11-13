@@ -177,6 +177,108 @@
       475,
       58,
       18
+    ],
+    [
+      298,
+      165,
+      154,
+      99
+    ],
+    [
+      495,
+      165,
+      150,
+      99
+    ],
+    [
+      1014,
+      162,
+      144,
+      102
+    ],
+    [
+      1191,
+      162,
+      115,
+      102
+    ],
+    [
+      1329,
+      162,
+      108,
+      102
+    ],
+    [
+      165,
+      545,
+      180,
+      157
+    ],
+    [
+      229,
+      699,
+      55,
+      55
+    ],
+    [
+      405,
+      542,
+      128,
+      228
+    ],
+    [
+      1125,
+      544,
+      197,
+      162
+    ],
+    [
+      1220,
+      701,
+      54,
+      54
+    ],
+    [
+      1385,
+      513,
+      127,
+      247
+    ],
+    [
+      80,
+      320,
+      57,
+      257
+    ],
+    [
+      1530,
+      321,
+      54,
+      258
+    ],
+    [
+      316,
+      352,
+      203,
+      105
+    ],
+    [
+      709,
+      388,
+      252,
+      126
+    ],
+    [
+      1130,
+      349,
+      209,
+      109
+    ],
+    [
+      686,
+      616,
+      292,
+      119
     ]
   ],
   "objects": [],
@@ -554,9 +656,196 @@
         18
       ],
       "type": "solid_shelf_base"
+    },
+    {
+      "name": "左後書櫃左半・實體",
+      "rect": [
+        298,
+        165,
+        154,
+        99
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "左後書櫃右半・實體",
+      "rect": [
+        495,
+        165,
+        150,
+        99
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右後書櫃左半・實體",
+      "rect": [
+        1014,
+        162,
+        144,
+        102
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右後書櫃中段・實體",
+      "rect": [
+        1191,
+        162,
+        115,
+        102
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右後書櫃右半・實體",
+      "rect": [
+        1329,
+        162,
+        108,
+        102
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "左 T 書櫃頂橫段・實體",
+      "rect": [
+        165,
+        545,
+        180,
+        157
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "左 T 書櫃下直段・實體",
+      "rect": [
+        229,
+        699,
+        55,
+        55
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "左直立書櫃・實體",
+      "rect": [
+        405,
+        542,
+        128,
+        228
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右 T 書櫃頂橫段・實體",
+      "rect": [
+        1125,
+        544,
+        197,
+        162
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右 T 書櫃下直段・實體",
+      "rect": [
+        1220,
+        701,
+        54,
+        54
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右直立書櫃・實體",
+      "rect": [
+        1385,
+        513,
+        127,
+        247
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "左壁櫃正面・實體",
+      "rect": [
+        80,
+        320,
+        57,
+        257
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右壁櫃正面・實體",
+      "rect": [
+        1530,
+        321,
+        54,
+        258
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "左閱覽桌正面・實體",
+      "rect": [
+        316,
+        352,
+        203,
+        105
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "中央閱覽桌正面・實體",
+      "rect": [
+        709,
+        388,
+        252,
+        126
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "右閱覽桌正面・實體",
+      "rect": [
+        1130,
+        349,
+        209,
+        109
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
+    },
+    {
+      "name": "入口前書桌・實體",
+      "rect": [
+        686,
+        616,
+        292,
+        119
+      ],
+      "type": "segmented_feet_footprint",
+      "source_object": "V9.5 家具實體局部幾何"
     }
   ],
-  "collision_calibration_version": "v8_shelf_solid_feet",
+  "collision_calibration_version": "V9.5_solid_geometry_clear_aisles",
   "occluders": [
     {
       "image": "assets/maps/foreground/academy_library_front_00.png",
