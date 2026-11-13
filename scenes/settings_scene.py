@@ -243,6 +243,10 @@ class SettingsScene(BaseScene):
             self.ctx.audio.set_sfx_volume(value)
 
     def handle_event(self, event):
+        if event.type == pygame.KEYDOWN and event.key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+            self.ctx.save_settings()
+            self.dragging = None
+            return "title"
 
 
 

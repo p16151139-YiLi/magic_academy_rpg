@@ -230,7 +230,7 @@ class NPCShopSystem:
     def handle_key(self, key):
         if self.dialogue:
             d = self.dialogue
-            if key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+            if key in (pygame.K_ESCAPE, pygame.K_BACKSPACE, pygame.K_TAB):
                 self.dialogue = None
             elif d['mode'] == 'choices' and key in (pygame.K_DOWN, pygame.K_s):
                 d['selected'] = (d['selected'] + 1) % len(self._conversation_choices(d['npc']))
@@ -245,7 +245,7 @@ class NPCShopSystem:
         if not self.shop:
             return False
         goods = self.GOODS[self.shop]
-        if key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+        if key in (pygame.K_ESCAPE, pygame.K_BACKSPACE, pygame.K_TAB):
             self.shop = None
             self.notice = ''
         elif key in (pygame.K_DOWN, pygame.K_s):
@@ -459,11 +459,11 @@ class NPCShopSystem:
             screen.blit(header, (panel.x+25, panel.y+15))
             self.close_rect = pygame.Rect(panel.right-114, panel.y+14, 95, 37)
             pygame.draw.rect(screen, (89, 75, 103), self.close_rect, border_radius=6)
-            close_label = self.font.render('離開 Esc', True, (249, 227, 195))
+            close_label = self.font.render('返回 Esc', True, (249, 227, 195))
             screen.blit(close_label, close_label.get_rect(center=self.close_rect.center))
             if mode == 'lines':
                 msg = d['lines'][min(d['index'], len(d['lines'])-1)]
-                tip = 'E / Enter / 點擊：下一句    Esc：關閉對話'
+                tip = 'E / Enter / 點擊：下一句    Esc / Tab：關閉對話'
                 self._draw_wrapped(screen,msg,(panel.x+29,panel.y+93),panel.width-59,(245,240,234))
                 screen.blit(self.font.render(tip, True, (180, 193, 216)), (panel.x+29,panel.bottom-49))
             elif mode == 'reply':
@@ -480,7 +480,7 @@ class NPCShopSystem:
                         pygame.draw.rect(screen,(236,192,100),rect,2,border_radius=7)
                     label=self.font.render(f'{i+1}.  {text}', True, (255, 239, 204))
                     screen.blit(label,(rect.x+18,rect.y+9))
-                screen.blit(self.font.render('↑↓ 選擇 / Enter 確認 / Esc 關閉', True,(187,204,222)),
+                screen.blit(self.font.render('↑↓ 選擇 / Enter 確認 / Esc / Tab 關閉', True,(187,204,222)),
                             (panel.x+29,panel.bottom-26))
             return
         panel = pygame.Rect((sw-780)//2,max(4,(sh-660)//2),780,min(sh-8,660))

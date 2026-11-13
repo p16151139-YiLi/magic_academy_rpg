@@ -1,26 +1,28 @@
 {
-  "phase": "V9.2",
-  "build_id": "0f2147e843a5",
-  "input_zip": "Magic_Academy_RPG_Phase8_V9_2_Hall_Input_Fixed.zip",
-  "built_utc": "2026-11-12T12:41:17.405952+00:00",
+  "phase": "V9.4.1",
+  "build_id": "0ebe84661d88",
+  "input_zip": "Magic_Academy_RPG_V9_4_1_Full_Fixed.zip",
+  "built_utc": "2026-11-13T01:36:36.073167+00:00",
   "source_sha256": {
-    "main.py": "805967bdf5249eed7251096c02461bcd710bba8e3268e680ffb786347dcf2237",
+    "main.py": "6158ddee1a7ab0782e75f031ac0dade39a718c68f742d8bf1feb5b76ec355ddb",
     "data/npcs/dialogue_profiles.json": "e7f7a5d0bc5fd6c7ad35943baa09b71a7c3e5c78a90e5e5c4db62097063b5f7a",
-    "systems/npc_shop_system.py": "9bec8521dcb8273145366c091c1c96a7e2ef77c0cd0b55b38492f709c015b166",
+    "systems/npc_shop_system.py": "c6fb5c8a4c94f5bfb2d3234257649db59b4c5d61db64390a9d52609adb18307f",
     "systems/npc_ai/ai_controller.py": "a57505df699c6a9d9742decbcef8826b7f8817a64d1fa8f522a02e8aae62c5e2",
     "systems/player_world_bridge.py": "23e91ebbfc82e6d3790389b3b298d234aed75538f502c9db8d8e704dba345f17",
-    "scenes/game_scene.py": "1f6fdde69a7641831dbbae63cc3b4fa209d3593725efb8a498c9a5f88a144f3d",
+    "scenes/game_scene.py": "f814c2b2bcaffab7bfb874db0d1b1d1a5690b1241e27709ea99c1beb7520e9fe",
+    "ui/player_menu.py": "f088307012bde87f0dcbeb986022813f3f88988fb8263318a14e41acddd0022b",
+    "ui/inventory_panel.py": "7226675386324ddd08e0fc7b5bde5ba61a8439b306710db288414165d9b6820d",
     "data/maps/academy_entrance.json": "cccb6ae7e2c9ade981530f8467e53cca7803910662eb19f0e39378ef68e614ec",
-    "data/release_manifest.json": "aeb2938919dbd22e0d8ee9033a33ea862d5d0ffaec7d9071f0678e4657069d76"
+    "data/release_manifest.json": "93228c0a5ce1f9d082da6f609198cf9dd014a3d1c9a09db3777c52ec5ef78e39"
   },
   "archives": {
     "magic_academy_rpg.apk": {
-      "sha256": "44f4df024d9dced9c912a31e57353ea6116574e2f04818ddea95f15292d45873",
-      "bytes": 33279272
+      "sha256": "1fc893bc7e23e4229325b74a13ae5473c896d8f1021c23f290361046bf050e05",
+      "bytes": 33282429
     },
     "magic_academy_rpg.tar.gz": {
-      "sha256": "f33a661d2c6d0a8b22a755d2fef0fbc07d6c15f672a562d4b9586b86b91b5bda",
-      "bytes": 33244269
+      "sha256": "9c8c62b90fa90763bb5d85a1fb0735c7ec6a595ad140cbdae57fe357fdef9f12",
+      "bytes": 33245218
     }
   }
 }

@@ -392,11 +392,19 @@ class ClassSelectionScene(BaseScene):
         )
 
     def handle_event(self, event):
-
-        if (
-            event.type != pygame.MOUSEBUTTONDOWN
-            or event.button != 1
-        ):
+        if event.type == pygame.KEYDOWN:
+            if event.key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+                return "title"
+            if event.key in (pygame.K_LEFT, pygame.K_a):
+                self.ctx.selected_class = (self.ctx.selected_class - 1) % 3
+                return None
+            if event.key in (pygame.K_RIGHT, pygame.K_d):
+                self.ctx.selected_class = (self.ctx.selected_class + 1) % 3
+                return None
+            if event.key in (pygame.K_RETURN, pygame.K_SPACE):
+                return self.confirm_selection()
+            return None
+        if event.type != pygame.MOUSEBUTTONDOWN or event.button != 1:
             return None
 
         if self.back_button.collidepoint(event.pos):
@@ -408,35 +416,38 @@ class ClassSelectionScene(BaseScene):
                 return None
 
         if self.confirm_button.collidepoint(event.pos):
-            selected_index = self.ctx.selected_class
-
-            if not 0 <= selected_index < 3:
-                return None
-
-            selected_id = self.CLASS_IDS[selected_index]
-
-            # 正式套用職業資料
-            try:
-                player_data = self.class_bridge.select_class(
-                    selected_id
-                )
-
-            except Exception as error:
-                print("職業選擇失敗：", repr(error))
-                return None
-
-            # 保留原本的職業資料
-            self.ctx.selected_character_class = (
-                self.ctx.classes[selected_index]
-            )
-
-            self.ctx.selected_class_id = selected_id
-
-            print(
-                "職業選擇完成：",
-                player_data["class_name"]
-            )
-
-            return "game"
+            return self.confirm_selection()
 
         return None
+
+    def confirm_selection(self):
+        selected_index = self.ctx.selected_class
+
+        if not 0 <= selected_index < 3:
+            return None
+
+        selected_id = self.CLASS_IDS[selected_index]
+
+        # 正式套用職業資料
+        try:
+            player_data = self.class_bridge.select_class(
+                selected_id
+            )
+
+        except Exception as error:
+            print("職業選擇失敗：", repr(error))
+            return None
+
+        # 保留原本的職業資料
+        self.ctx.selected_character_class = (
+            self.ctx.classes[selected_index]
+        )
+
+        self.ctx.selected_class_id = selected_id
+
+        print(
+            "職業選擇完成：",
+            player_data["class_name"]
+        )
+
+        return "game"

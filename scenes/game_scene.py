@@ -65,10 +65,11 @@ class GameScene(BaseScene):
         from systems.quickbar import Quickbar
         self.quickbar = Quickbar()
         self.player_menu.inventory_panel.quickbar = self.quickbar
+        # The browser may lose KEYDOWN when focus changes. Poll only rising
+        # edges, never repeat an action already delivered by KEYDOWN.
+        self._e_keydown_seen = False
         self._previous_game_keys = set()
         self._handled_key_events = set()
-        # Browser fallback: a KEYUP can still be delivered when KEYDOWN was lost.
-        self._e_keydown_seen = False
         self.shortcut_hint_open = False
 
         # STAGE4_PLAYER_WORLD_INTEGRATION
@@ -186,7 +187,7 @@ class GameScene(BaseScene):
         self.player_menu.draw()
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
-        build_tag = ctx.font_small.render("V9.2 E FIX", True, (243, 210, 123))
+        build_tag = ctx.font_small.render("V9.4.1 INPUT + FEATURES", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):
@@ -253,7 +254,11 @@ class GameScene(BaseScene):
         return False
 
     def _poll_keyboard(self):
-        """KEYDOWN is primary; key-state poll only repairs lost browser events."""
+        """Restore V9.2 browser fallback without double-dispatching keys.
+
+        Rising edges only; a KEYDOWN already routed in the current frame
+        suppresses the matching edge. KEYUP of E must not interact twice.
+        """
         watched = (pygame.K_TAB, pygame.K_ESCAPE, pygame.K_c, pygame.K_i,
                    pygame.K_k, pygame.K_m, pygame.K_h, pygame.K_e,
                    pygame.K_RETURN, pygame.K_SPACE, pygame.K_UP, pygame.K_DOWN,
@@ -263,10 +268,11 @@ class GameScene(BaseScene):
                    pygame.K_LEFT, pygame.K_RIGHT)
         state = pygame.key.get_pressed()
         current = {key for key in watched if state[key]}
-        newly_pressed = current - self._previous_game_keys - self._handled_key_events
-        self._previous_game_keys = current
-        for key in newly_pressed:
+        for key in current - self._previous_game_keys - self._handled_key_events:
             self._game_key(key)
+            if key == pygame.K_e:
+                self._e_keydown_seen = True
+        self._previous_game_keys = current
         self._handled_key_events.clear()
 
     def update(self, dt):
@@ -284,17 +290,19 @@ class GameScene(BaseScene):
                     str(getattr(event, "unicode", "")).lower() == "e"):
                 key = pygame.K_e
                 self._e_keydown_seen = True
-            if getattr(event, "repeat", 0) == 0:
-                if key not in self._handled_key_events:
-                    self._handled_key_events.add(key)
-                    self._game_key(key)
+            if not getattr(event, "repeat", 0):
+                self._handled_key_events.add(key)
+                self._game_key(key)
             return None
         if event.type == pygame.KEYUP and event.key == pygame.K_e:
             # If browser focus lost KEYDOWN, use KEYUP as a single fallback.
-            if not self._e_keydown_seen:
+            if (not self._e_keydown_seen and not getattr(getattr(self, "player_menu", None), "opened", False)
+                    and not getattr(getattr(self, "npc_shop", None), "shop", None)
+                    and not getattr(getattr(self, "npc_shop", None), "dialogue", None)):
                 self._game_key(pygame.K_e)
             self._e_keydown_seen = False
             return None
+        # Overlay has priority: dialogue/shop > player menu > game world.
         # 選單開啟時，滑鼠事件交由選單處理。
         if self.npc_shop.shop or self.npc_shop.dialogue:
             self.npc_shop.handle_event(event)

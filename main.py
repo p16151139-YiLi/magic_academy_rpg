@@ -319,21 +319,8 @@ async def main():
                 running = False
                 break
 
-            if event.type == pygame.KEYDOWN:
-
-                if event.key == pygame.K_ESCAPE:
-                    current = scene_manager.current_scene
-                    # 遊戲中的 ESC 必須先交給對話、商店或背包；不能直接退出。
-                    # 當前 GameScene 依覆蓋層優先順序關閉相應介面。
-                    if scene_manager.current_scene_name == "game":
-                        pass
-                    elif scene_manager.current_scene_name == "title":
-                        running = False
-                        continue
-                    else:
-                        scene_manager.switch("title")
-                        continue
-
+            # Route all keys and clicks to the active scene. An Escape handled
+            # globally would bypass panel-specific close and save actions.
             result = scene_manager.handle_event(event)
 
             if result == "quit":

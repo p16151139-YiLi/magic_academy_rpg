@@ -22,6 +22,7 @@ class TitleScene(BaseScene):
             "quit": "離開遊戲",
         }
 
+        self.keyboard_index = 0
         self.normal_color = (245, 240, 255)
         self.hover_color = (255, 225, 90)
 
@@ -46,7 +47,7 @@ class TitleScene(BaseScene):
 
         for name, rect in self.buttons.items():
 
-            hovered = rect.collidepoint(mouse_pos)
+            hovered = rect.collidepoint(mouse_pos) or name == tuple(self.buttons)[self.keyboard_index]
 
             if hovered:
                 # 半透明金黃色懸停效果
@@ -72,16 +73,32 @@ class TitleScene(BaseScene):
             )
 
     def handle_event(self, event):
-
+        if event.type == pygame.KEYDOWN:
+            keys = tuple(self.buttons)
+            if event.key in (pygame.K_UP, pygame.K_w):
+                self.keyboard_index = (self.keyboard_index - 1) % len(keys)
+                return None
+            if event.key in (pygame.K_DOWN, pygame.K_s):
+                self.keyboard_index = (self.keyboard_index + 1) % len(keys)
+                return None
+            if event.key in (pygame.K_RETURN, pygame.K_SPACE):
+                selected = keys[self.keyboard_index]
+                return "quit" if selected == "quit" else {
+                    "start": "class_selection", "settings": "settings",
+                    "credits": "credits",
+                }[selected]
+            if event.key == pygame.K_ESCAPE:
+                return None  # Never abruptly quit from the title screen.
         if (
             event.type != pygame.MOUSEBUTTONDOWN
             or event.button != 1
         ):
             return None
 
-        for name, rect in self.buttons.items():
+        for index, (name, rect) in enumerate(self.buttons.items()):
 
             if rect.collidepoint(event.pos):
+                self.keyboard_index = index
 
                 if name == "quit":
                     return "quit"

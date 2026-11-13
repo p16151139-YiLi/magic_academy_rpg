@@ -1,11 +1,12 @@
 {
-  "version": "V9.2",
-  "description": "入口真實接近區、E 鍵狀態回饋、KEYUP 備援、門本體可點擊",
-  "base": "V9.1",
+  "version": "V9.4.1",
+  "description": "V9.4.1 修復按鍵、恢復背包返回選單與關閉雙操作，保留所有原有遊戲功能",
+  "base": "V9.4",
   "fixes": [
-    "hall entry approach_rect matches player feet and door carpet",
-    "E now gives feedback even when too far",
-    "web KEYUP fallback and unicode E",
-    "door sprite click support and explicit version label"
-  ]
+    "Restore inventory Back-to-menu and Close-to-world as separate actions",
+    "Restore keyboard fallback without duplicate actions",
+    "Preserve existing NPC dialogue, shop, equipment, maps, quickbar, and scene navigation",
+    "Retain legacy Pygame smoke test and add key-preservation regression checks"
+  ],
+  "input_repair_version": "V9.4.1"
 }
