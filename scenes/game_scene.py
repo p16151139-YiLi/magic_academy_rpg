@@ -50,6 +50,10 @@ class GameScene(BaseScene):
 
         # 延後圖片載入，確保顯示畫面已初始化
         self.map_loaded = False
+        self._loading_map_ref = None
+        self._loading_npc_queue = []
+        self._load_error = ""
+        self._draw_error = ""
 
         # 返回按鈕
         self.back_button = pygame.Rect(
@@ -80,17 +84,76 @@ class GameScene(BaseScene):
         self.npc_shop = NPCShopSystem(self)
 
     def ensure_map_loaded(self):
-        """首次繪製時載入地圖圖片。"""
-
-        if not self.map_loaded:
-            self.map_renderer.load(self.map_data)
+        """Load a map and its NPC sprites over multiple browser frames."""
+        if self.map_loaded:
+            return True
+        try:
+            if self._loading_map_ref is not self.map_data:
+                self.map_renderer.begin_load(self.map_data)
+                self._loading_map_ref = self.map_data
+                # Keep all original NPC art; only spread sprite decoding over frames.
+                self._loading_npc_queue = list(dict.fromkeys(
+                    npc['sprite'] for npc in self.map_data.get('npcs', [])))
+            if self.map_renderer.loading:
+                self.map_renderer.step_load()
+                return False
+            if self._loading_npc_queue:
+                self.npc_shop.sprites.frames(self._loading_npc_queue.pop(0))
+                return False
             self.map_loaded = True
+            self._loading_map_ref = None
+            self._load_error = ""
+            return True
+        except Exception as exc:
+            import traceback
+            traceback.print_exc()
+            self._load_error = f"載入失敗：{type(exc).__name__}: {exc}"
+            return False
+
+    def draw_loading(self, screen):
+        """Always show a live loading/error state instead of a frozen last frame."""
+        screen.fill((24, 27, 46))
+        font = self.ctx.font_medium
+        small = self.ctx.font_small
+        label = self.map_data.get('name', '新場景')
+        if self._load_error:
+            lines = ['場景載入異常', self._load_error[:65], '按 Esc 返回主選單']
+        else:
+            map_progress = self.map_renderer.load_progress
+            total_npcs = len(set(n['sprite'] for n in self.map_data.get('npcs', [])))
+            done_npcs = total_npcs - len(self._loading_npc_queue)
+            percent = int(100 * (map_progress * 0.8 + (done_npcs / max(1,total_npcs)) * 0.2))
+            lines = ['正在載入：' + label, f'地圖與 NPC 素材 {min(percent,100)}%',
+                     '按 Esc 可以返回主選單']
+        for idx, line in enumerate(lines):
+            rendered = (font if idx == 0 else small).render(line, True, (244, 227, 197))
+            screen.blit(rendered, rendered.get_rect(center=(screen.get_width()//2,
+                                                            screen.get_height()//2 - 55 + idx*48)))
 
     def draw(self):
+        try:
+            self._draw_game_world()
+            self._draw_error = ""
+        except Exception as exc:
+            # In a browser a draw exception otherwise kills the async loop and
+            # leaves the last frame on screen, which looks like a hard freeze.
+            import traceback
+            if self._draw_error != repr(exc):
+                traceback.print_exc()
+            self._draw_error = repr(exc)
+            self.ctx.screen.fill((30, 27, 50))
+            messages = ('畫面繪製發生錯誤', str(exc)[:75], '按 Esc 返回主選單')
+            for idx, message in enumerate(messages):
+                surf = self.ctx.font_small.render(message, True, (248, 218, 187))
+                self.ctx.screen.blit(surf, surf.get_rect(
+                    center=(self.ctx.screen.get_width()//2, 260+idx*55)))
+
+    def _draw_game_world(self):
         ctx = self.ctx
         screen = ctx.screen
-
-        self.ensure_map_loaded()
+        if not self.map_loaded:
+            self.draw_loading(screen)
+            return
 
         screen.fill((20, 25, 30))
 
@@ -187,7 +250,7 @@ class GameScene(BaseScene):
         self.player_menu.draw()
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
-        build_tag = ctx.font_small.render("V9.4.1 INPUT + FEATURES", True, (243, 210, 123))
+        build_tag = ctx.font_small.render("V9.4.3 HALL DRAW FIX", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):
@@ -276,12 +339,26 @@ class GameScene(BaseScene):
         self._handled_key_events.clear()
 
     def update(self, dt):
+        # Important: do not start gameplay or NPC AI against a half-loaded map.
+        if not self.map_loaded:
+            self.ensure_map_loaded()
+            return
         self._poll_keyboard()
+        if not self.map_loaded:  # a key may have just changed the map
+            return
         self.player_world.update(dt)
         self.npc_shop.update(dt)
         self.quickbar.update(dt)
 
     def handle_event(self, event):
+        if not getattr(self, 'map_loaded', True):
+            # Emergency exit if a browser asset fails; normal Esc behavior is
+            # unchanged once the world is fully loaded.
+            if event.type == pygame.KEYDOWN and event.key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+                return "title"
+            return None
+        if getattr(self, '_draw_error', '') and event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            return "title"
         if event.type == pygame.KEYDOWN:
             # Some browser/IME layouts expose printable E via unicode while
             # the key identifier varies; normalize it before dispatching.

@@ -346,8 +346,6 @@ class NPCShopSystem:
                 # Real alpha silhouette check: transparent corners of cropped
                 # furniture must NOT trigger fading in empty floor tiles.
                 key=id(image)
-                if self._actor_mask is not None and key not in self._occluder_masks:
-                    self._occluder_masks[key]=pygame.mask.from_surface(image,60)
                 object_mask=self._occluder_masks.get(key)
                 # Objects are not erased or drawn as opaque rectangles over
                 # people. Only pixels that actually overlap a sprite fade,
@@ -361,6 +359,9 @@ class NPCShopSystem:
                         # BEHIND the prop's lower depth, not actors in front.
                         if b.bottom > draw_depth + 24 or not area.colliderect(b):
                             continue
+                        if self._actor_mask is not None and object_mask is None:
+                            object_mask=pygame.mask.from_surface(image,60)
+                            self._occluder_masks[key]=object_mask
                         if object_mask is not None:
                             actor_mask=pygame.mask.Mask(b.size,fill=True)
                             is_covered = object_mask.overlap_area(
