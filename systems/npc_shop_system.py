@@ -78,6 +78,9 @@ class NPCShopSystem:
         current=self.npcs()
         agents=[self.agent(n) for n in current if n.get('behavior')=='utility']
         obstacles=self.scene.player_world.get_obstacles()
+        # Give moving characters visual breathing room from bookcases/tables.
+        # The player still uses the original exact solid colliders.
+        obstacles=[r.inflate(20,18) for r in obstacles]
         # Free-roaming NPCs do not wander onto doorway thresholds or crowd
         # students already sitting on benches, desks or reading chairs.
         for exit_data in self.scene.map_manager.get_exits():

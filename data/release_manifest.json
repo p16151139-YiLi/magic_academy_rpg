@@ -1,5 +1,5 @@
 {
-  "version": "V9.6.2",
+  "version": "V9.6.3",
   "description": "更新圖書館坐姿NPC與兩店固定NPC碰撞座標、減少UI/高家具繪圖臨時Surface、提供可追查的繪圖階段；保留原有功能及素材",
   "base": "V9.5.1",
   "fixes": [
@@ -29,5 +29,6 @@
   "shared_motion": "player_and_npc_actual_displacement_facing",
   "occlusion": "character_reveal_through_baked_furniture_with_existing_colliders",
   "chair_display_fix": "V9.6.1_convert_alpha_display_guard_and_colab_lifecycle",
-  "npc_pose_ui_fix": "V9.6.2_standing_npc_counter_alignment_cached_surface_render_stages"
+  "npc_pose_ui_fix": "V9.6.2_standing_npc_counter_alignment_cached_surface_render_stages",
+  "release": "V9.6.3"
 }

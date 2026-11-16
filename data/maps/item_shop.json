@@ -423,7 +423,7 @@
       "shop": "item_shop",
       "position": [
         780,
-        391
+        340
       ],
       "color": [
         195,
@@ -441,7 +441,7 @@
       "facing": "down",
       "face_player": false,
       "idle_animation": true,
-      "draw_depth": 391,
+      "draw_depth": 340,
       "render_note": "Shopkeeper feet behind counter collision; countertop occluder in front of sprite.",
       "sprite_scale": 1.0,
       "activity": "shopkeeping",
@@ -456,8 +456,8 @@
       "behavior": "utility",
       "sprite": "npc_berk",
       "position": [
-        1040,
-        684
+        820,
+        674
       ],
       "interaction_radius": 95,
       "dialogue": [
@@ -466,10 +466,10 @@
       ],
       "pose": "roam",
       "area": [
-        1010,
-        575,
-        1260,
-        796
+        650,
+        570,
+        970,
+        780
       ],
       "speed": 35,
       "facing": "down",

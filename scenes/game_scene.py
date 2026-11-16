@@ -145,8 +145,7 @@ class GameScene(BaseScene):
             # In a browser a draw exception otherwise kills the async loop and
             # leaves the last frame on screen, which looks like a hard freeze.
             import traceback
-            if self._draw_error != repr(exc):
-                traceback.print_exc()
+            traceback.print_exc()
             # pygame.error can have an empty string; include the exact stage
             # and exception repr so we never lose the actionable cause.
             detail=str(exc).strip() or repr(exc)
@@ -277,7 +276,7 @@ class GameScene(BaseScene):
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
         self._draw_stage = "build tag"
-        build_tag = ctx.font_small.render("V9.6.2 NPC UI FIX", True, (243, 210, 123))
+        build_tag = ctx.font_small.render("V9.6.3 VISUAL FIX", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):
@@ -324,7 +323,7 @@ class GameScene(BaseScene):
             return True
         if key == pygame.K_ESCAPE:
             # 在世界畫面按 Esc 顯示選單，不返回標題畫面。
-            self.player_menu.open(5)
+            self.player_menu.open(-1)
             return True
         if key == pygame.K_e:
             # World interaction first when next to a door. Give feedback even

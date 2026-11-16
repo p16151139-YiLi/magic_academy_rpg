@@ -391,7 +391,7 @@
       "shop": "weapon_shop",
       "position": [
         948,
-        392
+        346
       ],
       "color": [
         174,
@@ -408,7 +408,7 @@
       "pose": "stand",
       "facing": "down",
       "face_player": false,
-      "draw_depth": 392,
+      "draw_depth": 346,
       "idle_animation": true,
       "sprite_scale": 1.22,
       "render_note": "Blacksmith feet behind counter collision, not within counter solid footprint.",

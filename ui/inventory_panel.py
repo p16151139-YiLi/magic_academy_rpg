@@ -28,6 +28,10 @@ class InventoryPanel:
         self.areas={}
         self.hover=None
         self.template=None
+        self._canvas=None
+        self._scaled_canvas=None
+        self._scaled_size=None
+        self._text_cache={}
 
     def font(self,size):
         if size not in self.font_cache:
@@ -64,7 +68,15 @@ class InventoryPanel:
         f=self.font(size);words=str(text)
         if max_w:
             while words and f.size(words)[0]>max_w:words=words[:-1]
-        if words:surf.blit(f.render(words,True,color),(int(x),int(y)))
+        if words:
+            cache_key=(words,size,tuple(color))
+            glyph=self._text_cache.get(cache_key)
+            if glyph is None:
+                glyph=f.render(words,True,color)
+                if len(self._text_cache)>512:
+                    self._text_cache.clear()
+                self._text_cache[cache_key]=glyph
+            surf.blit(glyph,(int(x),int(y)))
 
     def _box(self,surf,r,fill=(48,42,72),edge=(151,126,98),selected=False):
         pygame.draw.rect(surf,fill,r,border_radius=7)
@@ -74,12 +86,18 @@ class InventoryPanel:
         hovered=self.hover==('button',name)
         self._box(surf,rect,(98,69,106) if hovered else (65,54,87),selected=hovered)
         font=self.font(21)
-        label=font.render(name,True,(250,227,190))
+        cache_key=(name,21,(250,227,190))
+        label=self._text_cache.get(cache_key)
+        if label is None:
+            label=font.render(name,True,cache_key[2])
+            self._text_cache[cache_key]=label
         surf.blit(label,label.get_rect(center=rect.center))
         self.areas[('button',name)]=rect
 
     def render_canvas(self):
-        surf=pygame.Surface((self.BASE_W,self.BASE_H),pygame.SRCALPHA)
+        if self._canvas is None:
+            self._canvas=pygame.Surface((self.BASE_W,self.BASE_H),pygame.SRCALPHA)
+        surf=self._canvas
         surf.fill((27,28,49,248))
         pygame.draw.rect(surf,(222,175,98),(4,4,self.BASE_W-8,self.BASE_H-8),3,border_radius=12)
         self.areas={}
@@ -151,8 +169,11 @@ class InventoryPanel:
         if self.closed:return
         if rect is not None:self.rect=pygame.Rect(rect)
         canvas=self.render_canvas()
-        image=pygame.transform.scale(canvas,self.rect.size)
-        screen.blit(image,self.rect.topleft)
+        if self._scaled_size != self.rect.size:
+            self._scaled_canvas=pygame.Surface(self.rect.size,pygame.SRCALPHA)
+            self._scaled_size=self.rect.size
+        pygame.transform.scale(canvas,self.rect.size,self._scaled_canvas)
+        screen.blit(self._scaled_canvas,self.rect.topleft)
 
     def get_hit(self,screen_pos):
         if not self.rect.collidepoint(screen_pos):return None

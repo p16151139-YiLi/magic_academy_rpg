@@ -28,7 +28,7 @@ class PlayerMenu:
         self.draw_text = draw_text
 
         self.opened = False
-        self.tab = 5
+        self.tab = -1  # -1 is the real six-button parent menu.
         self.hover = -1
 
         self.template = pygame.image.load(
@@ -62,6 +62,8 @@ class PlayerMenu:
         self._shade_size = None
         self._template_scaled = None
         self._template_scaled_size = None
+        self._text_cache = {}
+        self._tab_overlay_cache = {}
 
     def font(self, size):
 
@@ -82,11 +84,14 @@ class PlayerMenu:
         color=(240, 230, 205)
     ):
 
-        surf = self.font(size).render(
-            str(value),
-            True,
-            color
-        )
+        cache_key = (str(value), int(size), tuple(color))
+        surf = self._text_cache.get(cache_key)
+        if surf is None:
+            surf = self.font(size).render(cache_key[0], True, color)
+            # The browser's WASM heap is finite. Never let text cache grow forever.
+            if len(self._text_cache) >= 384:
+                self._text_cache.clear()
+            self._text_cache[cache_key] = surf
 
         self.screen.blit(
             surf,
@@ -135,6 +140,8 @@ class PlayerMenu:
     def open(self, tab=None):
         if tab is not None:
             self.tab = tab
+        elif not self.opened:
+            self.tab = -1
         self.opened = True
         if self.tab == 1:
             self.inventory_panel.closed = False
@@ -143,6 +150,7 @@ class PlayerMenu:
 
     def close(self):
         self.opened = False
+        self.tab = -1
         self.inventory_panel.closed = False
 
     def return_from_inventory(self):
@@ -153,41 +161,42 @@ class PlayerMenu:
         """
         self.inventory_panel.back_requested = False
         self.inventory_panel.closed = False
-        self.tab = 0
+        self.tab = -1
+        self.opened = True
+
+    def return_home(self):
+        """Back means the six-item parent menu; never jump into character info."""
+        self.inventory_panel.back_requested = False
+        self.inventory_panel.closed = False
+        self.tab = -1
         self.opened = True
 
     def handle_key(self, key):
         if not self.opened:
             return False
-        # Preserve V9.2: inventory Esc/Backspace go back to the player menu.
-        # Tab toggles the entire player overlay from any page.
         if key == pygame.K_TAB:
             self.close()
             return True
-        if self.tab == 1:
-            if key == pygame.K_i:
-                self.return_from_inventory()
-                return True
-            if key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
-                self.return_from_inventory()
-                return True
-        elif key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
-            # Other tabs have no separate main-selection page; keep the
-            # established layout, close to world instead of losing input.
-            self.close()
+        if key in (pygame.K_ESCAPE, pygame.K_BACKSPACE):
+            if self.tab == -1:
+                self.close()
+            else:
+                self.return_home()
             return True
         shortcuts = {pygame.K_c: 0, pygame.K_i: 1,
                      pygame.K_k: 2, pygame.K_m: 4, pygame.K_h: 5}
         if key in shortcuts:
-            # Keep the V9.4 toggle shortcut while retaining V9.2 inventory Back.
-            if self.tab == shortcuts[key]:
-                self.close()
+            requested = shortcuts[key]
+            if requested == self.tab:
+                self.return_home()
             else:
-                self.open(shortcuts[key])
+                self.open(requested)
             return True
         if self.tab == 1 and self.inventory_panel.handle_key(key):
             if self.inventory_panel.back_requested:
-                self.return_from_inventory()
+                self.return_home()
+            elif self.inventory_panel.closed:
+                self.close()
             return True
         return False
 
@@ -201,6 +210,9 @@ class PlayerMenu:
         if self.tab != 1 and event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             if self.rect(875, 28, 85, 62).collidepoint(event.pos):
                 self.close()
+                return True
+            if self.tab >= 0 and self.rect(744, 492, 208, 57).collidepoint(event.pos):
+                self.return_home()
                 return True
 
         if self.tab == 0 and self.stat_allocation_panel.handle_event(event):
@@ -321,17 +333,13 @@ class PlayerMenu:
 
             if color:
 
-                overlay = pygame.Surface(
-                    r.size,
-                    pygame.SRCALPHA
-                )
-
-                overlay.fill(color)
-
-                self.screen.blit(
-                    overlay,
-                    r.topleft
-                )
+                overlay_key = (r.size, color)
+                overlay = self._tab_overlay_cache.get(overlay_key)
+                if overlay is None:
+                    overlay = pygame.Surface(r.size, pygame.SRCALPHA)
+                    overlay.fill(color)
+                    self._tab_overlay_cache[overlay_key] = overlay
+                self.screen.blit(overlay, r.topleft)
 
             if i == self.tab or i == self.hover:
 
@@ -342,11 +350,11 @@ class PlayerMenu:
                     max(1, round(2 * s))
                 )
 
-            label = self.font(19 * s).render(
-                name,
-                True,
-                (255, 235, 185)
-            )
+            label_key = (name, max(10, int(19*s)), (255,235,185))
+            label = self._text_cache.get(label_key)
+            if label is None:
+                label = self.font(label_key[1]).render(name,True,label_key[2])
+                self._text_cache[label_key] = label
 
             self.screen.blit(
                 label,
@@ -355,7 +363,7 @@ class PlayerMenu:
 
         # 內容標題
         txt(
-            self.TABS[self.tab],
+            self.TABS[self.tab] if self.tab >= 0 else "玩家選單",
             75,
             208,
             27,
@@ -376,8 +384,13 @@ class PlayerMenu:
             max(1, round(2 * s))
         )
 
+        # Parent selection: keep all six original button positions unchanged.
+        if self.tab == -1:
+            txt("請選擇上方功能", 85, 290, 25)
+            txt("Tab：返回遊戲    Esc：關閉選單", 85, 355, 19)
+
         # 操作說明
-        if self.tab == 5:
+        elif self.tab == 5:
 
             for i, (key, description) in enumerate(
                 self.controls
@@ -404,10 +417,17 @@ class PlayerMenu:
         elif self.tab == 0:
 
             # 角色資訊與配點不再同時繪製，避免半透明面板互相覆蓋。
-            self.stat_allocation_panel.draw(
-                self.screen,
-                self.rect(58, 260, 880, 280)
-            )
+            try:
+                self.stat_allocation_panel.draw(
+                    self.screen,
+                    self.rect(58, 260, 880, 280)
+                )
+            except Exception as exc:
+                # Report a precise source rather than an empty SDL error.
+                raise RuntimeError(
+                    "CharacterInfoPanel/StatAllocationPanel draw failed "
+                    f"({type(exc).__name__}: {repr(exc)})"
+                ) from exc
 
         # 技能樹
         elif self.tab == 2:
@@ -445,10 +465,11 @@ class PlayerMenu:
                 19
             )
 
-        txt(
-            "Tab 關閉 / Esc 返回",
-            765,
-            507,
-            15,
-            (188, 176, 159)
-        )
+        if self.tab >= 0:
+            back = self.rect(744, 492, 208, 57)
+            pygame.draw.rect(self.screen, (67, 49, 91), back, border_radius=7)
+            pygame.draw.rect(self.screen, (242, 212, 151), back, 2, border_radius=7)
+            label = self.font(max(12, round(18*s))).render("返回選單", True, (255, 233, 196))
+            self.screen.blit(label, label.get_rect(center=back.center))
+        else:
+            txt("Tab 關閉 / Esc 返回遊戲", 700, 507, 15, (188, 176, 159))

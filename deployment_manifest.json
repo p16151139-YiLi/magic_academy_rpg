@@ -1,12 +1,12 @@
 {
-  "phase": "V9.6.2",
-  "build_id": "b8ea4a27cbc5",
-  "input_zip": "Magic_Academy_RPG_V9_6_2_NPC_UI_Repair.zip",
-  "built_utc": "2026-11-16T00:58:22.432987+00:00",
+  "phase": "V9.6.3",
+  "build_id": "7da53cd821b3",
+  "input_zip": "Magic_Academy_RPG_V9_6_3_Visual_Repair.zip",
+  "built_utc": "2026-11-16T01:25:00.777497+00:00",
   "source_sha256": {
     "main.py": "6158ddee1a7ab0782e75f031ac0dade39a718c68f742d8bf1feb5b76ec355ddb",
     "data/npcs/dialogue_profiles.json": "e7f7a5d0bc5fd6c7ad35943baa09b71a7c3e5c78a90e5e5c4db62097063b5f7a",
-    "systems/npc_shop_system.py": "66cd0da6b5683de99d8951f7a9bb3142424459aeb9f56aa56343952da6a50646",
+    "systems/npc_shop_system.py": "c59e91c8da648386d07123cc356edd1a8a9555fedabefb8ea4e485289bb803ea",
     "systems/npc_ai/ai_controller.py": "a36d2eb3e2bc6457139628fd258cf2e006c59ec881d91b7d8b3b1e4404718c15",
     "systems/player_world_bridge.py": "79a9b0f12d6ced844c18b0d3abdb1893c6d53992250642f8d7390c4bae2f15b9",
     "systems/map_renderer.py": "5b75aa0bcc6b6a638a6ab8f138d903f3348bb824bc59bdf274a5ba7926fa3984",
@@ -16,20 +16,21 @@
     "assets/maps/chairs/academy_wooden_chair.png": "f0d4249494246b28965cb03b18ac60f65f961b87d49acd0475ada739f7be14fe",
     "data/maps/academy_library.json": "8707dfdf7b3b123dd5e8c6a636bdf36f0742edbba42a9c1d29fda4a642901d98",
     "data/maps/academy_classroom.json": "ceca7a2afaa4561114aa3eceaff1cf063ad3224befe652ef9194d2cdb68219ee",
-    "scenes/game_scene.py": "a72568c462ee04ffda7159899fb9c4cb68055130fabeb4fccaa3b6b9684c142c",
-    "ui/player_menu.py": "04e0f48ba6f69a127c8e0df8325cc41a2c426484741707f287088eafd5b7bf8a",
-    "ui/inventory_panel.py": "bb46a4ac6e45bd481858b44888c7ef777dbc4e7a8ced047e4e056e24c4cc9c63",
+    "scenes/game_scene.py": "0e61b614d050ae604bc346c3b47fd09100a2c49b2329b64a3f5ad4dabd702c11",
+    "ui/player_menu.py": "ec612bd21d9feef677d569406636c04dc5ee1aa36d1459b6c00ca0f6da14983f",
+    "ui/inventory_panel.py": "b829a09bfad311d796aa9db034e982011dcac503db8a641b50d2d2c50127a0e2",
+    "ui/stat_allocation_panel.py": "27bb66efa4bfd85b43a5adbf759dadf65eeefcb895d28953404748e3b5b7abb4",
     "data/maps/academy_entrance.json": "e7b6e4830cf132ec920b048cb146d4f834040192fd79d0fd4a87e9345f22250d",
-    "data/release_manifest.json": "992131d8a7c9929ad52280ea0a1c95123a8781d9d87c9ccfe03f3bf8de823c25"
+    "data/release_manifest.json": "c4710e585aacf92d860fa2d551df676d597f5f6a2fed10a2315d5f7f70169f79"
   },
   "archives": {
     "magic_academy_rpg.apk": {
-      "sha256": "4a70561cbf5ed5027f24708d5be1793d982c4ab11d60c0507a8e2b58f4e3b6eb",
-      "bytes": 33530846
+      "sha256": "37b9859206c85aa3ef1094be828234b1849c3efb782a6377c42fc0621217adc3",
+      "bytes": 40741494
     },
     "magic_academy_rpg.tar.gz": {
-      "sha256": "976be3bdd865ca1777ef83d5ceaf86323c5abdc585c4cbc063fdf538aedcdd4f",
-      "bytes": 33490536
+      "sha256": "8e4894e2dd7f53d5ff1c1beef0c6aba8e182229266a9488f2b29c8755a834a4d",
+      "bytes": 40700411
     }
   }
 }

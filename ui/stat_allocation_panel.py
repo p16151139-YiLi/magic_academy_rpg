@@ -10,17 +10,32 @@ class StatAllocationPanel:
         self.buttons={}
         self.fonts={}
         self.message=''
+        self._panel_surface=None
+        self._panel_size=None
+        self._glyph_cache={}
     def font(self,size):
         if size not in self.fonts:
             p=ROOT/'assets/fonts/NotoSansTC-Regular.ttf'
             self.fonts[size]=pygame.font.Font(str(p) if p.exists() else None,size)
         return self.fonts[size]
     def label(self,surf,text,pos,size=18,color=(240,233,211)):
-        surf.blit(self.font(size).render(str(text),True,color),pos)
+        key=(str(text),size,tuple(color))
+        glyph=self._glyph_cache.get(key)
+        if glyph is None:
+            glyph=self.font(size).render(key[0],True,color)
+            if len(self._glyph_cache)>240:
+                self._glyph_cache.clear()
+            self._glyph_cache[key]=glyph
+        surf.blit(glyph,pos)
     def draw(self,surface,rect):
         snap=self.progress.snapshot(); data=snap['player']; st=snap['stats']
         r=pygame.Rect(rect)
-        panel=pygame.Surface(r.size,pygame.SRCALPHA)
+        if r.width <= 0 or r.height <= 0:
+            raise ValueError(f"Invalid character-panel dimensions: {r.size}")
+        if self._panel_size != r.size:
+            self._panel_surface=pygame.Surface(r.size,pygame.SRCALPHA)
+            self._panel_size=r.size
+        panel=self._panel_surface
         panel.fill((21,29,48,246))
         pygame.draw.rect(panel,(177,143,83),panel.get_rect(),2,border_radius=8)
         self.label(panel,f"{data.get('name','冒險者')}  Lv.{data['level']}  {data.get('class_name','')}",(18,9),19,(255,211,129))
