@@ -344,7 +344,15 @@ class NPCShopSystem:
             overlap=actor_box.clip(furniture_rect)
             if overlap.width<=0 or overlap.height<=0:
                 continue
-            layer=pygame.Surface(actor_box.size,pygame.SRCALPHA)
+            # Reuse the same alpha buffer for each actor/occluder instead of
+            # creating many thousands of SDL surfaces during extended browser play.
+            cache_key=('actor_alpha',actor_box.width,actor_box.height)
+            layer=self._fade_cache.get(cache_key)
+            if layer is None:
+                layer=pygame.Surface(actor_box.size,pygame.SRCALPHA)
+                self._fade_cache[cache_key]=layer
+            else:
+                layer.fill((0,0,0,0))
             if kind=='player':
                 self.scene.player.draw(layer,camera_offset=(ox+actor_box.x,oy+actor_box.y))
             else:

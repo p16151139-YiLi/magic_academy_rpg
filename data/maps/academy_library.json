@@ -288,8 +288,8 @@
       "name": "賽琳娜・莫爾",
       "role": "librarian",
       "position": [
-        1178,
-        481
+        1352,
+        500
       ],
       "color": [
         151,
@@ -303,16 +303,15 @@
       "interaction_radius": 170,
       "sprite": "npc_selena",
       "behavior": "stationary",
-      "pose": "sit",
+      "pose": "stand",
       "facing": "down",
       "face_player": false,
       "idle_animation": true,
-      "draw_depth": 492,
-      "render_note": "坐在右側閱覽桌的原圖椅子，完整角色不帶第二把椅子",
+      "draw_depth": 500,
+      "render_note": "Standing beside the research desk in the free aisle; not seated through tabletop.",
       "activity": "cataloging",
       "talk_animation": true,
-      "dialogue_profile": "selena",
-      "chair_id": "academy_library_seat_05"
+      "dialogue_profile": "selena"
     },
     {
       "id": "isaac",

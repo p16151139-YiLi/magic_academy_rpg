@@ -58,6 +58,10 @@ class PlayerMenu:
 
         self.origin = (0, 0)
         self.scale = 1.0
+        self._shade_surface = None
+        self._shade_size = None
+        self._template_scaled = None
+        self._template_scaled_size = None
 
     def font(self, size):
 
@@ -242,29 +246,23 @@ class PlayerMenu:
         ox, oy = self.origin
 
         # 背景遮罩
-        shade = pygame.Surface(
-            (sw, sh),
-            pygame.SRCALPHA
-        )
-
-        shade.fill((0, 0, 0, 155))
-        self.screen.blit(shade, (0, 0))
+        if self._shade_size != (sw,sh):
+            self._shade_surface = pygame.Surface((sw,sh),pygame.SRCALPHA)
+            self._shade_surface.fill((0,0,0,155))
+            self._shade_size = (sw,sh)
+        self.screen.blit(self._shade_surface,(0,0))
 
         if self.tab == 1:
             self.inventory_panel.draw(self.screen,self.inventory_rect())
             return
 
         # 一般玩家選單
-        template = pygame.transform.scale(
-            self.template,
-            (
-                round(1000 * s),
-                round(580 * s)
-            )
-        )
-
+        template_size=(round(1000*s),round(580*s))
+        if template_size != self._template_scaled_size:
+            self._template_scaled = pygame.transform.scale(self.template,template_size)
+            self._template_scaled_size=template_size
         self.screen.blit(
-            template,
+            self._template_scaled,
             (
                 round(ox),
                 round(oy)

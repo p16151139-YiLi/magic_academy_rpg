@@ -391,7 +391,7 @@
       "shop": "weapon_shop",
       "position": [
         948,
-        425
+        392
       ],
       "color": [
         174,
@@ -408,10 +408,10 @@
       "pose": "stand",
       "facing": "down",
       "face_player": false,
-      "draw_depth": 425,
+      "draw_depth": 392,
       "idle_animation": true,
       "sprite_scale": 1.22,
-      "render_note": "V8 無椅子、店主在空櫃檯後，前景只依櫃檯本身處理",
+      "render_note": "Blacksmith feet behind counter collision, not within counter solid footprint.",
       "activity": "shopkeeping",
       "dialogue_profile": "grant"
     }

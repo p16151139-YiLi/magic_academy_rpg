@@ -54,6 +54,7 @@ class GameScene(BaseScene):
         self._loading_npc_queue = []
         self._load_error = ""
         self._draw_error = ""
+        self._draw_stage = "initialization"
 
         # 返回按鈕
         self.back_button = pygame.Rect(
@@ -146,15 +147,19 @@ class GameScene(BaseScene):
             import traceback
             if self._draw_error != repr(exc):
                 traceback.print_exc()
-            self._draw_error = f"{type(exc).__name__}: {exc}"
+            # pygame.error can have an empty string; include the exact stage
+            # and exception repr so we never lose the actionable cause.
+            detail=str(exc).strip() or repr(exc)
+            self._draw_error = f"{self._draw_stage}: {type(exc).__name__}: {detail}"
             self._last_draw_traceback = traceback.format_exc()
+            print("[DRAW FAILED]", self.map_id, self._draw_error, flush=True)
             self.draw_recovery_screen()
 
     def draw_recovery_screen(self):
         """A render error must not trap the user on an unusable frozen frame."""
         screen=self.ctx.screen
         screen.fill((30, 27, 50))
-        lines=('畫面繪製發生錯誤', self._draw_error[:75],
+        lines=('畫面繪製發生錯誤', self._draw_error[:90],
                '按 R 重新繪製；Esc 返回主選單')
         for idx,line in enumerate(lines):
             rendered=self.ctx.font_small.render(line,True,(248,218,187))
@@ -171,21 +176,27 @@ class GameScene(BaseScene):
         screen.fill((20, 25, 30))
 
         # 依序繪製地圖圖層
+        self._draw_stage = "ground"
         self.map_renderer.draw_ground(
             screen, self.camera
         )
 
+        self._draw_stage = "map objects"
         self.map_renderer.draw_objects(
             screen, self.camera
         )
+        self._draw_stage = "map decals"
         self.map_renderer.draw_decals(screen, self.camera)
 
         # 前景遮擋層
         # 玩家繪製於物件與前景之間
         # 角色依腳部座標排序：走到 NPC 前方時會自然遮住對方。
+        self._draw_stage = "NPC/chair/actor occlusion"
         self.npc_shop.draw_npcs(screen, include_player=True)
+        self._draw_stage = "player interaction overlay"
         self.player_world.draw(screen, include_player=False)
 
+        self._draw_stage = "map foreground"
         self.map_renderer.draw_foreground(
             screen, self.camera
         )
@@ -260,10 +271,13 @@ class GameScene(BaseScene):
         if not self.player_menu.opened and not self.npc_shop.shop and not self.npc_shop.dialogue:
             self.quickbar.draw(screen)
         # 地圖與場景繪製完成後，顯示玩家介面
+        self._draw_stage = f"player menu tab {self.player_menu.tab}"
         self.player_menu.draw()
+        self._draw_stage = "NPC dialogue/shop panel"
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
-        build_tag = ctx.font_small.render("V9.6.1 CHAIR LOAD FIX", True, (243, 210, 123))
+        self._draw_stage = "build tag"
+        build_tag = ctx.font_small.render("V9.6.2 NPC UI FIX", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):

@@ -423,7 +423,7 @@
       "shop": "item_shop",
       "position": [
         780,
-        425
+        391
       ],
       "color": [
         195,
@@ -441,8 +441,8 @@
       "facing": "down",
       "face_player": false,
       "idle_animation": true,
-      "draw_depth": 425,
-      "render_note": "V8 AI背景無椅子；NPC 獨立站櫃檯後，前景不重複繪製家具",
+      "draw_depth": 391,
+      "render_note": "Shopkeeper feet behind counter collision; countertop occluder in front of sprite.",
       "sprite_scale": 1.0,
       "activity": "shopkeeping",
       "talk_animation": true,
