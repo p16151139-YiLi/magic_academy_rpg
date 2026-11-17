@@ -1,0 +1,10 @@
+{
+  "version": "V9.8.10",
+  "folder": ".",
+  "files": [
+    "favicon.png",
+    "index.html",
+    "magic_academy_publish_app.apk",
+    "magic_academy_publish_app.tar.gz"
+  ]
+}
