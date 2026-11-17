@@ -4,11 +4,11 @@
   "width": 1672,
   "height": 941,
   "tile_size": 32,
-  "background": "assets/maps/backgrounds/academy_library.png",
+  "background": "assets/maps/backgrounds/academy_library_modular.png",
   "spawn_points": {
     "default": [
-      838,
-      752
+      837,
+      810
     ]
   },
   "exits": [
@@ -32,253 +32,31 @@
       0,
       0,
       1672,
-      85
+      266
     ],
     [
       0,
-      85,
+      0,
       78,
-      765
+      941
     ],
     [
       1594,
-      85,
+      0,
       78,
-      765
+      941
     ],
     [
       0,
-      850,
-      748,
-      91
+      838,
+      738,
+      103
     ],
     [
-      924,
-      850,
-      748,
-      91
-    ],
-    [
-      297,
-      249,
-      158,
-      19
-    ],
-    [
-      493,
-      249,
-      153,
-      19
-    ],
-    [
-      1012,
-      249,
-      147,
-      19
-    ],
-    [
-      1190,
-      249,
-      117,
-      19
-    ],
-    [
-      1326,
-      249,
-      113,
-      19
-    ],
-    [
-      312,
-      429,
-      209,
-      25
-    ],
-    [
-      713,
-      487,
-      248,
-      28
-    ],
-    [
-      1134,
-      428,
-      204,
-      26
-    ],
-    [
-      706,
-      707,
-      269,
-      33
-    ],
-    [
-      632,
-      817,
-      45,
-      30
-    ],
-    [
-      995,
-      817,
-      45,
-      30
-    ],
-    [
-      752,
-      876,
-      169,
-      13
-    ],
-    [
-      164,
-      681,
-      196,
-      21
-    ],
-    [
-      229,
-      709,
-      55,
-      41
-    ],
-    [
-      397,
-      743,
-      135,
-      23
-    ],
-    [
-      1124,
-      682,
-      211,
-      22
-    ],
-    [
-      1220,
-      712,
-      54,
-      39
-    ],
-    [
-      1378,
-      690,
-      107,
-      23
-    ],
-    [
-      80,
-      474,
-      63,
-      18
-    ],
-    [
-      1528,
-      475,
-      58,
-      18
-    ],
-    [
-      298,
-      165,
-      154,
-      99
-    ],
-    [
-      495,
-      165,
-      150,
-      99
-    ],
-    [
-      1014,
-      162,
-      144,
-      102
-    ],
-    [
-      1191,
-      162,
-      115,
-      102
-    ],
-    [
-      1329,
-      162,
-      108,
-      102
-    ],
-    [
-      165,
-      545,
-      180,
-      157
-    ],
-    [
-      229,
-      699,
-      55,
-      55
-    ],
-    [
-      405,
-      542,
-      128,
-      228
-    ],
-    [
-      1125,
-      544,
-      197,
-      162
-    ],
-    [
-      1220,
-      701,
-      54,
-      54
-    ],
-    [
-      1385,
-      513,
-      127,
-      247
-    ],
-    [
-      80,
-      320,
-      57,
-      257
-    ],
-    [
-      1530,
-      321,
-      54,
-      258
-    ],
-    [
-      316,
-      352,
-      203,
-      105
-    ],
-    [
-      709,
-      388,
-      252,
-      126
-    ],
-    [
-      1130,
-      349,
-      209,
-      109
-    ],
-    [
-      686,
-      616,
-      292,
-      119
+      936,
+      838,
+      736,
+      103
     ]
   ],
   "objects": [],
@@ -288,8 +66,8 @@
       "name": "賽琳娜・莫爾",
       "role": "librarian",
       "position": [
-        1352,
-        500
+        390,
+        448
       ],
       "color": [
         151,
@@ -297,21 +75,23 @@
         157
       ],
       "dialogue": [
-        "歡迎光臨學院圖書館，我是賽琳娜。",
-        "我正在櫃檯旁核對借閱記錄與館藏目錄，請保持安靜。"
+        "歡迎來到學院圖書館，我是賽琳娜。",
+        "我坐在閱覽桌旁整理借閱紀錄，也可以幫你查詢館藏。"
       ],
       "interaction_radius": 170,
       "sprite": "npc_selena",
       "behavior": "stationary",
-      "pose": "stand",
+      "pose": "sit",
       "facing": "down",
       "face_player": false,
       "idle_animation": true,
-      "draw_depth": 500,
-      "render_note": "Standing beside the research desk in the free aisle; not seated through tabletop.",
+      "render_note": "賽琳娜使用正面完整坐姿；座位位於閱覽桌北側，臉、身體、雙腳朝下並面向桌面",
       "activity": "cataloging",
       "talk_animation": true,
-      "dialogue_profile": "selena"
+      "dialogue_profile": "selena",
+      "seat_id": "academy_library_seat_01",
+      "seated_sprite_art": "front_v969",
+      "seated_visual_height_px": 94
     },
     {
       "id": "isaac",
@@ -319,8 +99,8 @@
       "real_name": "伊薩克・維爾",
       "role": "hidden",
       "position": [
-        1425,
-        459
+        1455,
+        540
       ],
       "color": [
         101,
@@ -339,15 +119,16 @@
       "facing": "left",
       "face_player": true,
       "activity": "secret",
-      "dialogue_profile": "isaac"
+      "dialogue_profile": "isaac",
+      "render_note": "新圖書館右側書架通道角落"
     },
     {
       "id": "nina",
       "name": "妮娜・亞爾",
       "role": "student",
       "position": [
-        1073,
-        499
+        1035,
+        655
       ],
       "pose": "stand",
       "facing": "down",
@@ -359,8 +140,7 @@
         "我是妮娜，正在找有關古代魔法的資料。",
         "我站在閱覽區附近比對幾個書名，希望找到提到古代符文的那一本。"
       ],
-      "draw_depth": 532,
-      "render_note": "在閱覽桌側邊站立，不踩在椅子上",
+      "render_note": "新圖書館中央右側通道讀書，腳底不與桌子或水晶碰撞",
       "activity": "research",
       "dialogue_profile": "nina"
     }
@@ -368,14 +148,14 @@
   "enemies": [],
   "music": null,
   "layers": {
-    "ground": "assets/maps/backgrounds/academy_library.png"
+    "ground": "assets/maps/backgrounds/academy_library_modular.png"
   },
   "save_crystals": [
     {
       "id": "crystal_1",
       "position": [
-        479,
-        260
+        840,
+        460
       ],
       "interaction_radius": 90,
       "enabled": false
@@ -385,8 +165,8 @@
     {
       "id": "rare_book_shelf",
       "position": [
-        1300,
-        180
+        1340,
+        240
       ],
       "kind": "hidden_item",
       "enabled": false
@@ -394,666 +174,882 @@
     {
       "id": "secret_archive",
       "position": [
-        1340,
-        810
+        1455,
+        700
       ],
       "kind": "hidden_story",
       "enabled": false
     }
   ],
-  "collision_metadata": [
-    {
-      "name": "上牆",
-      "rect": [
-        0,
-        0,
-        1672,
-        85
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "左牆",
-      "rect": [
-        0,
-        85,
-        78,
-        765
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "右牆",
-      "rect": [
-        1594,
-        85,
-        78,
-        765
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "下牆左",
-      "rect": [
-        0,
-        850,
-        748,
-        91
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "下牆右",
-      "rect": [
-        924,
-        850,
-        748,
-        91
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "左後書架・左格底座",
-      "rect": [
-        297,
-        249,
-        158,
-        19
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "左後書架"
-    },
-    {
-      "name": "左後書架・右格底座",
-      "rect": [
-        493,
-        249,
-        153,
-        19
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "左後書架"
-    },
-    {
-      "name": "右後書架・左格底座",
-      "rect": [
-        1012,
-        249,
-        147,
-        19
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "右後書架"
-    },
-    {
-      "name": "右後書架・中格底座",
-      "rect": [
-        1190,
-        249,
-        117,
-        19
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "右後書架"
-    },
-    {
-      "name": "右後書架・右格底座",
-      "rect": [
-        1326,
-        249,
-        113,
-        19
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "右後書架"
-    },
-    {
-      "name": "左閱覽桌",
-      "rect": [
-        312,
-        429,
-        209,
-        25
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "中閱覽桌",
-      "rect": [
-        713,
-        487,
-        248,
-        28
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "右閱覽桌",
-      "rect": [
-        1134,
-        428,
-        204,
-        26
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "下方中央書桌",
-      "rect": [
-        706,
-        707,
-        269,
-        33
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "入口左花盆",
-      "rect": [
-        632,
-        817,
-        45,
-        30
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "入口右花盆",
-      "rect": [
-        995,
-        817,
-        45,
-        30
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "bottom exit door sill",
-      "rect": [
-        752,
-        876,
-        169,
-        13
-      ],
-      "type": "accurate_footprint"
-    },
-    {
-      "name": "左側 T 字書架橫架底座",
-      "rect": [
-        164,
-        681,
-        196,
-        21
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "左側 T 字書架立架底座",
-      "rect": [
-        229,
-        709,
-        55,
-        41
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "左下直書架底座",
-      "rect": [
-        397,
-        743,
-        135,
-        23
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "右側 T 字書架橫架底座",
-      "rect": [
-        1124,
-        682,
-        211,
-        22
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "右側 T 字書架立架底座",
-      "rect": [
-        1220,
-        712,
-        54,
-        39
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "右下直書架底座",
-      "rect": [
-        1378,
-        690,
-        107,
-        23
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "圖書館左壁書櫃底座",
-      "rect": [
-        80,
-        474,
-        63,
-        18
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "圖書館右壁書櫃底座",
-      "rect": [
-        1528,
-        475,
-        58,
-        18
-      ],
-      "type": "solid_shelf_base"
-    },
-    {
-      "name": "左後書櫃左半・實體",
-      "rect": [
-        298,
-        165,
-        154,
-        99
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "左後書櫃右半・實體",
-      "rect": [
-        495,
-        165,
-        150,
-        99
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右後書櫃左半・實體",
-      "rect": [
-        1014,
-        162,
-        144,
-        102
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右後書櫃中段・實體",
-      "rect": [
-        1191,
-        162,
-        115,
-        102
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右後書櫃右半・實體",
-      "rect": [
-        1329,
-        162,
-        108,
-        102
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "左 T 書櫃頂橫段・實體",
-      "rect": [
-        165,
-        545,
-        180,
-        157
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "左 T 書櫃下直段・實體",
-      "rect": [
-        229,
-        699,
-        55,
-        55
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "左直立書櫃・實體",
-      "rect": [
-        405,
-        542,
-        128,
-        228
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右 T 書櫃頂橫段・實體",
-      "rect": [
-        1125,
-        544,
-        197,
-        162
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右 T 書櫃下直段・實體",
-      "rect": [
-        1220,
-        701,
-        54,
-        54
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右直立書櫃・實體",
-      "rect": [
-        1385,
-        513,
-        127,
-        247
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "左壁櫃正面・實體",
-      "rect": [
-        80,
-        320,
-        57,
-        257
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右壁櫃正面・實體",
-      "rect": [
-        1530,
-        321,
-        54,
-        258
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "左閱覽桌正面・實體",
-      "rect": [
-        316,
-        352,
-        203,
-        105
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "中央閱覽桌正面・實體",
-      "rect": [
-        709,
-        388,
-        252,
-        126
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "右閱覽桌正面・實體",
-      "rect": [
-        1130,
-        349,
-        209,
-        109
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    },
-    {
-      "name": "入口前書桌・實體",
-      "rect": [
-        686,
-        616,
-        292,
-        119
-      ],
-      "type": "segmented_feet_footprint",
-      "source_object": "V9.5 家具實體局部幾何"
-    }
-  ],
-  "collision_calibration_version": "V9.5_solid_geometry_clear_aisles",
-  "occluders": [
-    {
-      "image": "assets/maps/foreground/academy_library_front_00.png",
-      "x": 278,
-      "y": 124,
-      "depth_y": 280,
-      "fade_when_overlapping": false
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_01.png",
-      "x": 1001,
-      "y": 123,
-      "depth_y": 281,
-      "fade_when_overlapping": false
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_02.png",
-      "x": 160,
-      "y": 522,
-      "depth_y": 780,
-      "fade_when_overlapping": false
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_03.png",
-      "x": 394,
-      "y": 522,
-      "depth_y": 779,
-      "fade_when_overlapping": false
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_04.png",
-      "x": 1117,
-      "y": 522,
-      "depth_y": 779,
-      "fade_when_overlapping": false
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_05.png",
-      "x": 1378,
-      "y": 496,
-      "depth_y": 758,
-      "fade_when_overlapping": false
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_06.png",
-      "x": 690,
-      "y": 355,
-      "depth_y": 528,
-      "fade_when_overlapping": true
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_07.png",
-      "x": 306,
-      "y": 329,
-      "depth_y": 463,
-      "fade_when_overlapping": true
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_08.png",
-      "x": 1115,
-      "y": 325,
-      "depth_y": 531,
-      "fade_when_overlapping": true
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_front_09.png",
-      "x": 656,
-      "y": 587,
-      "depth_y": 733,
-      "fade_when_overlapping": true
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_bottomwall_left.png",
-      "x": 0,
-      "y": 793,
-      "depth_y": 906,
-      "fade_when_overlapping": true
-    },
-    {
-      "image": "assets/maps/foreground/academy_library_bottomwall_right.png",
-      "x": 924,
-      "y": 793,
-      "depth_y": 906,
-      "fade_when_overlapping": true
-    }
-  ],
+  "collision_metadata": {
+    "version": "v970_modular",
+    "furniture_source": "furniture[]",
+    "collision_policy": "object-local segmented physical footprints",
+    "seat_policy": "reservation separate from chair legs"
+  },
+  "collision_calibration_version": "v968_desk_surface_plus_small_legs_and_chair_reservations",
+  "occluders": [],
   "floor": "1F",
   "chairs": [
     {
       "id": "academy_library_seat_01",
-      "image": "assets/maps/chairs/academy_wooden_chair.png",
-      "x": 340,
-      "y": 428,
-      "width": 58,
-      "height": 62,
-      "collision_rect": [
-        355,
-        466,
-        28,
-        20
-      ],
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 349,
+      "y": 388,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": "selena",
       "seat_anchor": [
-        369,
-        482
+        390,
+        448
       ],
-      "facing": "up",
-      "occupied_by": null
+      "collision_rects": [
+        [
+          363,
+          456,
+          11,
+          17
+        ],
+        [
+          407,
+          456,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        377,
+        440,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
     },
     {
       "id": "academy_library_seat_02",
-      "image": "assets/maps/chairs/academy_wooden_chair.png",
-      "x": 466,
-      "y": 429,
-      "width": 58,
-      "height": 62,
-      "collision_rect": [
-        481,
-        467,
-        28,
-        20
-      ],
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 449,
+      "y": 388,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
       "seat_anchor": [
-        495,
-        483
+        490,
+        448
       ],
-      "facing": "up",
-      "occupied_by": null
+      "collision_rects": [
+        [
+          463,
+          456,
+          11,
+          17
+        ],
+        [
+          507,
+          456,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        477,
+        440,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
     },
     {
       "id": "academy_library_seat_03",
-      "image": "assets/maps/chairs/academy_wooden_chair.png",
-      "x": 733,
-      "y": 465,
-      "width": 58,
-      "height": 61,
-      "collision_rect": [
-        748,
-        502,
-        28,
-        20
-      ],
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 1141,
+      "y": 388,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
       "seat_anchor": [
-        762,
-        518
+        1182,
+        448
       ],
-      "facing": "up",
-      "occupied_by": null
+      "collision_rects": [
+        [
+          1155,
+          456,
+          11,
+          17
+        ],
+        [
+          1199,
+          456,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        1169,
+        440,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
     },
     {
       "id": "academy_library_seat_04",
-      "image": "assets/maps/chairs/academy_wooden_chair.png",
-      "x": 879,
-      "y": 465,
-      "width": 58,
-      "height": 61,
-      "collision_rect": [
-        894,
-        502,
-        28,
-        20
-      ],
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 1241,
+      "y": 388,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
       "seat_anchor": [
-        908,
-        518
+        1282,
+        448
       ],
-      "facing": "up",
-      "occupied_by": null
+      "collision_rects": [
+        [
+          1255,
+          456,
+          11,
+          17
+        ],
+        [
+          1299,
+          456,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        1269,
+        440,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
     },
     {
       "id": "academy_library_seat_05",
-      "image": "assets/maps/chairs/academy_wooden_chair.png",
-      "x": 1149,
-      "y": 426,
-      "width": 58,
-      "height": 63,
-      "collision_rect": [
-        1164,
-        465,
-        28,
-        20
-      ],
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 349,
+      "y": 578,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
       "seat_anchor": [
-        1178,
-        481
+        390,
+        638
       ],
-      "facing": "up",
-      "occupied_by": "selena"
+      "collision_rects": [
+        [
+          363,
+          646,
+          11,
+          17
+        ],
+        [
+          407,
+          646,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        377,
+        630,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
     },
     {
       "id": "academy_library_seat_06",
-      "image": "assets/maps/chairs/academy_wooden_chair.png",
-      "x": 1250,
-      "y": 426,
-      "width": 58,
-      "height": 63,
-      "collision_rect": [
-        1265,
-        465,
-        28,
-        20
-      ],
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 449,
+      "y": 578,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
       "seat_anchor": [
-        1279,
-        481
+        490,
+        638
       ],
-      "facing": "up",
-      "occupied_by": null
+      "collision_rects": [
+        [
+          463,
+          646,
+          11,
+          17
+        ],
+        [
+          507,
+          646,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        477,
+        630,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
+    },
+    {
+      "id": "academy_library_seat_07",
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 1141,
+      "y": 578,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
+      "seat_anchor": [
+        1182,
+        638
+      ],
+      "collision_rects": [
+        [
+          1155,
+          646,
+          11,
+          17
+        ],
+        [
+          1199,
+          646,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        1169,
+        630,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
+    },
+    {
+      "id": "academy_library_seat_08",
+      "image": "assets/maps/furniture/academy_highback_chair_down.png",
+      "x": 1241,
+      "y": 578,
+      "width": 82,
+      "height": 88,
+      "facing": "down",
+      "occupied_by": null,
+      "seat_anchor": [
+        1282,
+        638
+      ],
+      "collision_rects": [
+        [
+          1255,
+          646,
+          11,
+          17
+        ],
+        [
+          1299,
+          646,
+          11,
+          17
+        ]
+      ],
+      "seat_block_rect": [
+        1269,
+        630,
+        26,
+        16
+      ],
+      "collision_style": "two_independent_legs_and_access_controlled_seat",
+      "seated_foot_offset_y": 0,
+      "chair_art_version": "high_back_gold_purple_v972_front_facing_down"
     }
   ],
-  "chair_art_version": "v9.6_alpha_separate"
+  "chair_art_version": "v972_high_back_occluding_chair",
+  "decals": [],
+  "compositing_method": "independent_furniture_depth_sort_no_background_crop",
+  "visual_revision": "V9.7.4 varied archive shelves, compact ornate reading tables, down-facing seated librarian; V9.7.5 direction audit and AI initial-facing synchronization",
+  "furniture": [
+    {
+      "id": "library_counter",
+      "image": "assets/maps/furniture/academy_library_counter.png",
+      "x": 703,
+      "y": 276,
+      "width": 262,
+      "height": 121,
+      "depth_y": 391,
+      "collision_rects": [
+        [
+          12,
+          26,
+          80,
+          23
+        ],
+        [
+          92,
+          26,
+          80,
+          23
+        ],
+        [
+          172,
+          26,
+          77,
+          23
+        ],
+        [
+          10,
+          49,
+          83,
+          15
+        ],
+        [
+          93,
+          49,
+          82,
+          15
+        ],
+        [
+          175,
+          49,
+          74,
+          15
+        ],
+        [
+          20,
+          67,
+          20,
+          36
+        ],
+        [
+          222,
+          67,
+          20,
+          36
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_crystal",
+      "image": "assets/maps/furniture/academy_crystal_pedestal.png",
+      "x": 777,
+      "y": 486,
+      "width": 118,
+      "height": 150,
+      "depth_y": 630,
+      "collision_rects": [
+        [
+          23,
+          104,
+          36,
+          17
+        ],
+        [
+          59,
+          104,
+          34,
+          17
+        ],
+        [
+          33,
+          121,
+          50,
+          13
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_potted_L",
+      "image": "assets/maps/furniture/academy_potted_plant.png",
+      "x": 82,
+      "y": 670,
+      "width": 75,
+      "height": 93,
+      "depth_y": 757,
+      "collision_rects": [
+        [
+          24,
+          70,
+          26,
+          15
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_potted_R",
+      "image": "assets/maps/furniture/academy_potted_plant.png",
+      "x": 1513,
+      "y": 670,
+      "width": 75,
+      "height": 93,
+      "depth_y": 757,
+      "collision_rects": [
+        [
+          24,
+          70,
+          26,
+          15
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_shelf_tall_L",
+      "image": "assets/maps/furniture/academy_bookshelf_tall.png",
+      "x": 170,
+      "y": 130,
+      "width": 180,
+      "height": 190,
+      "depth_y": 316,
+      "collision_rects": [
+        [
+          8,
+          148,
+          56,
+          22
+        ],
+        [
+          64,
+          148,
+          56,
+          22
+        ],
+        [
+          120,
+          148,
+          52,
+          22
+        ],
+        [
+          8,
+          170,
+          56,
+          13
+        ],
+        [
+          64,
+          170,
+          56,
+          13
+        ],
+        [
+          120,
+          170,
+          52,
+          13
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_shelf_low_L",
+      "image": "assets/maps/furniture/academy_bookshelf_low.png",
+      "x": 420,
+      "y": 160,
+      "width": 150,
+      "height": 155,
+      "depth_y": 310,
+      "collision_rects": [
+        [
+          7,
+          116,
+          46,
+          18
+        ],
+        [
+          53,
+          116,
+          46,
+          18
+        ],
+        [
+          99,
+          116,
+          44,
+          18
+        ],
+        [
+          7,
+          134,
+          46,
+          12
+        ],
+        [
+          53,
+          134,
+          46,
+          12
+        ],
+        [
+          99,
+          134,
+          44,
+          12
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_shelf_low_R",
+      "image": "assets/maps/furniture/academy_bookshelf_low.png",
+      "x": 1102,
+      "y": 160,
+      "width": 150,
+      "height": 155,
+      "depth_y": 310,
+      "collision_rects": [
+        [
+          7,
+          116,
+          46,
+          18
+        ],
+        [
+          53,
+          116,
+          46,
+          18
+        ],
+        [
+          99,
+          116,
+          44,
+          18
+        ],
+        [
+          7,
+          134,
+          46,
+          12
+        ],
+        [
+          53,
+          134,
+          46,
+          12
+        ],
+        [
+          99,
+          134,
+          44,
+          12
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_shelf_tall_R",
+      "image": "assets/maps/furniture/academy_bookshelf_tall.png",
+      "x": 1322,
+      "y": 130,
+      "width": 180,
+      "height": 190,
+      "depth_y": 316,
+      "collision_rects": [
+        [
+          8,
+          148,
+          56,
+          22
+        ],
+        [
+          64,
+          148,
+          56,
+          22
+        ],
+        [
+          120,
+          148,
+          52,
+          22
+        ],
+        [
+          8,
+          170,
+          56,
+          13
+        ],
+        [
+          64,
+          170,
+          56,
+          13
+        ],
+        [
+          120,
+          170,
+          52,
+          13
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_table_01",
+      "image": "assets/maps/furniture/academy_reading_table_ornate.png",
+      "x": 340,
+      "y": 460,
+      "width": 200,
+      "height": 98,
+      "depth_y": 552,
+      "collision_rects": [
+        [
+          9,
+          20,
+          60,
+          19
+        ],
+        [
+          69,
+          20,
+          62,
+          19
+        ],
+        [
+          131,
+          20,
+          60,
+          19
+        ],
+        [
+          9,
+          39,
+          64,
+          10
+        ],
+        [
+          73,
+          39,
+          62,
+          10
+        ],
+        [
+          135,
+          39,
+          56,
+          10
+        ],
+        [
+          18,
+          51,
+          20,
+          29
+        ],
+        [
+          162,
+          51,
+          20,
+          29
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_table_02",
+      "image": "assets/maps/furniture/academy_reading_table_ornate.png",
+      "x": 1132,
+      "y": 460,
+      "width": 200,
+      "height": 98,
+      "depth_y": 552,
+      "collision_rects": [
+        [
+          9,
+          20,
+          60,
+          19
+        ],
+        [
+          69,
+          20,
+          62,
+          19
+        ],
+        [
+          131,
+          20,
+          60,
+          19
+        ],
+        [
+          9,
+          39,
+          64,
+          10
+        ],
+        [
+          73,
+          39,
+          62,
+          10
+        ],
+        [
+          135,
+          39,
+          56,
+          10
+        ],
+        [
+          18,
+          51,
+          20,
+          29
+        ],
+        [
+          162,
+          51,
+          20,
+          29
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_table_03",
+      "image": "assets/maps/furniture/academy_reading_table_ornate.png",
+      "x": 340,
+      "y": 650,
+      "width": 200,
+      "height": 98,
+      "depth_y": 742,
+      "collision_rects": [
+        [
+          9,
+          20,
+          60,
+          19
+        ],
+        [
+          69,
+          20,
+          62,
+          19
+        ],
+        [
+          131,
+          20,
+          60,
+          19
+        ],
+        [
+          9,
+          39,
+          64,
+          10
+        ],
+        [
+          73,
+          39,
+          62,
+          10
+        ],
+        [
+          135,
+          39,
+          56,
+          10
+        ],
+        [
+          18,
+          51,
+          20,
+          29
+        ],
+        [
+          162,
+          51,
+          20,
+          29
+        ]
+      ],
+      "group": "furniture"
+    },
+    {
+      "id": "library_table_04",
+      "image": "assets/maps/furniture/academy_reading_table_ornate.png",
+      "x": 1132,
+      "y": 650,
+      "width": 200,
+      "height": 98,
+      "depth_y": 742,
+      "collision_rects": [
+        [
+          9,
+          20,
+          60,
+          19
+        ],
+        [
+          69,
+          20,
+          62,
+          19
+        ],
+        [
+          131,
+          20,
+          60,
+          19
+        ],
+        [
+          9,
+          39,
+          64,
+          10
+        ],
+        [
+          73,
+          39,
+          62,
+          10
+        ],
+        [
+          135,
+          39,
+          56,
+          10
+        ],
+        [
+          18,
+          51,
+          20,
+          29
+        ],
+        [
+          162,
+          51,
+          20,
+          29
+        ]
+      ],
+      "group": "furniture"
+    }
+  ]
 }

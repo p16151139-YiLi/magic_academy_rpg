@@ -94,9 +94,10 @@ class PlayerWorldBridge:
                         )
                     )
 
+        from systems.chair_geometry import chair_walking_obstacles
         for chair in self.scene.map_data.get("chairs", []):
-            if "collision_rect" in chair:
-                obstacles.append(pygame.Rect(*chair["collision_rect"]))
+            for box in chair_walking_obstacles(chair):
+                obstacles.append(pygame.Rect(*box))
         return obstacles
 
     def _safe_spawn(self, x, y):

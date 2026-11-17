@@ -52,6 +52,8 @@ class GameScene(BaseScene):
         self.map_loaded = False
         self._loading_map_ref = None
         self._loading_npc_queue = []
+        self._loading_npc_total = 0
+        self._loading_npc_done = 0
         self._load_error = ""
         self._draw_error = ""
         self._draw_stage = "initialization"
@@ -84,6 +86,34 @@ class GameScene(BaseScene):
         from systems.npc_shop_system import NPCShopSystem
         self.npc_shop = NPCShopSystem(self)
 
+    def _build_npc_preload_queue(self):
+        """Build unique pose-aware preload tasks for the current map.
+
+        Standing NPCs need a four-direction atlas. Seated NPCs need their
+        dedicated seated PNG, with the chair as the authoritative direction
+        source. This deliberately avoids asking a seated-only NPC for a
+        standing atlas.
+        """
+        tasks = []
+        seen = set()
+        for npc in self.map_data.get('npcs', []):
+            pose = npc.get('pose', 'stand')
+            if pose == 'sit':
+                seat = self.npc_shop.seat_for_npc(npc)
+                direction = seat['facing']
+            elif pose in ('stand', 'roam'):
+                # 'roam' is a behavior/pose label for a standing NPC; it still
+                # uses the same four-direction standing atlas as 'stand'.
+                pose = 'stand'
+                direction = 'down'  # Direction is stored in the atlas, not in the cache key.
+            else:
+                raise ValueError(f"NPC {npc.get('id', '<unknown>')} 的姿勢不受支援：{pose}")
+            task = (npc['sprite'], pose, direction)
+            if task not in seen:
+                seen.add(task)
+                tasks.append(task)
+        return tasks
+
     def ensure_map_loaded(self):
         """Load a map and its NPC sprites over multiple browser frames."""
         if self.map_loaded:
@@ -96,14 +126,18 @@ class GameScene(BaseScene):
             if self._loading_map_ref is not self.map_data:
                 self.map_renderer.begin_load(self.map_data)
                 self._loading_map_ref = self.map_data
-                # Keep all original NPC art; only spread sprite decoding over frames.
-                self._loading_npc_queue = list(dict.fromkeys(
-                    npc['sprite'] for npc in self.map_data.get('npcs', [])))
+                # Warm the correct asset for each active pose. A seated-only
+                # character must never be sent through the standing atlas API.
+                self._loading_npc_queue = self._build_npc_preload_queue()
+                self._loading_npc_total = len(self._loading_npc_queue)
+                self._loading_npc_done = 0
             if self.map_renderer.loading:
                 self.map_renderer.step_load()
                 return False
             if self._loading_npc_queue:
-                self.npc_shop.sprites.frames(self._loading_npc_queue.pop(0))
+                task = self._loading_npc_queue.pop(0)
+                self.npc_shop.sprites.preload(*task)
+                self._loading_npc_done += 1
                 return False
             self.map_loaded = True
             self._loading_map_ref = None
@@ -125,9 +159,9 @@ class GameScene(BaseScene):
             lines = ['場景載入異常', self._load_error[:65], '按 R 重試，Esc 返回主選單']
         else:
             map_progress = self.map_renderer.load_progress
-            total_npcs = len(set(n['sprite'] for n in self.map_data.get('npcs', [])))
-            done_npcs = total_npcs - len(self._loading_npc_queue)
-            percent = int(100 * (map_progress * 0.8 + (done_npcs / max(1,total_npcs)) * 0.2))
+            total_assets = self._loading_npc_total
+            done_assets = self._loading_npc_done
+            percent = int(100 * (map_progress * 0.8 + (done_assets / max(1,total_assets)) * 0.2))
             lines = ['正在載入：' + label, f'地圖與 NPC 素材 {min(percent,100)}%',
                      '按 Esc 可以返回主選單']
         for idx, line in enumerate(lines):
@@ -276,7 +310,7 @@ class GameScene(BaseScene):
         self.npc_shop.draw_overlay(screen)
         # Visible build number makes a stale GitHub Pages cache easy to spot.
         self._draw_stage = "build tag"
-        build_tag = ctx.font_small.render("V9.6.3 VISUAL FIX", True, (243, 210, 123))
+        build_tag = ctx.font_small.render("V9.8.2 FULL PROJECT AUDIT", True, (243, 210, 123))
         screen.blit(build_tag, (screen.get_width() // 2 - build_tag.get_width() // 2, 7))
 
     def shortcut_button_rect(self):
@@ -386,6 +420,8 @@ class GameScene(BaseScene):
                     self._load_error = ""
                     self._loading_map_ref = None
                     self._loading_npc_queue = []
+                    self._loading_npc_total = 0
+                    self._loading_npc_done = 0
             return None
         if getattr(self, '_draw_error', ''):
             if event.type == pygame.KEYDOWN:

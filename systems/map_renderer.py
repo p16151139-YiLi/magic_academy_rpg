@@ -14,6 +14,8 @@ class MapRenderer:
         self.foreground = None
         self.occluders = []
         self.decals = []
+        self.furniture = []
+        self._image_cache = {}
 
     def _load_image(self, relative_path, required=True):
         if not relative_path:
@@ -30,7 +32,11 @@ class MapRenderer:
                 )
             return None
 
-        return pygame.image.load(str(path)).convert_alpha()
+        # Reuse PNG surfaces: multiple matching desks must not decode per instance.
+        key=str(path)
+        if key not in self._image_cache:
+            self._image_cache[key]=pygame.image.load(str(path)).convert_alpha()
+        return self._image_cache[key]
 
     def _fallback_ground(self, map_data):
         """Draw a usable floor if an optional map background is unavailable."""
@@ -63,11 +69,13 @@ class MapRenderer:
             tasks.append(("occluder", item.get("image"), item))
         for item in map_data.get("decals", []):
             tasks.append(("decal", item.get("image"), item))
+        for item in map_data.get("furniture", []):
+            tasks.append(("furniture", item.get("image"), item))
         self._load_pending = tasks
         self._load_count = len(tasks)
         self._load_target = map_data
         self._load_parts = {"ground": None, "objects": None,
-                            "foreground": None, "occluders": [], "decals": []}
+                            "foreground": None, "occluders": [], "decals": [], "furniture": []}
         self.load_warnings = []
         self.loading = True
 
@@ -91,6 +99,8 @@ class MapRenderer:
                         raise ValueError(f"{kind} 尺寸錯誤：{image.get_size()} != {expected}")
             except (OSError, RuntimeError, ValueError, pygame.error) as exc:
                 image = None
+                if kind == 'furniture':
+                    raise RuntimeError(f'獨立家具載入失敗：{relative}: {exc}') from exc
                 msg = f"地圖素材略過 {relative}: {exc}"
                 self.load_warnings.append(msg)
                 print(msg)
@@ -104,6 +114,14 @@ class MapRenderer:
                 self._load_parts["decals"].append(
                     (image, int(item["x"]), int(item["y"]),
                      bool(item.get("fade_when_overlapping", True))))
+            elif kind == "furniture":
+                if image is None:
+                    raise FileNotFoundError('缺少必需的獨立家具：'+str(relative))
+                size=(int(item['width']),int(item['height']))
+                if image.get_size()!=size:
+                    image=pygame.transform.scale(image,size)
+                self._load_parts['furniture'].append(
+                    (float(item['depth_y']),image,int(item['x']),int(item['y']),str(item['id'])))
         if self._load_pending:
             return False
         parts = self._load_parts
@@ -115,6 +133,7 @@ class MapRenderer:
         self.foreground = parts["foreground"]
         self.occluders = parts["occluders"]
         self.decals = parts["decals"]
+        self.furniture = parts['furniture']
         self.loading = False
         self._load_parts = None
         return True

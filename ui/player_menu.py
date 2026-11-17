@@ -3,7 +3,6 @@ import pygame
 import json
 from pathlib import Path
 
-from ui.character_info_panel import CharacterInfoPanel
 from ui.character_panel import CharacterPanel
 from ui.inventory_panel import InventoryPanel
 from ui.stat_allocation_panel import StatAllocationPanel
@@ -44,7 +43,9 @@ class PlayerMenu:
         ) as f:
             self.controls = json.load(f)
 
-        self.character_info_panel = CharacterInfoPanel()
+        # The unified stat overview now draws character information directly.
+        # Do not allocate an unused second panel/font set on every game entry.
+        self.character_info_panel = None
         self.character_panel = CharacterPanel()
 
         self.inventory_panel = InventoryPanel()
@@ -64,6 +65,8 @@ class PlayerMenu:
         self._template_scaled_size = None
         self._text_cache = {}
         self._tab_overlay_cache = {}
+        self._info_canvas = None
+        self._info_target = None
 
     def font(self, size):
 
@@ -75,6 +78,16 @@ class PlayerMenu:
 
         return self.fonts[size]
 
+    def _cached_text(self, value, size, color):
+        key = (str(value), max(10,int(size)), tuple(color))
+        image = self._text_cache.get(key)
+        if image is None:
+            image = self.font(key[1]).render(key[0], True, key[2])
+            if len(self._text_cache) >= 384:
+                self._text_cache.clear()
+            self._text_cache[key] = image
+        return image
+
     def text(
         self,
         value,
@@ -84,14 +97,7 @@ class PlayerMenu:
         color=(240, 230, 205)
     ):
 
-        cache_key = (str(value), int(size), tuple(color))
-        surf = self._text_cache.get(cache_key)
-        if surf is None:
-            surf = self.font(size).render(cache_key[0], True, color)
-            # The browser's WASM heap is finite. Never let text cache grow forever.
-            if len(self._text_cache) >= 384:
-                self._text_cache.clear()
-            self._text_cache[cache_key] = surf
+        surf = self._cached_text(value, size, color)
 
         self.screen.blit(
             surf,
@@ -143,6 +149,8 @@ class PlayerMenu:
         elif not self.opened:
             self.tab = -1
         self.opened = True
+        if self.tab == 0 and hasattr(self, "stat_allocation_panel"):
+            self.stat_allocation_panel.invalidate()
         if self.tab == 1:
             self.inventory_panel.closed = False
             self.inventory_panel.back_requested = False
@@ -215,8 +223,15 @@ class PlayerMenu:
                 self.return_home()
                 return True
 
-        if self.tab == 0 and self.stat_allocation_panel.handle_event(event):
-            return True
+        if self.tab == 0 and event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            destination=self.rect(58,260,880,226)
+            if destination.collidepoint(event.pos):
+                logical_x=(event.pos[0]-destination.x)*880/max(1,destination.width)
+                logical_y=(event.pos[1]-destination.y)*226/max(1,destination.height)
+                logical=pygame.event.Event(pygame.MOUSEBUTTONDOWN,{'button':1,
+                    'pos':(round(logical_x),round(logical_y))})
+                if self.stat_allocation_panel.handle_event(logical):
+                    return True
 
         if self.tab == 1:
             self.inventory_panel.handle_event(event,self.inventory_rect())
@@ -309,7 +324,7 @@ class PlayerMenu:
         close_rect = self.rect(875, 28, 85, 62)
         pygame.draw.rect(self.screen, (92, 44, 62), close_rect, border_radius=7)
         pygame.draw.rect(self.screen, (242, 212, 151), close_rect, 2, border_radius=7)
-        close_label = self.font(20 * s).render("關閉", True, (255, 233, 196))
+        close_label = self._cached_text('關閉', 20 * s, (255, 233, 196))
         self.screen.blit(close_label, close_label.get_rect(center=close_rect.center))
 
         # 分頁按鈕
@@ -418,10 +433,20 @@ class PlayerMenu:
 
             # 角色資訊與配點不再同時繪製，避免半透明面板互相覆蓋。
             try:
-                self.stat_allocation_panel.draw(
-                    self.screen,
-                    self.rect(58, 260, 880, 280)
-                )
+                # Render at stable logical resolution, then scale the whole
+                # page to the current window. The old direct draw raised on
+                # screens <620 high because height fell under 220 pixels.
+                if self._info_canvas is None:
+                    self._info_canvas = pygame.Surface((880, 226), pygame.SRCALPHA)
+                self._info_canvas.fill((0, 0, 0, 0))
+                self.stat_allocation_panel.draw(self._info_canvas,
+                                                pygame.Rect(0, 0, 880, 226))
+                dest = self.rect(58, 260, 880, 226)
+                if dest.size != (880, 226):
+                    scaled = pygame.transform.scale(self._info_canvas, dest.size)
+                else:
+                    scaled = self._info_canvas
+                self.screen.blit(scaled, dest.topleft)
             except Exception as exc:
                 # Report a precise source rather than an empty SDL error.
                 raise RuntimeError(
@@ -469,7 +494,7 @@ class PlayerMenu:
             back = self.rect(744, 492, 208, 57)
             pygame.draw.rect(self.screen, (67, 49, 91), back, border_radius=7)
             pygame.draw.rect(self.screen, (242, 212, 151), back, 2, border_radius=7)
-            label = self.font(max(12, round(18*s))).render("返回選單", True, (255, 233, 196))
+            label = self._cached_text('返回選單', max(12, round(18*s)), (255, 233, 196))
             self.screen.blit(label, label.get_rect(center=back.center))
         else:
             txt("Tab 關閉 / Esc 返回遊戲", 700, 507, 15, (188, 176, 159))

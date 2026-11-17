@@ -60,10 +60,37 @@ class NPCShopSystem:
             self.agents[key]=Agent(npc,self.scene.map_id,npc['position'])
         return self.agents[key]
 
+    def seat_for_npc(self,npc):
+        """Return the one authoritative chair assigned to a seated NPC."""
+        seat_id = npc.get('seat_id')
+        matching = [chair for chair in self.scene.map_data.get('chairs', [])
+                    if chair.get('id') == seat_id]
+        if len(matching) != 1 or matching[0].get('occupied_by') != npc['id']:
+            raise ValueError(f"NPC {npc['id']} 缺少正確的座位對應：{seat_id}")
+        if matching[0].get('facing') != npc.get('facing'):
+            raise ValueError(
+                f"NPC {npc['id']} 坐姿方向與椅子不一致："
+                f"NPC={npc.get('facing')} / chair={matching[0].get('facing')}"
+            )
+        return matching[0]
+
     def pos(self,npc):
+        # The chair is the source of truth for seated actors. A stale NPC JSON
+        # point can never separate the seated sprite from its assigned chair.
+        if npc.get('pose') == 'sit':
+            return pygame.Vector2(self.seat_for_npc(npc)['seat_anchor'])
         if npc.get('behavior')=='utility':
             return self.agent(npc).pos
         return pygame.Vector2(npc['position'])
+
+    def seat_visual_offset(self,npc):
+        """Only the chair can decide its occupied sprite's visual alignment.
+
+        Position used for interaction/pathfinding remains the seat anchor;
+        screen-space feet are adjusted once, not twice by separate NPC JSON.
+        """
+        chair=self.seat_for_npc(npc)
+        return int(chair.get('seated_foot_offset_y', 0))
 
     def npc_obstacles(self):
         # Seated characters already occupy furniture/benches drawn in the map.
@@ -76,7 +103,10 @@ class NPCShopSystem:
         self.notice_timer=max(0,self.notice_timer-dt)
         if self.dialogue or self.shop or self.scene.player_menu.opened:return
         current=self.npcs()
-        agents=[self.agent(n) for n in current if n.get('behavior')=='utility']
+        # A seated NPC is anchored to a chair and must never enter the AI
+        # movement/turning loop, even if legacy map data still says utility.
+        agents=[self.agent(n) for n in current
+                if n.get('behavior')=='utility' and n.get('pose')!='sit']
         obstacles=self.scene.player_world.get_obstacles()
         # Give moving characters visual breathing room from bookcases/tables.
         # The player still uses the original exact solid colliders.
@@ -385,16 +415,24 @@ class NPCShopSystem:
         # same sorted display list: standing BEHIND a shelf hides the body;
         # walking IN FRONT displays the actor over the shelf image.
         entities=[(float(n.get('draw_depth',self.pos(n).y+5)),0,'npc',n) for n in self.npcs()]
+        # Independent PNG furniture shares ONE depth-sorted world pass with actors.
+        # Identical position/depth also owns the collision data in map_data['furniture'].
+        for depth,image,fx,fy,fid in self.scene.map_renderer.furniture:
+            entities.append((float(depth), -2, 'furniture', (image,fx,fy,fid)))
         for chair in self.chairs.placements(self.scene.map_data):
             # The seat is depth-sorted like another world entity, not pasted as
             # an opaque rectangle over the player's head.
-            entities.append((float(chair['y']+chair['height']-7),-1,'chair',chair))
+            entities.append((float(chair['seat_anchor'][1]-1 if chair.get('occupied_by') else chair['y']+chair['height']-7),-1,'chair',chair))
         if include_player:
             entities.append((self.scene.player.rect.bottom+7,0,'player',None))
         for depth,asset,x,y,fade_allowed in self.scene.map_renderer.occluders:
             entities.append((depth,1,'occluder',(asset,x,y,fade_allowed)))
         entities.sort(key=lambda pair:(pair[0],pair[1]))
         for draw_depth,layer_order,kind,payload in entities:
+            if kind == 'furniture':
+                image,x,y,_id=payload
+                screen.blit(image,(round(x-ox),round(y-oy)))
+                continue
             if kind == 'chair':
                 chair=payload
                 image=self.chairs.image(chair)
@@ -418,7 +456,16 @@ class NPCShopSystem:
             p=self.pos(npc);x,y=round(p.x-ox),round(p.y-oy)
             if not (-100<x<screen.get_width()+100 and -105<y<screen.get_height()+105):
                 continue
-            if npc.get('behavior')=='utility':
+            if npc.get('pose') == 'sit':
+                # Seated pose has strict priority over AI behavior and player
+                # facing. Use the assigned chair's facing as the source of
+                # truth so a utility/legacy flag cannot show a front sprite
+                # while the character is physically seated facing the desk.
+                seat=self.seat_for_npc(npc)
+                direction=seat['facing']
+                moving=False
+                frame=0
+            elif npc.get('behavior')=='utility':
                 agent=self.agent(npc)
                 direction=agent.direction
                 moving=agent.moving
@@ -427,10 +474,10 @@ class NPCShopSystem:
                     moving=False
                     frame=0  # No false 'walking in place' while speaking.
             else:
-                # Fixed workers face their work; seated NPCs *never* stand up
-                # or rotate through implausible walk frames during ambient idle.
+                # Fixed workers face their work; they only turn toward player
+                # when they are not using a dedicated seated pose.
                 direction=npc.get('facing','down')
-                if npc.get('face_player',True) and npc.get('pose') != 'sit':
+                if npc.get('face_player',True):
                     pplayer=pygame.Vector2(self.scene.player.rect.center)
                     diff=pplayer-p
                     if diff.length_squared()<145**2:
@@ -439,14 +486,27 @@ class NPCShopSystem:
                         else:
                             direction='down' if diff.y>0 else 'up'
                 moving=False
-                # Existing NPC sheets contain directional WALK poses only.
-                # Cycling them while a fixed worker is speaking or seated
-                # looks like sliding/walking in place. Dialogue remains fully
-                # interactive; use the standing portrait until a dedicated
-                # talk/idle atlas is supplied for that NPC.
                 frame=0
-            self.sprites.render(screen,npc['sprite'],direction,moving,frame,x,y,
+            # A seated actor's visible feet are NOT its ground collision point.
+            # Align the bespoke seated torso with the cushion, leaving the
+            # chair's solid footprint and seat world anchor unchanged.
+            visual_y = y + self.seat_visual_offset(npc) if npc.get('pose') == 'sit' else y
+            self.sprites.render(screen,npc['sprite'],direction,moving,frame,x,visual_y,
                                 npc.get('sprite_scale',1.0), npc.get('pose','stand'))
+            # Back-facing seated students need a FRONT chair-back pass.
+            # Previously the entire NPC (including boots) was painted over the
+            # chair. Depth-sorting alone cannot represent the tall seat back.
+            # Keep chair art independent; never erase/crop NPC feet to hide it.
+            if npc.get('pose') == 'sit' and direction == 'up':
+                seat_id = npc.get('seat_id')
+                seat = next((c for c in self.scene.map_data.get('chairs', [])
+                             if c.get('id') == seat_id
+                             and c.get('occupied_by') == npc.get('id')), None)
+                if seat is not None:
+                    backrest = self.chairs.front_backrest(seat)
+                    if backrest is not None:
+                        screen.blit(backrest, (round(seat['x']-ox),
+                                               round(seat['y']-oy)))
             if who is npc:
                 label=self.font.render(npc['name']+'  E 交談',True,(250,232,185))
                 bg=label.get_rect(midbottom=(x,y-(92 if npc.get('pose')=='sit' else 100))).inflate(16,10)

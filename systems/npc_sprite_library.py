@@ -1,25 +1,39 @@
-"""Loads actual AI-generated four-direction PNG sprite sheets (4 frames x 4 rows)."""
+"""Loads audited NPC direction atlases and dedicated seated sprites."""
 from pathlib import Path
+import json
 import pygame
 
 ROOT=Path(__file__).resolve().parents[1]
 DIRECTIONS={'down':0,'left':1,'right':2,'up':3}
+DIRECTION_ORDER=('down','left','right','up')
+MANIFEST_PATH=ROOT/'data/npcs/sprite_direction_manifest.json'
+with MANIFEST_PATH.open('r',encoding='utf-8') as f:
+    DIRECTION_MANIFEST=json.load(f)
+SEATED_ASSETS={name:entry.get('seated_assets',{})
+               for name,entry in DIRECTION_MANIFEST['sprites'].items()
+               if entry.get('seated_assets')}
+SEATED_ONLY_SPRITES={name for name,entry in DIRECTION_MANIFEST['sprites'].items()
+                     if entry.get('mode')=='seated_only'}
+TARGET_VISIBLE_HEIGHT=94
 
 class NPCSpriteLibrary:
     def __init__(self):
         self.cache={}
         self.scaled_cache={}
         self.reference_heights={}
+        self.seated_cache={}
 
     def frames(self,name):
-        """Read each directional atlas once, keeping the 4x4 ordering.
-
-        A few generated walk frames vary significantly in visible height.
-        Normalize only frames outside a small tolerance at decode time;
-        during rendering every frame uses the SAME character scale.
-        """
+        """Decode a validated 4x4 atlas: rows down, left, right, up."""
+        entry=DIRECTION_MANIFEST['sprites'].get(name)
+        if entry is None:
+            raise KeyError(f'NPC 方向清單沒有角色：{name}')
+        if entry.get('mode')!='four_direction_atlas':
+            raise ValueError(f'{name} 是固定坐姿角色，禁止使用未校正的站立方向圖集')
+        if tuple(entry.get('row_order',()))!=DIRECTION_ORDER:
+            raise ValueError(f'{name} 的方向列序與遊戲方向列序不一致')
         if name not in self.cache:
-            path=ROOT/'assets/characters/npcs'/f'{name}.png'
+            path=ROOT/entry['atlas']
             if not path.is_file():
                 raise FileNotFoundError('NPC 專屬圖片遺失: '+str(path))
             sprite=pygame.image.load(str(path)).convert_alpha()
@@ -32,17 +46,16 @@ class NPCSpriteLibrary:
             heights=sorted(frame.get_bounding_rect(min_alpha=25).height
                            for row in atlas for frame in row)
             reference=max(1,heights[len(heights)//2])
-            # Maintain a consistent body height while retaining minor natural
-            # 1-3 pixel fluctuations. Correct both shrunken and enlarged art.
+            # Normalize visible height only; preserve each frame's aspect ratio.
             for row in range(4):
                 for col in range(4):
                     frame=atlas[row][col]
                     bounds=frame.get_bounding_rect(min_alpha=25)
-                    if not bounds.height or abs(bounds.height-reference)<=max(2,reference*0.05):
+                    if not bounds.height or bounds.height==reference:
                         continue
                     factor=reference/bounds.height
-                    width=min(fw,max(1,round(bounds.width*factor)))
-                    height=min(fh,max(1,round(bounds.height*factor)))
+                    width=max(1,round(bounds.width*factor))
+                    height=max(1,round(bounds.height*factor))
                     cropped=frame.subsurface(bounds).copy()
                     corrected=pygame.transform.scale(cropped,(width,height))
                     cell=pygame.Surface((fw,fh),pygame.SRCALPHA)
@@ -52,21 +65,60 @@ class NPCSpriteLibrary:
             self.reference_heights[name]=reference
         return self.cache[name]
 
+    def preload(self,name,pose='stand',direction='down'):
+        """Warm the correct asset for an NPC's active pose.
+
+        A seated-only character (for example Selena) has no valid standing
+        atlas.  Its dedicated seated PNG must be loaded through the seated
+        asset path instead of calling frames(), which intentionally rejects
+        legacy front-only atlases.
+        """
+        if pose == 'sit':
+            return self._seated_sprite(name,direction)
+        if pose in ('stand', 'roam'):
+            return self.frames(name)
+        raise ValueError(f'{name} 的 NPC 姿勢不受支援：{pose}')
+
+    def _seated_sprite(self,name,direction):
+        assets=SEATED_ASSETS.get(name,{})
+        filename=assets.get(direction)
+        if not filename:
+            allowed=', '.join(assets) or 'none'
+            raise ValueError(f'{name} 尚未製作 {direction} 坐姿模型；目前只允許：{allowed}')
+        path=ROOT/filename
+        if not path.is_file():
+            raise FileNotFoundError('NPC 坐姿素材遺失: '+str(path))
+        key=(name,direction,filename)
+        if key not in self.seated_cache:
+            raw=pygame.image.load(str(path)).convert_alpha()
+            visible=raw.get_bounding_rect(min_alpha=25)
+            if visible.height<=0:
+                raise ValueError('坐姿模型是空白圖片：'+str(path))
+            cropped=raw.subsurface(visible).copy()
+            # Preserve original width/height ratio. Never widen a narrow model to
+            # an arbitrary minimum, which previously distorted limbs and shoes.
+            target_h=TARGET_VISIBLE_HEIGHT
+            target_w=max(1,round(visible.width*target_h/visible.height))
+            self.seated_cache[key]=pygame.transform.scale(cropped,(target_w,target_h))
+        return self.seated_cache[key]
+
     def render(self,surface,name,direction,moving,frame,x,y,scale=1.0,pose='stand'):
+        if pose=='sit':
+            if moving:
+                raise ValueError('坐姿 NPC 不可播放行走動畫')
+            sprite=self._seated_sprite(name,direction)
+            surface.blit(sprite,(round(x-sprite.get_width()/2),round(y-sprite.get_height())))
+            return
         atlas=self.frames(name)
-        row=DIRECTIONS.get(direction,0)
+        row=DIRECTIONS.get(direction)
+        if row is None:
+            raise ValueError(f'未知 NPC 面向方向：{direction}')
         col=(int(frame)%4) if moving or int(frame)>0 else 0
         sprite=atlas[row][col]
         visible=sprite.get_bounding_rect(min_alpha=25)
         if visible.w<=0 or visible.h<=0:
             return
-        # A shared on-screen body height (not a shared model/hairstyle).
-        # Separate idle/walk frames may have different invisible margins.
-        target_h=71 if pose=='sit' else 80
-        # Older merchant data can request 1.22x or 1.3x. Cap that historical
-        # multiplier so NPCs never dwarf the player or other NPCs.
-        adjustment=max(.95,min(1.07,float(scale)))
-        factor=(target_h/max(1,self.reference_heights[name]))*adjustment
+        factor=TARGET_VISIBLE_HEIGHT/max(1,self.reference_heights[name])
         key=(name,row,col,round(factor,4))
         if key not in self.scaled_cache:
             dim=(max(1,round(sprite.get_width()*factor)),

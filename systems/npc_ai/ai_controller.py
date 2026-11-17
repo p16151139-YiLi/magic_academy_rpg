@@ -84,7 +84,15 @@ class Agent:
         self.rng = random.Random(sum((i + 1) * ord(c) for i, c in enumerate(map_name + self.id)) * 103)
         self.route = []
         self.intent = 'idle'
-        self.direction = 'down'
+        # Preserve the map-authored facing immediately, before the first AI
+        # movement tick. Without this, a guard placed facing left briefly renders
+        # down/front until the first successful movement updates the direction.
+        initial_direction = entity.get('facing', 'down')
+        if initial_direction not in ('down', 'left', 'right', 'up'):
+            raise ValueError(
+                f"NPC {self.id} 的初始面向方向無效：{initial_direction!r}"
+            )
+        self.direction = initial_direction
         self.moving = False
         self.state = 'standing'
         self.idle_left = self.rng.uniform(.25, 1.2) if self.role in ('patrol','guard') else self.rng.uniform(2.2, 5.0)

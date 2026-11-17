@@ -106,7 +106,8 @@ class MapManager:
     def get_collisions(self):
         if self.current_map is None:
             return []
-        return self.current_map["collision_rects"]
+        from systems.furniture_geometry import map_furniture_world_rects
+        return list(self.current_map["collision_rects"]) + map_furniture_world_rects(self.current_map)
 
     def get_objects(self):
         if self.current_map is None:

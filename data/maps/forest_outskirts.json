@@ -29,5 +29,301 @@
   "npcs": [],
   "enemies": [],
   "music": null,
-  "collision_calibration_version": "v4_npc_door_footprint"
+  "collision_calibration_version": "v4_npc_door_footprint",
+  "layers": {
+    "ground": "assets/maps/backgrounds/forest_outskirts.png"
+  },
+  "furniture": [
+    {
+      "id": "forest_tree_01",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 145,
+      "y": 230,
+      "width": 116,
+      "height": 145,
+      "depth_y": 365,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_02",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 485,
+      "y": 280,
+      "width": 116,
+      "height": 145,
+      "depth_y": 415,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_03",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 1910,
+      "y": 220,
+      "width": 116,
+      "height": 145,
+      "depth_y": 355,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_04",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 2180,
+      "y": 550,
+      "width": 116,
+      "height": 145,
+      "depth_y": 685,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_05",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 186,
+      "y": 760,
+      "width": 116,
+      "height": 145,
+      "depth_y": 895,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_06",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 485,
+      "y": 990,
+      "width": 116,
+      "height": 145,
+      "depth_y": 1125,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_07",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 2030,
+      "y": 880,
+      "width": 116,
+      "height": 145,
+      "depth_y": 1015,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_08",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 2270,
+      "y": 1050,
+      "width": 116,
+      "height": 145,
+      "depth_y": 1185,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_09",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 159,
+      "y": 1170,
+      "width": 116,
+      "height": 145,
+      "depth_y": 1305,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "forest_tree_10",
+      "image": "assets/maps/furniture/forest_tree.png",
+      "x": 1930,
+      "y": 1250,
+      "width": 116,
+      "height": 145,
+      "depth_y": 1385,
+      "collision_rects": [
+        [
+          49,
+          112,
+          10,
+          13
+        ],
+        [
+          59,
+          112,
+          10,
+          13
+        ],
+        [
+          47,
+          125,
+          23,
+          11
+        ]
+      ]
+    }
+  ],
+  "visual_revision": "V9.7.0 Forest Background Restoration"
 }

@@ -1,0 +1,671 @@
+{
+  "schema_version": 1,
+  "source_version": "V9.7.5",
+  "direction_rows": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "mapped_npc_sprite_count": 16,
+  "sprites": {
+    "npc_oscar": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_oscar.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_cora": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_cora.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "seated_assets": {
+        "down": "assets/characters/npcs/npc_cora_sitting_down_v969.png"
+      },
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_leo": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_leo.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "seated_assets": {
+        "down": "assets/characters/npcs/npc_leo_sitting_down_v969.png"
+      },
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_guard_cap": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_guard_cap.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_edwin": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_edwin.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_lia": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_lia.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_rain_tousled": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_rain_tousled.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_noah": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_noah.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_mira_teal_waves": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_mira_teal_waves.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_sophie_v8": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_sophie_v8.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_selena": {
+      "mode": "seated_only",
+      "active_pose": "sit",
+      "active_directions": [
+        "down"
+      ],
+      "standing_atlas_status": "disabled_legacy_front_only",
+      "visual_note": "固定坐姿；不呼叫舊的四方向站立圖集",
+      "seated_assets": {
+        "down": "assets/characters/npcs/npc_selena_sitting_down_v969.png"
+      },
+      "visual_audit": "Seated-only sprite: front/down face, torso, knees and feet all oriented toward the desk; no standing atlas fallback.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front_seated",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 1
+        }
+      }
+    },
+    "npc_isaac": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_isaac.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_nina": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_nina.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_erin_wavy": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_erin_wavy.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_berk": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_berk.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    },
+    "npc_grant": {
+      "mode": "four_direction_atlas",
+      "atlas": "assets/characters/npcs/npc_grant.png",
+      "row_order": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "frame_columns": 4,
+      "visual_audit": "Manual visual review of all four animation frames in each direction row: down/front face and feet down; left row face, torso and feet left; right row face, torso and feet right; up row rear view. Direction row order is down, left, right, up.",
+      "visual_direction_audit": {
+        "down": {
+          "view": "front",
+          "face_direction": "down",
+          "torso_direction": "down",
+          "feet_direction": "down",
+          "frames_reviewed": 4
+        },
+        "left": {
+          "view": "left_profile",
+          "face_direction": "left",
+          "torso_direction": "left",
+          "feet_direction": "left",
+          "frames_reviewed": 4
+        },
+        "right": {
+          "view": "right_profile",
+          "face_direction": "right",
+          "torso_direction": "right",
+          "feet_direction": "right",
+          "frames_reviewed": 4
+        },
+        "up": {
+          "view": "rear",
+          "face_direction": "back",
+          "torso_direction": "up",
+          "feet_direction": "up",
+          "frames_reviewed": 4
+        }
+      }
+    }
+  }
+}
