@@ -1,6 +1,7 @@
 {
-  "version": "V9.8.11",
+  "version": "V9.8.42",
   "folder": ".",
+  "source_sha256": "34a67de078a89199170f5211a7e1e7c266619c720fe17321370a670dbd35c071",
   "files": [
     "favicon.png",
     "index.html",
