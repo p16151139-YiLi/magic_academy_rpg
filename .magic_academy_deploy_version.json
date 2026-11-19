@@ -1,0 +1,37 @@
+{
+  "version": "V9.8.44",
+  "game_archive": "magic_academy_rpg_v9844.tar.gz",
+  "archive_sha256": "d26cd5ce30109374af8293f66a0160d42799723cb8e3284c7fd9004ea98534ad",
+  "maps": {
+    "academy_entrance": {
+      "background": "assets/maps/backgrounds/academy_entrance.png",
+      "sha256": "ff52d14bb2fa4b6425c534c15fb0006b612f79b00a7390e2982705e5e6324708",
+      "map_json_sha256": "f2f197cad5f9fcce5035871ee13e65d6df5f585269aa7c6bc97cf2d024b6d74c"
+    },
+    "academy_hall": {
+      "background": "assets/maps/backgrounds/academy_hall.png",
+      "sha256": "f34e7dc420e1e500d96c584f4c4184c44a4021c9b52934bf9e88eade5ac018a8",
+      "map_json_sha256": "f7882af701d15657c2a6a56bc6352e0a2f456cb2566aab6cb97f208b8759eb45"
+    },
+    "academy_library": {
+      "background": "assets/maps/backgrounds/academy_library_v9814_architecture.png",
+      "sha256": "d2f6fd09584cc502041332442de9a831507bad8b32e05a1f840a9a9e26359a54",
+      "map_json_sha256": "e9958159600dc7b498d21443a44cdbeadef63b14f603c60daee5eaa8df56d941"
+    },
+    "academy_classroom": {
+      "background": "assets/maps/classroom_v9829/classroom_with_bookshelves_baked_1672x941.png",
+      "sha256": "101ee4a53ca37b5ffbf42955ceece026a8acc39d787e19d93b42f661d44491f0",
+      "map_json_sha256": "4cafc08dac3792d413b3e2159e2317c0c228944e3432e377b5110a404a1e292c"
+    },
+    "item_shop": {
+      "background": "assets/maps/backgrounds/item_shop_v9836_no_book.png",
+      "sha256": "c0ea7e18428b9d7e35c517b76295510646638f9c07121b67ac2eeff83442c98c",
+      "map_json_sha256": "0a4a08dd5666ce944a7136ff73f9db4c0557ce6814f04a1470d0636325a6cfc4"
+    },
+    "weapon_shop": {
+      "background": "assets/maps/backgrounds/weapon_shop.png",
+      "sha256": "98d27721bde4468aa5e6fb7db3ec29c448f3376258a7f2703b87fd7d60ad3395",
+      "map_json_sha256": "9f0da2bc5a3298699f718cbaafcdc2f50941b7f38990cceaf33767ccb2e95da9"
+    }
+  }
+}

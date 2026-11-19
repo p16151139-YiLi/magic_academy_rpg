@@ -1,11 +1,11 @@
 {
-  "version": "V9.8.42",
+  "version": "V9.8.44",
   "folder": ".",
-  "source_sha256": "34a67de078a89199170f5211a7e1e7c266619c720fe17321370a670dbd35c071",
+  "source_sha256": "3f70945fc4bc8e992edc2d9ef83353e3de49a8451b2e977246bbc1457c461292",
   "files": [
     "favicon.png",
     "index.html",
-    "magic_academy_publish_app.apk",
-    "magic_academy_publish_app.tar.gz"
+    "magic_academy_rpg_v9844.apk",
+    "magic_academy_rpg_v9844.tar.gz"
   ]
 }
